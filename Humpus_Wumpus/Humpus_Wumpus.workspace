@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="Humpus_Wumpus" Database="" Version="10000">
-  <Project Name="Humpus_Wumpus" Path="Humpus_Wumpus/Humpus_Wumpus.project" Active="Yes"/>
-  <Project Name="Jari_Project" Path="Jari_Project/Jari_Project.project"/>
+  <Project Name="Humpus_Wumpus" Path="Humpus_Wumpus/Humpus_Wumpus.project" Active="No"/>
+  <Project Name="Jari_Project" Path="Jari_Project/Jari_Project.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
