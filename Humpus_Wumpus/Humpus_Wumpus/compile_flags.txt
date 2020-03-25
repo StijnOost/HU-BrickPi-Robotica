@@ -6,3 +6,5 @@
 -I"C:\Program Files\TDM-GCC\lib\gcc\mingw32\5.1.0\include"
 -I"C:\Program Files\TDM-GCC\include"
 -I"C:\Program Files\TDM-GCC\lib\gcc\mingw32\5.1.0\include-fixed"
+-target
+x86_64-pc-windows-gnu

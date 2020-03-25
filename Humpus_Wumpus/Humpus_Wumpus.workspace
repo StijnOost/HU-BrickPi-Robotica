@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="Humpus_Wumpus" Database="" Version="10000">
   <Project Name="Humpus_Wumpus" Path="Humpus_Wumpus/Humpus_Wumpus.project" Active="No"/>
-  <Project Name="Jari_Project" Path="Jari_Project/Jari_Project.project" Active="Yes"/>
-  <Project Name="Stijn_Project" Path="Stijn_Project/Stijn_Project.project"/>
-  <Project Name="Tim_Project" Path="Tim_Project/Tim_Project.project"/>
-  <Project Name="Alex_Project" Path="Alex_Project/Alex_Project.project"/>
+  <Project Name="Jari_Project" Path="Jari_Project/Jari_Project.project" Active="No"/>
+  <Project Name="Stijn_Project" Path="Stijn_Project/Stijn_Project.project" Active="No"/>
+  <Project Name="Tim_Project" Path="Tim_Project/Tim_Project.project" Active="No"/>
+  <Project Name="Alex_Project" Path="Alex_Project/Alex_Project.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
