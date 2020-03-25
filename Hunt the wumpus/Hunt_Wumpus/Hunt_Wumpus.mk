@@ -62,11 +62,9 @@ AS       := C:/TDM-GCC-32/bin/as.exe
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
-Objects0=../build-$(ConfigurationName)/Hunt_Wumpus/main.cpp$(ObjectSuffix) 
 
 
-
-Objects=$(Objects0) 
+Objects=
 
 ##
 ## Main Build Targets 
@@ -77,7 +75,6 @@ all: MakeIntermediateDirs $(OutputFile)
 $(OutputFile): ../build-$(ConfigurationName)/Hunt_Wumpus/.d $(Objects) 
 	@if not exist "..\build-$(ConfigurationName)\Hunt_Wumpus" mkdir "..\build-$(ConfigurationName)\Hunt_Wumpus"
 	@echo "" > $(IntermediateDirectory)/.d
-	@echo $(Objects0)  > $(ObjectsFileList)
 	$(LinkerName) $(OutputSwitch)$(OutputFile) @$(ObjectsFileList) $(LibPath) $(Libs) $(LinkOptions)
 
 MakeIntermediateDirs:
@@ -93,14 +90,6 @@ PreBuild:
 ##
 ## Objects
 ##
-../build-$(ConfigurationName)/Hunt_Wumpus/main.cpp$(ObjectSuffix): main.cpp ../build-$(ConfigurationName)/Hunt_Wumpus/main.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/stijn/OneDrive/Documenten/GitHub/HU-BrickPi-Robotica/Hunt the wumpus/Hunt_Wumpus/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
-../build-$(ConfigurationName)/Hunt_Wumpus/main.cpp$(DependSuffix): main.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/Hunt_Wumpus/main.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/Hunt_Wumpus/main.cpp$(DependSuffix) -MM main.cpp
-
-../build-$(ConfigurationName)/Hunt_Wumpus/main.cpp$(PreprocessSuffix): main.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/Hunt_Wumpus/main.cpp$(PreprocessSuffix) main.cpp
-
 
 -include ../build-$(ConfigurationName)/Hunt_Wumpus//*$(DependSuffix)
 ##
