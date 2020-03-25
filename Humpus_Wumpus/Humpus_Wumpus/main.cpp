@@ -21,14 +21,12 @@ int Instructies_uitlezen(){
 }
 int random_rand_waarde_player()
 {	
-	srand((unsigned)time(0));
 	int xyplayer = (rand()%19)+0;
 	cout << xyplayer;
 }
 
 int random_rand_waarde_wump()
 {	
-	srand((unsigned)time(0));
 	int xywump = (rand()%19)+0;
 	cout << xywump;
 }
@@ -46,6 +44,7 @@ char Begin_Met_Spelen(){
 }
 int main()
 {
+	srand((unsigned)time(0));
 	int positie_speler = random_rand_waarde_player();
 	int positie_wump =random_rand_waarde_wump();
 	char YorN_Instr;
