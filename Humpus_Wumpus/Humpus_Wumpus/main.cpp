@@ -10,7 +10,7 @@ int main()
     string paard = "Paard in de gang";
     cout << "Dit is een test: " << paard << endl;
     cout << "test123" << endl;
-	cout << "Alex ):O" << endl;
+    cout<< "gang gang skrrt dikke dab\n";
 	return 0;
     
 }
