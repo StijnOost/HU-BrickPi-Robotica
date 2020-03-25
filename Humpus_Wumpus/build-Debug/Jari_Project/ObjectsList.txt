@@ -1,0 +1,1 @@
+../build-Debug/Jari_Project/main.cpp.o   
