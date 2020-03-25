@@ -12,6 +12,7 @@ int move(){
     cout << "You are in room: " << a[0] << endl;
 	cout << "Tunnels lead to room: " << a[1] << ", " << a[2] << " and " << a[3] <<endl ;
     cout << "---------------------------------------\n";
+    cout << "To which room do you want to go?" << endl;
     cin >> side;
     return side;
 }
