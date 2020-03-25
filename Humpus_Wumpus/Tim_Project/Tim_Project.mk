@@ -3,13 +3,13 @@
 ## any manual changes will be erased      
 ##
 ## Debug
-ProjectName            :=Humpus_Wumpus
+ProjectName            :=Tim_Project
 ConfigurationName      :=Debug
 WorkspaceConfiguration := $(ConfigurationName)
 WorkspacePath          :=C:/Users/Stolk/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus
-ProjectPath            :=C:/Users/Stolk/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Humpus_Wumpus
-IntermediateDirectory  :=../build-$(ConfigurationName)/Humpus_Wumpus
-OutDir                 :=../build-$(ConfigurationName)/Humpus_Wumpus
+ProjectPath            :=C:/Users/Stolk/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Tim_Project
+IntermediateDirectory  :=../build-$(ConfigurationName)/Tim_Project
+OutDir                 :=../build-$(ConfigurationName)/Tim_Project
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
@@ -62,7 +62,7 @@ AS       := C:/TDM-GCC-32/bin/as.exe
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
-Objects0=../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(ObjectSuffix) 
+Objects0=../build-$(ConfigurationName)/Tim_Project/main.cpp$(ObjectSuffix) 
 
 
 
@@ -74,18 +74,18 @@ Objects=$(Objects0)
 .PHONY: all clean PreBuild PrePreBuild PostBuild MakeIntermediateDirs
 all: MakeIntermediateDirs $(OutputFile)
 
-$(OutputFile): ../build-$(ConfigurationName)/Humpus_Wumpus/.d $(Objects) 
-	@if not exist "..\build-$(ConfigurationName)\Humpus_Wumpus" mkdir "..\build-$(ConfigurationName)\Humpus_Wumpus"
+$(OutputFile): ../build-$(ConfigurationName)/Tim_Project/.d $(Objects) 
+	@if not exist "..\build-$(ConfigurationName)\Tim_Project" mkdir "..\build-$(ConfigurationName)\Tim_Project"
 	@echo "" > $(IntermediateDirectory)/.d
 	@echo $(Objects0)  > $(ObjectsFileList)
 	$(LinkerName) $(OutputSwitch)$(OutputFile) @$(ObjectsFileList) $(LibPath) $(Libs) $(LinkOptions)
 
 MakeIntermediateDirs:
-	@if not exist "..\build-$(ConfigurationName)\Humpus_Wumpus" mkdir "..\build-$(ConfigurationName)\Humpus_Wumpus"
+	@if not exist "..\build-$(ConfigurationName)\Tim_Project" mkdir "..\build-$(ConfigurationName)\Tim_Project"
 	@if not exist ""..\build-$(ConfigurationName)\bin"" mkdir ""..\build-$(ConfigurationName)\bin""
 
-../build-$(ConfigurationName)/Humpus_Wumpus/.d:
-	@if not exist "..\build-$(ConfigurationName)\Humpus_Wumpus" mkdir "..\build-$(ConfigurationName)\Humpus_Wumpus"
+../build-$(ConfigurationName)/Tim_Project/.d:
+	@if not exist "..\build-$(ConfigurationName)\Tim_Project" mkdir "..\build-$(ConfigurationName)\Tim_Project"
 
 PreBuild:
 
@@ -93,16 +93,16 @@ PreBuild:
 ##
 ## Objects
 ##
-../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(ObjectSuffix): main.cpp ../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Stolk/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Humpus_Wumpus/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
-../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(DependSuffix): main.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(DependSuffix) -MM main.cpp
+../build-$(ConfigurationName)/Tim_Project/main.cpp$(ObjectSuffix): main.cpp ../build-$(ConfigurationName)/Tim_Project/main.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Stolk/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Tim_Project/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
+../build-$(ConfigurationName)/Tim_Project/main.cpp$(DependSuffix): main.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/Tim_Project/main.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/Tim_Project/main.cpp$(DependSuffix) -MM main.cpp
 
-../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(PreprocessSuffix): main.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(PreprocessSuffix) main.cpp
+../build-$(ConfigurationName)/Tim_Project/main.cpp$(PreprocessSuffix): main.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/Tim_Project/main.cpp$(PreprocessSuffix) main.cpp
 
 
--include ../build-$(ConfigurationName)/Humpus_Wumpus//*$(DependSuffix)
+-include ../build-$(ConfigurationName)/Tim_Project//*$(DependSuffix)
 ##
 ## Clean
 ##
