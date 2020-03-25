@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include <vector>
+#include <iostream>
+#include <fstream>
+using namespace std;
 
-int main(int argc, char **argv)
-{
-	printf("hello world\n");
-	return 0;
+int main(){
+	cout << "Zooi" << endl;
 }
