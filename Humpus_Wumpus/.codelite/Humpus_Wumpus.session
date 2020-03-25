@@ -2,14 +2,11 @@
 <Session Name="C:\Users\stijn\OneDrive\Documenten\Documenten\Github\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus.workspace">
   <int Value="0" Name="m_selectedTab"/>
   <wxString Value="C:\Users\stijn\OneDrive\Documenten\Documenten\Github\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus.workspace" Name="m_workspaceName"/>
-<<<<<<< HEAD
-  <TabInfoArray Name="TabInfoArray"/>
-=======
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
       <wxString Value="C:\Users\stijn\OneDrive\Documenten\Documenten\Github\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus\main.cpp" Name="FileName"/>
-      <int Value="30" Name="FirstVisibleLine"/>
-      <int Value="15" Name="CurrentLine"/>
+      <int Value="33" Name="FirstVisibleLine"/>
+      <int Value="0" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
@@ -21,7 +18,6 @@
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
   </TabInfoArray>
->>>>>>> Stijn
   <SerializedObject Name="m_breakpoints">
     <long Value="0" Name="Count"/>
   </SerializedObject>
