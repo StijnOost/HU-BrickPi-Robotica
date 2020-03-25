@@ -60,9 +60,10 @@ int main()
     checkside(side);
     // Return Y om volgende functie te starten die het spel laat starten:
 
-vector<int> a = {1,5,6,8};
-
+	
+}
 int move(){
+	vector<int> a = {1,5,6,8};
     int side;
     cout << "---------------------------------------\n";
     cout << "You are in room: " << a[0] << endl;
