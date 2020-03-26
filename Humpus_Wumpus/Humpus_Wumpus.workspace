@@ -2,16 +2,25 @@
 <CodeLite_Workspace Name="Humpus_Wumpus" Database="" Version="10000">
   <Project Name="Humpus_Wumpus" Path="Humpus_Wumpus/Humpus_Wumpus.project" Active="Yes"/>
   <Project Name="Jari_Project" Path="Jari_Project/Jari_Project.project" Active="No"/>
+  <Project Name="Stijn_Project" Path="Stijn_Project/Stijn_Project.project" Active="No"/>
+  <Project Name="Tim_Project" Path="Tim_Project/Tim_Project.project" Active="No"/>
+  <Project Name="Alex_Project" Path="Alex_Project/Alex_Project.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
       <Project Name="Humpus_Wumpus" ConfigName="Debug"/>
       <Project Name="Jari_Project" ConfigName="Debug"/>
+      <Project Name="Stijn_Project" ConfigName="Debug"/>
+      <Project Name="Tim_Project" ConfigName="Debug"/>
+      <Project Name="Alex_Project" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Environment/>
       <Project Name="Humpus_Wumpus" ConfigName="Release"/>
       <Project Name="Jari_Project" ConfigName="Release"/>
+      <Project Name="Stijn_Project" ConfigName="Release"/>
+      <Project Name="Tim_Project" ConfigName="Release"/>
+      <Project Name="Alex_Project" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
