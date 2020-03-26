@@ -31,14 +31,14 @@ int random_rand_waarde_wump()
 	cout << xywump;
 }
 
-char Begin_Met_Spelen(){
+void Begin_Met_Spelen(){
     char Y_tostart;
     while(Y_tostart != 'Y' || Y_tostart != 'y'){
         cout << "\nDo you wanne start (Y)? ";
         cin >> Y_tostart;
 
         if(Y_tostart == 'Y' || Y_tostart == 'y'){
-            return 'Y';
+            break;
         }
     }
 }
@@ -70,9 +70,7 @@ int checkside(int side){
 
 int main()
 {
-	srand((unsigned)time(0));
-	int positie_speler = random_rand_waarde_player();
-	int positie_wump = random_rand_waarde_wump();
+
 	char YorN_Instr;
     cout << "Hunt the Wumpus" << endl;
     cout << "Do you need instructions: (Y/N)? ";
@@ -81,7 +79,11 @@ int main()
     if(YorN_Instr == 'Y' || YorN_Instr == 'y'){
         int Instructies = Instructies_uitlezen();
     }
-    char Begin_met_Spelen_Uitkomst = Begin_Met_Spelen();
+    Begin_Met_Spelen();
+    srand((unsigned)time(0));
+	int positie_speler = random_rand_waarde_player();
+	int positie_wump = random_rand_waarde_wump();
+    
 	int side = move();
     checkside(side);
     // Return Y om volgende functie te starten die het spel laat starten:
