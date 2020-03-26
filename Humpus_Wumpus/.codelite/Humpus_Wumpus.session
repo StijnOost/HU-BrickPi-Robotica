@@ -5,7 +5,11 @@
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
       <wxString Value="C:\Users\stijn\OneDrive\Documenten\Documenten\Github\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus\main.cpp" Name="FileName"/>
+<<<<<<< HEAD
       <int Value="12" Name="FirstVisibleLine"/>
+=======
+      <int Value="22" Name="FirstVisibleLine"/>
+>>>>>>> parent of e6095cf... Merge branch 'master' into Tim
       <int Value="23" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
