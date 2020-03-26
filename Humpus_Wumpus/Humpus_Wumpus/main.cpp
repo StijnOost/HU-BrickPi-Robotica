@@ -42,26 +42,7 @@ char Begin_Met_Spelen(){
         }
     }
 }
-int main()
-{
-	srand((unsigned)time(0));
-	int positie_speler = random_rand_waarde_player();
-	int positie_wump =random_rand_waarde_wump();
-	char YorN_Instr;
-    cout << "Hunt the Wumpus" << endl;
-    cout << "Do you need instructions: (Y/N)? ";
-    cin >> YorN_Instr;
 
-    if(YorN_Instr == 'Y' || YorN_Instr == 'y'){
-        int Instructies = Instructies_uitlezen();
-    }
-    char Begin_met_Spelen_Uitkomst = Begin_Met_Spelen();
-    int side = move();
-    checkside(side);
-    // Return Y om volgende functie te starten die het spel laat starten:
-
-	
-}
 int move(){
 	vector<int> a = {1,5,6,8};
     int side;
@@ -85,4 +66,25 @@ int checkside(int side){
         checkside(side);
     }
 
+}
+
+int main()
+{
+	srand((unsigned)time(0));
+	int positie_speler = random_rand_waarde_player();
+	int positie_wump = random_rand_waarde_wump();
+	char YorN_Instr;
+    cout << "Hunt the Wumpus" << endl;
+    cout << "Do you need instructions: (Y/N)? ";
+    cin >> YorN_Instr;
+
+    if(YorN_Instr == 'Y' || YorN_Instr == 'y'){
+        int Instructies = Instructies_uitlezen();
+    }
+    char Begin_met_Spelen_Uitkomst = Begin_Met_Spelen();
+	int side = move();
+    checkside(side);
+    // Return Y om volgende functie te starten die het spel laat starten:
+
+	
 }
