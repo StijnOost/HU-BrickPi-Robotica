@@ -120,5 +120,5 @@ int main()
     checkside(side);
     // Return Y om volgende functie te starten die het spel laat starten:
 
-	
+
 }
