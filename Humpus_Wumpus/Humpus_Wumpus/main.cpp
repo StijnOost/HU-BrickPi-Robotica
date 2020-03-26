@@ -19,7 +19,7 @@ void Instructies_uitlezen(){
     cout << "5. You have 5 wumpus-piercing arrows.\n";
     cout << "6. You may find an arrow dropped by a previous hunter.\n";
 
-    
+
 }
 
 vector<int> directions(int local){
@@ -80,7 +80,7 @@ void Begin_Met_Spelen(){
 }
 
 int move(vector<int> cords){
-	
+
     int side;
     cout << "---------------------------------------\n";
     cout << "You are in room: " << cords[0] << endl;
@@ -106,7 +106,7 @@ int checkside(int side, vector<int> cords){
 
 int main()
 {
-	
+
 	string YorN_Instr;
     cout << "Hunt the Wumpus" << endl;
     cout << "Do you need instructions: (Y/N)? ";
@@ -115,15 +115,15 @@ int main()
     if(YorN_Instr == "Y" || YorN_Instr == "y"){
         Instructies_uitlezen();
     }
-    
+
     Begin_Met_Spelen();
     srand((unsigned)time(0));
 	int positie_wump = random_rand_waarde_wump();
 	vector<int> cords = directions(random_rand_waarde_player());
-    
+
 	int side = move(cords);
     int finalDest = checkside(side, cords);
-    
+
     while(true){
         cords = directions(finalDest);
         side = move(cords);
