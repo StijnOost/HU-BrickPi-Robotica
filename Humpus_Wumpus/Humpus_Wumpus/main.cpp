@@ -19,6 +19,39 @@ int Instructies_uitlezen(){
 
     return 0;
 }
+
+vector<int> directions(int local){
+	ifstream infile;
+	string filename = "map.txt";
+	string line;
+	vector<int> cords;
+	cords.push_back(local);
+	infile.open(filename.c_str());
+	if(infile.is_open()){
+		for(int i=0;i<local+1;i++){
+			getline(infile, line);
+			if(i==local){
+				stringstream find;
+				find << line;
+				string temp;
+				int found;
+				while(!find.eof()) {
+					find >> temp;
+					if(stringstream(temp) >> found){
+						cords.push_back(found);
+					}
+					temp = "";
+				}
+			}
+		}
+		infile.close();
+		return(cords);
+	}
+	else{
+		cout << "ERROR: File unreachable \n";
+	}
+}
+
 int random_rand_waarde_player()
 {
 	int xyplayer = (rand()%19)+0;
@@ -73,6 +106,7 @@ int main()
 	srand((unsigned)time(0));
 	int positie_speler = random_rand_waarde_player();
 	int positie_wump = random_rand_waarde_wump();
+	directions(location);
 	char YorN_Instr;
     cout << "Hunt the Wumpus" << endl;
     cout << "Do you need instructions: (Y/N)? ";
