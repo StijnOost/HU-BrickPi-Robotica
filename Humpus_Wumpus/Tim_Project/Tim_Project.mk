@@ -1,49 +1,49 @@
 ##
 ## Auto Generated makefile by CodeLite IDE
-## any manual changes will be erased
+## any manual changes will be erased      
 ##
 ## Debug
 ProjectName            :=Tim_Project
 ConfigurationName      :=Debug
 WorkspaceConfiguration := $(ConfigurationName)
-WorkspacePath          :=C:/Users/alexa/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus
-ProjectPath            :=C:/Users/alexa/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Tim_Project
+WorkspacePath          :=C:/Users/stijn/OneDrive/Documenten/Documenten/Github/HU-BrickPi-Robotica/Humpus_Wumpus
+ProjectPath            :=C:/Users/stijn/OneDrive/Documenten/Documenten/Github/HU-BrickPi-Robotica/Humpus_Wumpus/Tim_Project
 IntermediateDirectory  :=../build-$(ConfigurationName)/Tim_Project
 OutDir                 :=../build-$(ConfigurationName)/Tim_Project
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
-User                   :=alexa
-Date                   :=25/03/2020
+User                   :=stijn
+Date                   :=26/03/2020
 CodeLitePath           :="C:/Program Files/CodeLite"
-LinkerName             :="C:/Program Files/TDM-GCC/bin/g++.exe"
-SharedObjectLinkerName :="C:/Program Files/TDM-GCC/bin/g++.exe" -shared -fPIC
+LinkerName             :=C:/TDM-GCC-32/bin/g++.exe
+SharedObjectLinkerName :=C:/TDM-GCC-32/bin/g++.exe -shared -fPIC
 ObjectSuffix           :=.o
 DependSuffix           :=.o.d
 PreprocessSuffix       :=.i
-DebugSwitch            :=-g
+DebugSwitch            :=-g 
 IncludeSwitch          :=-I
 LibrarySwitch          :=-l
-OutputSwitch           :=-o
+OutputSwitch           :=-o 
 LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
-SourceSwitch           :=-c
+SourceSwitch           :=-c 
 OutputFile             :=..\build-$(ConfigurationName)\bin\$(ProjectName)
 Preprocessors          :=
-ObjectSwitch           :=-o
-ArchiveOutputSwitch    :=
+ObjectSwitch           :=-o 
+ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E
 ObjectsFileList        :=$(IntermediateDirectory)/ObjectsList.txt
 PCHCompileFlags        :=
-RcCmpOptions           :=
-RcCompilerName         :="C:/Program Files/TDM-GCC/bin/windres.exe"
-LinkOptions            :=
-IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch).
-IncludePCH             :=
-RcIncludePath          :=
-Libs                   :=
-ArLibs                 :=
-LibPath                := $(LibraryPathSwitch).
+RcCmpOptions           := 
+RcCompilerName         :=C:/TDM-GCC-32/bin/windres.exe
+LinkOptions            :=  
+IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). 
+IncludePCH             := 
+RcIncludePath          := 
+Libs                   := 
+ArLibs                 :=  
+LibPath                := $(LibraryPathSwitch). 
 
 ##
 ## Common variables
@@ -52,29 +52,29 @@ LibPath                := $(LibraryPathSwitch).
 AR       := C:/TDM-GCC-32/bin/ar.exe rcu
 CXX      := C:/TDM-GCC-32/bin/g++.exe
 CC       := C:/TDM-GCC-32/bin/gcc.exe
-CXXFLAGS :=  -g -O0 -std=c++14 -Wall $(Preprocessors)
+CXXFLAGS :=  -g -O0 -Wall $(Preprocessors)
 CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
-ASFLAGS  :=
-AS       := "C:/Program Files/TDM-GCC/bin/as.exe"
+ASFLAGS  := 
+AS       := C:/TDM-GCC-32/bin/as.exe
 
 
 ##
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
-Objects0=../build-$(ConfigurationName)/Tim_Project/main.cpp$(ObjectSuffix)
+Objects0=../build-$(ConfigurationName)/Tim_Project/main.cpp$(ObjectSuffix) 
 
 
 
-Objects=$(Objects0)
+Objects=$(Objects0) 
 
 ##
-## Main Build Targets
+## Main Build Targets 
 ##
 .PHONY: all clean PreBuild PrePreBuild PostBuild MakeIntermediateDirs
 all: MakeIntermediateDirs $(OutputFile)
 
-$(OutputFile): ../build-$(ConfigurationName)/Tim_Project/.d $(Objects)
+$(OutputFile): ../build-$(ConfigurationName)/Tim_Project/.d $(Objects) 
 	@if not exist "..\build-$(ConfigurationName)\Tim_Project" mkdir "..\build-$(ConfigurationName)\Tim_Project"
 	@echo "" > $(IntermediateDirectory)/.d
 	@echo $(Objects0)  > $(ObjectsFileList)
@@ -94,7 +94,7 @@ PreBuild:
 ## Objects
 ##
 ../build-$(ConfigurationName)/Tim_Project/main.cpp$(ObjectSuffix): main.cpp ../build-$(ConfigurationName)/Tim_Project/main.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/alexa/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Tim_Project/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/stijn/OneDrive/Documenten/Documenten/Github/HU-BrickPi-Robotica/Humpus_Wumpus/Tim_Project/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
 ../build-$(ConfigurationName)/Tim_Project/main.cpp$(DependSuffix): main.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/Tim_Project/main.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/Tim_Project/main.cpp$(DependSuffix) -MM main.cpp
 
@@ -108,3 +108,5 @@ PreBuild:
 ##
 clean:
 	$(RM) -r $(IntermediateDirectory)
+
+

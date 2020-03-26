@@ -52,7 +52,7 @@ LibPath                := $(LibraryPathSwitch).
 AR       := C:/TDM-GCC-32/bin/ar.exe rcu
 CXX      := C:/TDM-GCC-32/bin/g++.exe
 CC       := C:/TDM-GCC-32/bin/gcc.exe
-CXXFLAGS :=  -g -O0 -std=c++14 -Wall $(Preprocessors)
+CXXFLAGS :=  -g -O0 -Wall $(Preprocessors)
 CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
 ASFLAGS  := 
 AS       := C:/TDM-GCC-32/bin/as.exe
