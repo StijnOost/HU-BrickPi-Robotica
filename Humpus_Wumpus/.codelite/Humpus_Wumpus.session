@@ -1,19 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Session Name="C:\Users\alexa\OneDrive\Documents\GitHub\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus.workspace">
-  <int Value="0" Name="m_selectedTab"/>
-  <wxString Value="C:\Users\alexa\OneDrive\Documents\GitHub\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus.workspace" Name="m_workspaceName"/>
+<Session Name="C:\Users\Stolk\OneDrive\Documents\GitHub\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus.workspace">
+  <int Value="4" Name="m_selectedTab"/>
+  <wxString Value="C:\Users\Stolk\OneDrive\Documents\GitHub\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus.workspace" Name="m_workspaceName"/>
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
-      <wxString Value="C:\Users\alexa\OneDrive\Documents\GitHub\HU-BrickPi-Robotica\Humpus_Wumpus\Alex_Project\main.cpp" Name="FileName"/>
+      <wxString Value="C:\Users\Stolk\OneDrive\Documents\GitHub\HU-BrickPi-Robotica\Humpus_Wumpus\Jari_Project\main.cpp" Name="FileName"/>
       <int Value="0" Name="FirstVisibleLine"/>
       <int Value="0" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
-      <wxString Value="C:\Users\alexa\OneDrive\Documents\GitHub\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus\main.cpp" Name="FileName"/>
+      <wxString Value="C:\Users\Stolk\OneDrive\Documents\GitHub\HU-BrickPi-Robotica\Humpus_Wumpus\Stijn_Project\main.cpp" Name="FileName"/>
       <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="11" Name="CurrentLine"/>
+      <int Value="0" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="C:\Users\Stolk\OneDrive\Documents\GitHub\HU-BrickPi-Robotica\Humpus_Wumpus\Tim_Project\main.cpp" Name="FileName"/>
+      <int Value="0" Name="FirstVisibleLine"/>
+      <int Value="0" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="C:\Users\Stolk\OneDrive\Documents\GitHub\HU-BrickPi-Robotica\Humpus_Wumpus\Alex_Project\main.cpp" Name="FileName"/>
+      <int Value="0" Name="FirstVisibleLine"/>
+      <int Value="0" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="C:\Users\Stolk\OneDrive\Documents\GitHub\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus\main.cpp" Name="FileName"/>
+      <int Value="45" Name="FirstVisibleLine"/>
+      <int Value="68" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>

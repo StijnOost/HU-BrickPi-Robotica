@@ -18,12 +18,9 @@ void Instructies_uitlezen(){
     cout << "4. Firing an arrow that misses the wumpus may cause it to move.\n";
     cout << "5. You have 5 wumpus-piercing arrows.\n";
     cout << "6. You may find an arrow dropped by a previous hunter.\n";
-
-    
 }
 
 vector<int> directions(int local){
-    cout << local << endl;
 	ifstream infile;
 	string filename = "map.txt";
 	string line;
@@ -55,14 +52,12 @@ vector<int> directions(int local){
 	}
 }
 
-int random_rand_waarde_player()
-{
+int random_rand_waarde_player(){
 	int xyplayer = (rand()%19)+0;
 	return xyplayer;
 }
 
-int random_rand_waarde_wump()
-{
+int random_rand_waarde_wump(){
 	int xywump = (rand()%19)+0;
 	return xywump;
 }
@@ -70,7 +65,7 @@ int random_rand_waarde_wump()
 void Begin_Met_Spelen(){
     string Y_tostart;
     while(Y_tostart != "Y" || Y_tostart != "y"){
-        cout << "\nDo you wanne start (Y)? ";
+        cout << "\nDo you want to start (Y)? ";
         cin >> Y_tostart;
 
         if(Y_tostart == "Y" || Y_tostart == "y"){
@@ -104,9 +99,7 @@ int checkside(int side, vector<int> cords){
     }
 }
 
-int main()
-{
-	
+int main(){
 	string YorN_Instr;
     cout << "Hunt the Wumpus" << endl;
     cout << "Do you need instructions: (Y/N)? ";
