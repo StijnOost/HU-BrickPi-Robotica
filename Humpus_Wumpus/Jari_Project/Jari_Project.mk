@@ -6,15 +6,15 @@
 ProjectName            :=Jari_Project
 ConfigurationName      :=Debug
 WorkspaceConfiguration := $(ConfigurationName)
-WorkspacePath          :=C:/Users/stijn/OneDrive/Documenten/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus
-ProjectPath            :=C:/Users/stijn/OneDrive/Documenten/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Jari_Project
+WorkspacePath          :=C:/Users/Jari/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus
+ProjectPath            :=C:/Users/Jari/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Jari_Project
 IntermediateDirectory  :=../build-$(ConfigurationName)/Jari_Project
 OutDir                 :=../build-$(ConfigurationName)/Jari_Project
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
-User                   :=stijn
-Date                   :=25/03/2020
+User                   :=Jari
+Date                   :=26/03/2020
 CodeLitePath           :="C:/Program Files/CodeLite"
 LinkerName             :=C:/TDM-GCC-32/bin/g++.exe
 SharedObjectLinkerName :=C:/TDM-GCC-32/bin/g++.exe -shared -fPIC
@@ -94,7 +94,7 @@ PreBuild:
 ## Objects
 ##
 ../build-$(ConfigurationName)/Jari_Project/main.cpp$(ObjectSuffix): main.cpp ../build-$(ConfigurationName)/Jari_Project/main.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/stijn/OneDrive/Documenten/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Jari_Project/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Jari/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Jari_Project/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
 ../build-$(ConfigurationName)/Jari_Project/main.cpp$(DependSuffix): main.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/Jari_Project/main.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/Jari_Project/main.cpp$(DependSuffix) -MM main.cpp
 
