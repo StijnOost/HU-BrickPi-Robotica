@@ -47,19 +47,19 @@ void random_waardes_toewijzen(){
     if(waardes_infile.is_open()){
         int xyplayer = (rand()%19)+0;
         waardes_infile << "P " << xyplayer << endl;
-        
+
         int xywump = (rand()%19)+0;
         while(xyplayer == xywump){
             xywump = (rand()%19)+0;
         }
         waardes_infile << "W " << xywump << endl;
-        
+
         int xybats = (rand()%19)+0;
         while(xybats == xywump || xybats == xyplayer){
             xybats = (rand()%19)+0;
         }
         waardes_infile << "B " << xybats << endl;
-        
+
         int xypit = (rand()%19)+0;
         while(xypit == xyplayer || xypit == xywump || xypit == xybats){
             xypit = (rand()%19)+0;
@@ -70,7 +70,7 @@ void random_waardes_toewijzen(){
         cout << "ERROR: File unreachable \n";
     }
     waardes_infile.close();
-    
+
 }
 
 int Begin_waarde_Speler()
@@ -168,7 +168,7 @@ int main()
 {
     // Start functie die vraagt of mensen instructies wilt hebben.
     Instructies_uitlezen();
-    
+
     string Continue_playing;
     cout << "Do you want to continue with the last level? (Y/N)";
     cin >> Continue_playing;
@@ -178,11 +178,11 @@ int main()
 
     // Random waardes geven voor spawn points voor Wumpus en de spelers ( Moet nog bats en pit zijn. )
     srand((unsigned)time(0));
-    if(Continue_playing != 'Y' || Continue_playing != 'y'){
+    if(Continue_playing != "Y" || Continue_playing != "y"){
         random_waardes_toewijzen();
     }
     vector<int> cords = directions(Begin_waarde_Speler());
-    
+
 
     // Begin van het spel en de functies uitvoeren
 	int side = move(cords);
