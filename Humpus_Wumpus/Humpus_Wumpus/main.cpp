@@ -41,14 +41,12 @@ void Klaar_Om_Te_Spelen()
     }
 }
 
-int random_rand_waarde_player()
-{
+int random_rand_waarde_player(){
 	int xyplayer = (rand()%19)+0;
 	return xyplayer;
 }
 
-int random_rand_waarde_wump()
-{
+int random_rand_waarde_wump(){
 	int xywump = (rand()%19)+0;
 	return xywump;
 }

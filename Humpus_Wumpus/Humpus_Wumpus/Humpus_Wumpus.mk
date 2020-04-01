@@ -13,8 +13,13 @@ OutDir                 :=../build-$(ConfigurationName)/Humpus_Wumpus
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
-User                   :=Jari
+
+User                   :=Stolk
+Date                   :=27/03/2020
+
+User                   :=stijn
 Date                   :=26/03/2020
+
 CodeLitePath           :="C:/Program Files/CodeLite"
 LinkerName             :=C:/TDM-GCC-32/bin/g++.exe
 SharedObjectLinkerName :=C:/TDM-GCC-32/bin/g++.exe -shared -fPIC
