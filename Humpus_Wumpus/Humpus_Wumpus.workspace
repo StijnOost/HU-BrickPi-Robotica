@@ -4,7 +4,8 @@
   <Project Name="Jari_Project" Path="Jari_Project/Jari_Project.project" Active="No"/>
   <Project Name="Stijn_Project" Path="Stijn_Project/Stijn_Project.project" Active="No"/>
   <Project Name="Tim_Project" Path="Tim_Project/Tim_Project.project" Active="No"/>
-  <Project Name="Alex_Project" Path="Alex_Project/Alex_Project.project" Active="Yes"/>
+  <Project Name="Alex_Project" Path="Alex_Project/Alex_Project.project" Active="No"/>
+  <Project Name="Cumpus_Humpus" Path="Cumpus_Humpus/Cumpus_Humpus.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
@@ -13,6 +14,7 @@
       <Project Name="Stijn_Project" ConfigName="Debug"/>
       <Project Name="Tim_Project" ConfigName="Debug"/>
       <Project Name="Alex_Project" ConfigName="Debug"/>
+      <Project Name="Cumpus_Humpus" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Environment/>
@@ -21,6 +23,7 @@
       <Project Name="Stijn_Project" ConfigName="Release"/>
       <Project Name="Tim_Project" ConfigName="Release"/>
       <Project Name="Alex_Project" ConfigName="Release"/>
+      <Project Name="Cumpus_Humpus" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
