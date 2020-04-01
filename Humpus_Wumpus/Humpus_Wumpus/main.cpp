@@ -178,7 +178,7 @@ int main()
 
     // Random waardes geven voor spawn points voor Wumpus en de spelers ( Moet nog bats en pit zijn. )
     srand((unsigned)time(0));
-    if(Continue_playing =! 'Y' || Continue_playing =! 'y'){
+    if(Continue_playing != "Y" || Continue_playing != "y"){
         random_waardes_toewijzen();
     }
     vector<int> cords = directions(Begin_waarde_Speler());
