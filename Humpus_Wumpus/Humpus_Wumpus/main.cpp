@@ -14,7 +14,7 @@ void Instructies_uitlezen()
     cout << "Hunt the Wumpus" << endl;
     cout << "Do you need instructions: (Y/N)? ";
     cin >> YorN_Instr;
-    
+
     if(YorN_Instr == "Y" || YorN_Instr == "y"){
         cout << "1. There are 3 hazards: \n";
             cout << "\t1.1 A bottomless pit (you will feel a breeze nearby).\n";
@@ -55,9 +55,8 @@ int random_rand_waarde_wump()
 
 // HIER GRAAG RANDOM WAARDE VAN PIT EN BATS
 
-int move(vector<int> cords)
-{
-	
+int move(vector<int> cords){
+
     int side;
     cout << "---------------------------------------\n";
     cout << "You are in room: " << cords[0] << endl;
@@ -119,19 +118,19 @@ int main()
 {
     // Start functie die vraagt of mensen instructies wilt hebben.
     Instructies_uitlezen();
-    
+
     // Begint funcite om te vragen om mensen klaar zijn om te spelen.
     Klaar_Om_Te_Spelen();
-    
+
     // Random waardes geven voor spawn points voor Wumpus en de spelers ( Moet nog bats en pit zijn. )
     srand((unsigned)time(0));
 	int positie_wump = random_rand_waarde_wump();
 	vector<int> cords = directions(random_rand_waarde_player());
-    
+
     // Begin van het spel en de functies uitvoeren
 	int side = move(cords);
     int finalDest = checkside(side, cords);
-    
+
     // Loop: doorheen gaan van het spel.
     while(true){
         cords = directions(finalDest);
