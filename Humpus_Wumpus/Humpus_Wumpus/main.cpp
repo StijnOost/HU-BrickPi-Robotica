@@ -11,7 +11,7 @@ using namespace std;
 void Instructies_uitlezen()
 {
 	string YorN_Instr;
-    cout << "Hunt the Wumpus" << endl;
+    cout << "\nHunt the Wumpus" << endl;
     cout << "Do you need instructions: (Y/N)? ";
     cin >> YorN_Instr;
 
@@ -24,7 +24,6 @@ void Instructies_uitlezen()
         cout << "3. The wumpus is covered in suckers; he won't fall down the bottomless pit.\n";
         cout << "4. Firing an arrow that misses the wumpus may cause it to move.\n";
         cout << "5. You have 5 wumpus-piercing arrows.\n";
-        cout << "6. You may find an arrow dropped by a previous hunter.\n";
     }
 }
 
@@ -41,17 +40,70 @@ void Klaar_Om_Te_Spelen()
     }
 }
 
-int random_rand_waarde_player(){
-	int xyplayer = (rand()%19)+0;
-	return xyplayer;
+void random_waardes_toewijzen(){
+    ofstream waardes_infile;
+	string filename = "Waardes.txt";
+    waardes_infile.open(filename.c_str());
+    if(waardes_infile.is_open()){
+        int xyplayer = (rand()%19)+0;
+        waardes_infile << "P " << xyplayer << endl;
+        
+        int xywump = (rand()%19)+0;
+        while(xyplayer == xywump){
+            xywump = (rand()%19)+0;
+        }
+        waardes_infile << "W " << xywump << endl;
+        
+        int xybats = (rand()%19)+0;
+        while(xybats == xywump || xybats == xyplayer){
+            xybats = (rand()%19)+0;
+        }
+        waardes_infile << "B " << xybats << endl;
+        
+        int xypit = (rand()%19)+0;
+        while(xypit == xyplayer || xypit == xywump || xypit == xybats){
+            xypit = (rand()%19)+0;
+        }
+        waardes_infile << "PI " << xypit << endl;
+    }
+    else{
+        cout << "ERROR: File unreachable \n";
+    }
+    waardes_infile.close();
+    
 }
 
-int random_rand_waarde_wump(){
-	int xywump = (rand()%19)+0;
-	return xywump;
+int Begin_waarde_Speler()
+{
+    ifstream Start_waarde;
+    string line;
+    string filename = "Waardes.txt";
+    Start_waarde.open(filename.c_str());
+    if(Start_waarde.is_open()){
+        while (true){
+            getline(Start_waarde, line);
+            if(line[0] == 'P'){
+                stringstream find;
+				find << line;
+				string temp;
+				int found;
+				while(!find.eof()) {
+					find >> temp;
+					if(stringstream(temp) >> found){
+                        Start_waarde.close();
+						return found;
+					}
+					temp = "";
+				}
+            }
+        }
+    }
+    else{
+        cout << "ERROR: File unreachable \n";
+        Start_waarde.close();
+        return 0;
+    }
 }
-
-// HIER GRAAG RANDOM WAARDE VAN PIT EN BATS
 
 int move(vector<int> cords){
 
@@ -116,14 +168,21 @@ int main()
 {
     // Start functie die vraagt of mensen instructies wilt hebben.
     Instructies_uitlezen();
+    
+    string Continue_playing;
+    cout << "Do you want to continue with the last level? (Y/N)";
+    cin >> Continue_playing;
 
     // Begint funcite om te vragen om mensen klaar zijn om te spelen.
     Klaar_Om_Te_Spelen();
 
     // Random waardes geven voor spawn points voor Wumpus en de spelers ( Moet nog bats en pit zijn. )
     srand((unsigned)time(0));
-	int positie_wump = random_rand_waarde_wump();
-	vector<int> cords = directions(random_rand_waarde_player());
+    if(Continue_playing != 'Y' || Continue_playing != 'y'){
+        random_waardes_toewijzen();
+    }
+    vector<int> cords = directions(Begin_waarde_Speler());
+    
 
     // Begin van het spel en de functies uitvoeren
 	int side = move(cords);
