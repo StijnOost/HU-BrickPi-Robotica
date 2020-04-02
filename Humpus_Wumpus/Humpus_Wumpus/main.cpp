@@ -72,6 +72,83 @@ void random_waardes_toewijzen(){
     waardes_infile.close();
 
 }
+int start_waarde_wumpus(){
+    ifstream Start_waarde;
+    string line;
+    string filename = "Waardes.txt";
+    Start_waarde.open(filename.c_str());
+    if(Start_waarde.is_open()){
+        while (true){
+            getline(Start_waarde, line);
+            if(line[0] == 'W'){
+                stringstream find;
+				find << line;
+				string temp;
+				int found;
+				while(!find.eof()) {
+					find >> temp;
+					if(stringstream(temp) >> found){
+                        Start_waarde.close();
+						return found;
+					}
+					temp = "";
+				}
+            }
+        }
+    }
+    else{
+        cout << "ERROR: File unreachable \n";
+        Start_waarde.close();
+        return 0;
+    }
+}
+
+	
+
+bool raak_wumpus(int coords_wumpus,int schot_kamer)
+{
+	if (coords_wumpus == schot_kamer){
+		return true;
+	}
+	return false;
+}
+
+int wumpus_lopen(int coords_wumpus)
+{
+	ifstream infile;
+	string filename = "map.txt";
+	string line;
+	vector<int> cords;
+	cords.push_back(coords_wumpus);
+	infile.open(filename.c_str());
+	if(infile.is_open()){
+		for(int i=0;i<coords_wumpus+1;i++){
+			getline(infile, line);
+			if(i==coords_wumpus){
+				stringstream find;
+				find << line;
+				string temp;
+				int found;
+				while(!find.eof()) {
+					find >> temp;
+					if(stringstream(temp) >> found){
+						cords.push_back(found);
+					}
+					temp = "";
+				}
+			}
+		}
+		infile.close();
+		
+		int move_rand_wump = (rand()%3)+1;
+		cords[move_rand_wump];
+		return move_rand_wump;
+	}
+	else{
+		infile.close();
+		cout << "ERROR: File unreachable \n";
+	}
+}
 
 int Begin_waarde_Speler()
 {
@@ -160,6 +237,7 @@ vector<int> directions(int local)
 		return(cords);
 	}
 	else{
+		infile.close();
 		cout << "ERROR: File unreachable \n";
 	}
 }
