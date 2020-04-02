@@ -11,7 +11,7 @@ using namespace std;
 void Instructies_uitlezen()
 {
 	string YorN_Instr;
-    cout << "Hunt the Wumpus" << endl;
+    cout << "\nHunt the Wumpus" << endl;
     cout << "Do you need instructions: (Y/N)? ";
     cin >> YorN_Instr;
 
@@ -25,6 +25,161 @@ void Instructies_uitlezen()
         cout << "4. Firing an arrow that misses the wumpus may cause it to move.\n";
         cout << "5. You have 5 wumpus-piercing arrows.\n";
     }
+}
+
+void sense(vector<int> kamer){
+    ifstream infile;
+    string line;
+    string filename = "Waardes.txt";
+    infile.open(filename.c_str());
+    if(infile.is_open()){
+        while ( getline (infile, line) ){
+            stringstream find;
+            find << line;
+            string temp;
+            int found;
+            while(!find.eof()) {
+                find >> temp;
+                if(stringstream(temp) >> found){
+                    for(unsigned int i=1;i<5;i++){
+                        if(found==kamer[i]){
+                            if(line[0]=='W'){
+                                cout << "You smell a disgusting beast" << endl;
+                            }
+                            if(line[0]=='B'){
+                                cout << "You hear flapping nearby" << endl;
+                            }    
+                            if(line[0]=='G'){
+                                cout << "You feel a cold breeze" << endl;
+                            }        
+                        }
+                    }
+                }
+                temp = "";
+            }
+        }
+    }
+    else{
+        cout << "ERROR: File unreachable \n";
+        infile.close();
+    }
+}
+
+int death()
+{
+    string getFileContents (ifstream&); 
+    ifstream Reader ("death.txt");             //Open file
+
+    string Art = getFileContents (Reader);       //Get file
+    
+    cout << Art << endl;               //Print it to the screen
+
+    Reader.close ();                           //Close file
+
+    return 0;
+}
+
+string getFileContents (ifstream& File)
+{
+    string Lines = "";        //All lines
+    
+    if (File)                      //Check if everything is good
+    {
+    while (File.good ())
+    {
+        string TempLine;                  //Temp line
+        getline (File , TempLine);        //Get temp line
+        TempLine += "\n";                      //Add newline character
+        
+        Lines += TempLine;                     //Add newline
+    }
+    return Lines;
+    }
+    else                           //Return error
+    {
+    return "ERROR File does not exist.";
+    }
+}
+
+int win()
+{
+    string getFileContents (ifstream&); 
+    ifstream Reader ("winner.txt");             //Open file
+
+    string Art = getFileContents (Reader);       //Get file
+    
+    cout << Art << endl;               //Print it to the screen
+
+    Reader.close ();                           //Close file
+
+    return 0;
+}
+
+bool collision_death(vector<int> kamer){
+    ifstream infile;
+    string line;
+    string filename = "Waardes.txt";
+    infile.open(filename.c_str());
+    if(infile.is_open()){
+        while ( getline (infile, line) ){
+            stringstream find;
+            find << line;
+            string temp;
+            int found;
+            while(!find.eof()) {
+                find >> temp;
+                if(stringstream(temp) >> found){
+                    if (line[0] == 'W' || line[0] == 'G'){
+                        if (found == kamer[0]){
+                            infile.close();
+                            return true;
+                        }
+                    }
+                }
+                temp = "";
+            }
+        }
+    }
+    else{
+        cout << "ERROR: File unreachable \n";
+        infile.close();
+
+    }
+    return false;
+
+}
+
+bool collision_bats(vector<int> kamer){
+    ifstream infile;
+    string line;
+    string filename = "Waardes.txt";
+    infile.open(filename.c_str());
+    if(infile.is_open()){
+        while ( getline (infile, line) ){
+            stringstream find;
+            find << line;
+            string temp;
+            int found;
+            while(!find.eof()) {
+                find >> temp;
+                if(stringstream(temp) >> found){
+                    if (line[0] == 'B'){
+                        if (found == kamer[0]){
+                            infile.close();
+                            return true;
+                        }
+                    }
+                }
+                temp = "";
+            }
+        }
+    }
+    else{
+        cout << "ERROR: File unreachable \n";
+        infile.close();
+
+    }
+    return false;
 }
 
 char Klaar_Om_Te_Spelen()
@@ -48,31 +203,118 @@ void random_waardes_toewijzen()
     if(waardes_infile.is_open()){
         int xyplayer = (rand()%19)+0;
         waardes_infile << "P " << xyplayer << endl;
-        
+
         int xywump = (rand()%19)+0;
         while(xyplayer == xywump){
             xywump = (rand()%19)+0;
         }
         waardes_infile << "W " << xywump << endl;
-        
+
         int xybats = (rand()%19)+0;
         while(xybats == xywump || xybats == xyplayer){
             xybats = (rand()%19)+0;
         }
         waardes_infile << "B " << xybats << endl;
-        
+
         int xypit = (rand()%19)+0;
         while(xypit == xyplayer || xypit == xywump || xypit == xybats){
             xypit = (rand()%19)+0;
         }
-        waardes_infile << "PI " << xypit << endl;
+        waardes_infile << "G " << xypit << endl;
     }
     else{
         cout << "ERROR: File unreachable \n";
     }
     waardes_infile.close();
-    
+
 }
+int start_waarde_wumpus(){
+    ifstream Start_waarde;
+    string line;
+    string filename = "Waardes.txt";
+    Start_waarde.open(filename.c_str());
+    if(Start_waarde.is_open()){
+        while (true){
+            getline(Start_waarde, line);
+            if(line[0] == 'W'){
+                stringstream find;
+				find << line;
+				string temp;
+				int found;
+				while(!find.eof()) {
+					find >> temp;
+					if(stringstream(temp) >> found){
+                        Start_waarde.close();
+						return found;
+					}
+					temp = "";
+				}
+            }
+        }
+    }
+    else{
+        cout << "ERROR: File unreachable \n";
+        Start_waarde.close();
+        return 0;
+    }
+}
+
+int wumpus_lopen(int coords_wumpus)
+{
+	ifstream infile;
+	string filename = "map.txt";
+	string line;
+	vector<int> cords;
+	cords.push_back(coords_wumpus);
+	infile.open(filename.c_str());
+	if(infile.is_open()){
+		for(int i=0;i<coords_wumpus+1;i++){
+			getline(infile, line);
+			if(i==coords_wumpus){
+				stringstream find;
+				find << line;
+				string temp;
+				int found;
+				while(!find.eof()) {
+					find >> temp;
+					if(stringstream(temp) >> found){
+						cords.push_back(found);
+					}
+					temp = "";
+				}
+			}
+		}
+		infile.close();
+
+		int move_rand_wump = (rand()%3)+1;
+		cords[move_rand_wump];
+		return move_rand_wump;
+	}
+	else{
+		infile.close();
+		cout << "ERROR: File unreachable \n";
+	}
+}
+
+bool raak_wumpus(int coords_wumpus,int schot_kamer)
+{
+	if (coords_wumpus == schot_kamer){
+		return true;
+	}
+	return false;
+}
+
+bool schot_lopen_wumpus(int wumpus_coords, int schot_kamer){
+	if(raak_wumpus(wumpus_coords,schot_kamer)){
+		return true;
+	}
+	else{
+		wumpus_coords = wumpus_lopen(wumpus_coords);
+		return false;
+	}
+}
+
+
 
 int Begin_waarde_Speler()
 {
@@ -105,13 +347,14 @@ int Begin_waarde_Speler()
         return 0;
     }
 }
-
 char Show_Position_And_Options(vector<int> cords)
 {
+    int side;
     cout << "---------------------------------------\n";
     cout << "You are in room: " << cords[0] << endl;
 	cout << "Tunnels lead to room: " << cords[1] << ", " << cords[2] << " and " << cords[3] <<endl ;
     cout << "---------------------------------------\n";
+	sense(cords);
     char SorM_Instr;
     while(true){
         cout << "Do you wanne shoot or move (S/M)? ";
@@ -125,7 +368,11 @@ char Show_Position_And_Options(vector<int> cords)
 int move(vector<int> cords)
 {
     int side;
+<<<<<<< HEAD
     cout << "Which direction do you move to? ";
+=======
+    cout << "Which direction do you move to?: ";
+>>>>>>> master
     cin >> side;
     return side;
 }
@@ -172,8 +419,17 @@ vector<int> directions(int local)
 		return(cords);
 	}
 	else{
+		infile.close();
 		cout << "ERROR: File unreachable \n";
 	}
+}
+
+int schieten(vector<int>cords){
+    int shoot;
+    cout << "To which room do you want to shoot?" << endl;
+    cin >> shoot;
+    int finalDest = checkside(shoot, cords);
+    return finalDest;
 }
 
 int main()
@@ -182,15 +438,25 @@ int main()
     Instructies_uitlezen();
 
     // Begint funcite om te vragen om mensen klaar zijn om te spelen.
-    char Klaar_Om_to_Spelen_Uitkomst = Klaar_Om_Te_Spelen();
+		char Klaar_Om_to_Spelen_Uitkomst = Klaar_Om_Te_Spelen();
+
+	 // Random waardes geven voor spawn points voor Wumpus en de spelers ( Moet nog bats en pit zijn. )
+	 srand((unsigned)time(0));
+	 if(Klaar_Om_to_Spelen_Uitkomst != 'Y' || Klaar_Om_to_Spelen_Uitkomst != 'y'){
+			 random_waardes_toewijzen();
+	 }
+    // Random waardes geven voor spawn points voor Wumpus en de spelers ( Moet nog bats en pit zijn. )
+
+	vector<int> cords = directions(Begin_waarde_Speler());
+	int wumpus_coords = start_waarde_wumpus();
+
+	// Er wordt gekeken of er is geschoten en of ie raak is dan wumpus locatie veranderen
+	bool finish = true;
+	int schot_kamer = -1;
+    // Begint funcite om te vragen om mensen klaar zijn om te spelen.
 
     // Random waardes geven voor spawn points voor Wumpus en de spelers ( Moet nog bats en pit zijn. )
-    srand((unsigned)time(0));
-    if(Klaar_Om_to_Spelen_Uitkomst != 'Y' || Klaar_Om_to_Spelen_Uitkomst != 'y'){
-        random_waardes_toewijzen();
-    }
-    vector<int> cords = directions(Begin_waarde_Speler());
-    
+
     // Begin van het spel en de functies uitvoeren
     int side;
     int finalDest;
@@ -198,23 +464,69 @@ int main()
     if(Uitkomst_SPAO == 'M' || Uitkomst_SPAO == 'm'){
         side = move(cords);
         finalDest = checkside(+side, cords);
+		cords = directions(finalDest);
+		if (collision_bats(cords)){
+			cout << "The bats carry you away" << endl;
+			cords = directions((rand()%19)+0);
+		}
+		if (collision_death(cords)){
+			death();
+			cout << "You are dead, oh noh!" << endl;
+			finish = false;
+		}
+
     }
     else{
-        // HIER MOET CODE VOOR SCHIETEN
+		
+		schot_kamer = schieten(cords);
+		if(schot_kamer != -1){
+			bool raak = schot_lopen_wumpus(wumpus_coords, schot_kamer);
+			if(raak){
+				win();
+				cout << "You win! You have killed the wumpus. You are MLG." << endl;
+				finish = false;
+			}else{
+				cout << "You missed the shot you have " << "left." << endl;
+			}
         cout << "CUMPUS" << endl;
-    }
-    
-    // Loop: doorheen gaan van het spel.
-    while(true){
-        Uitkomst_SPAO = Show_Position_And_Options(cords);
-        if(Uitkomst_SPAO == 'M' || Uitkomst_SPAO == 'm'){
-            side = move(cords);
-            finalDest = checkside(side, cords);
-            cords = directions(finalDest);
-        }
-        else{
-            // HIER MOET CODE VOOR SCHIETEN
-            cout << "CUMPUS" << endl;
-        }
-    }
+		}
+	}
+	if(finish == true){    // Loop: doorheen gaan van het spel.
+		while(true){
+			Uitkomst_SPAO = Show_Position_And_Options(cords);
+			if(Uitkomst_SPAO == 'M' || Uitkomst_SPAO == 'm'){
+				side = move(cords);
+				finalDest = checkside(side, cords);
+				cords = directions(finalDest);// Loop: doorheen gaan van het spel
+				if (collision_bats(cords)){
+					cout << "The bats carry you away" << endl;
+					cords = directions((rand()%19)+0);
+				}
+				if (collision_death(cords)){
+					death();
+					cout << "You are dead, oh noh!" << endl;
+					break;
+				}
+				
+			}
+			else{
+				// HIER MOET CODE VOOR SCHIETEN
+				schot_kamer = schieten(cords);
+				if(schot_kamer != -1){
+					bool raak = schot_lopen_wumpus(wumpus_coords, schot_kamer);
+					if(raak){
+						win();
+						cout << "You win! You have killed the wumpus. You are MLG." << endl;
+						break;
+					}
+					else{
+						cout << "You missed the shot you have "  << "left." << endl;
+					}
+				}
+				cout << "CUMPUS" << endl;
+			}
+
+		}
+	}
 }
+
