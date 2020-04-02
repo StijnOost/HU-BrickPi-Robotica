@@ -169,16 +169,6 @@ int start_waarde_wumpus(){
     }
 }
 
-bool schot_lopen_wumpus(int wumpus_coords, int schot_kamer){
-	if(raak_wumpus(wumpus_coords,schot_kamer)){
-		return true;
-	}
-	else{
-		wumpus_coords = wumpus_lopen(wumpus_coords);
-		return false;
-	}
-}
-
 bool raak_wumpus(int coords_wumpus,int schot_kamer)
 {
 	if (coords_wumpus == schot_kamer){
@@ -223,6 +213,18 @@ int wumpus_lopen(int coords_wumpus)
 		cout << "ERROR: File unreachable \n";
 	}
 }
+
+bool schot_lopen_wumpus(int wumpus_coords, int schot_kamer){
+	if(raak_wumpus(wumpus_coords,schot_kamer)){
+		return true;
+	}
+	else{
+		wumpus_coords = wumpus_lopen(wumpus_coords);
+		return false;
+	}
+}
+
+
 
 int Begin_waarde_Speler()
 {
@@ -282,6 +284,14 @@ int checkside(int side, vector<int> cords)
     }
 }
 
+int schieten(vector<int>cords){
+    int shoot;
+    cout << "To which room do you want to shoot?" << endl;
+    cin >> shoot;
+    int finalDest = checkside(shoot, cords);
+    return finalDest;
+}
+
 vector<int> directions(int local)
 {
 	ifstream infile;
@@ -316,6 +326,56 @@ vector<int> directions(int local)
 	}
 }
 
+int death()
+{
+    string getFileContents (ifstream&); 
+    ifstream Reader ("death.txt");             //Open file
+
+    string Art = getFileContents (Reader);       //Get file
+    
+    cout << Art << endl;               //Print it to the screen
+
+    Reader.close ();                           //Close file
+
+    return 0;
+}
+
+string getFileContents (ifstream& File)
+{
+    string Lines = "";        //All lines
+    
+    if (File)                      //Check if everything is good
+    {
+	while (File.good ())
+	{
+	    string TempLine;                  //Temp line
+	    getline (File , TempLine);        //Get temp line
+	    TempLine += "\n";                      //Add newline character
+	    
+	    Lines += TempLine;                     //Add newline
+	}
+	return Lines;
+    }
+    else                           //Return error
+    {
+	return "ERROR File does not exist.";
+    }
+}
+
+int win()
+{
+    string getFileContents (ifstream&); 
+    ifstream Reader ("winner.txt");             //Open file
+
+    string Art = getFileContents (Reader);       //Get file
+    
+    cout << Art << endl;               //Print it to the screen
+
+    Reader.close ();                           //Close file
+
+    return 0;
+}
+
 int main()
 {
     // Start functie die vraagt of mensen instructies wilt hebben.
@@ -326,12 +386,10 @@ int main()
 
     // Random waardes geven voor spawn points voor Wumpus en de spelers ( Moet nog bats en pit zijn. )
     srand((unsigned)time(0));
-    if(Continue_playing != "Y" || Continue_playing != "y"){
-        random_waardes_toewijzen();
-    }
+    
     vector<int> cords = directions(Begin_waarde_Speler());
 
-    
+    int schot_kamer = -1;
 
 	int wumpus_coords = start_waarde_wumpus();
 
@@ -340,7 +398,7 @@ int main()
 
     // Begin van het spel en de functies uitvoeren
 	if(schot_kamer == -1){
-		schot_lopen_wumpus(wumpus_coords, schot_kamer)
+		schot_lopen_wumpus(wumpus_coords, schot_kamer);
 	}
 
 
@@ -354,6 +412,7 @@ int main()
         cords = directions(finalDest);
 		if (collision_death(cords)){
             cout << "You are dead" << endl;
+            death();
             break;
         }
         if (collision_bats(cords)){
