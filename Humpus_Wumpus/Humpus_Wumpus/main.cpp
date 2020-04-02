@@ -130,7 +130,7 @@ void random_waardes_toewijzen(){
         while(xypit == xyplayer || xypit == xywump || xypit == xybats){
             xypit = (rand()%19)+0;
         }
-        waardes_infile << "G" << xypit << endl;
+        waardes_infile << "G " << xypit << endl;
     }
     else{
         cout << "ERROR: File unreachable \n";
@@ -169,24 +169,6 @@ int start_waarde_wumpus(){
     }
 }
 
-bool schot_lopen_wumpus(int wumpus_coords, int schot_kamer){
-	if(raak_wumpus(wumpus_coords,schot_kamer)){
-		return true;
-	}
-	else{
-		wumpus_coords = wumpus_lopen(wumpus_coords);
-		return false;
-	}
-}
-
-bool raak_wumpus(int coords_wumpus,int schot_kamer)
-{
-	if (coords_wumpus == schot_kamer){
-		return true;
-	}
-	return false;
-}
-
 int wumpus_lopen(int coords_wumpus)
 {
 	ifstream infile;
@@ -223,6 +205,25 @@ int wumpus_lopen(int coords_wumpus)
 		cout << "ERROR: File unreachable \n";
 	}
 }
+
+bool raak_wumpus(int coords_wumpus,int schot_kamer)
+{
+	if (coords_wumpus == schot_kamer){
+		return true;
+	}
+	return false;
+}
+
+bool schot_lopen_wumpus(int wumpus_coords, int schot_kamer){
+	if(raak_wumpus(wumpus_coords,schot_kamer)){
+		return true;
+	}
+	else{
+		wumpus_coords = wumpus_lopen(wumpus_coords);
+		return false;
+	}
+}
+
 
 int Begin_waarde_Speler()
 {
@@ -337,30 +338,49 @@ int main()
 	int wumpus_coords = start_waarde_wumpus();
 
 	// Er wordt gekeken of er is geschoten en of ie raak is dan wumpus locatie veranderen
-
-    // Begin van het spel en de functies uitvoeren
-	if(schot_kamer == -1){
-		schot_lopen_wumpus(wumpus_coords, schot_kamer)
-	}
+	
 
 
 	int side = move(cords);
     int finalDest = checkside(side, cords);
+	bool finish = true;
+	
+	int schot_kamer = -1;
+    // Begin van het spel en de functies uitvoeren
+	if(schot_kamer != -1){
+		bool raak = schot_lopen_wumpus(wumpus_coords, schot_kamer);
+		if(raak){
+			cout << "You Killed the wumpus and you saved the city!"<< endl;
+			finish = false;
+		}else{
+			cout << "You missed the shot you have " << "left." << endl;
+		}
+	}
+	
 
+	if(finish == true){// Loop: doorheen gaan van het spel.
+		while(true){
 
-    // Loop: doorheen gaan van het spel.
-    while(true){
-
-        cords = directions(finalDest);
-		if (collision_death(cords)){
-            cout << "You are dead" << endl;
-            break;
-        }
-        if (collision_bats(cords)){
-            cout << "The bats carry you away" << endl;
-            cords = directions((rand()%19)+0); 
-        }
-        side = move(cords);
-        finalDest = checkside(side, cords);
+			cords = directions(finalDest);
+			if (collision_death(cords)){
+				cout << "You are dead" << endl;
+				break;
+			}
+			if (collision_bats(cords)){
+				cout << "The bats carry you away" << endl;
+				cords = directions((rand()%19)+0); 
+			}
+			if(schot_kamer != -1){
+			bool raak = schot_lopen_wumpus(wumpus_coords, schot_kamer);
+				if(raak){
+					cout << "You Killed the wumpus and you saved the city!" << endl;
+					break;
+				}else{
+					cout << "You missed the shot you have "  << "left." << endl;
+				}
+			}
+			side = move(cords);
+			finalDest = checkside(side, cords);
+		}
     }
 }
