@@ -8,16 +8,12 @@ ConfigurationName      :=Debug
 WorkspaceConfiguration := $(ConfigurationName)
 WorkspacePath          :=C:/Users/alexa/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus
 ProjectPath            :=C:/Users/alexa/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Humpus_Wumpus
-WorkspacePath          :=C:/Users/Stolk/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus
-ProjectPath            :=C:/Users/Stolk/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Humpus_Wumpus
 IntermediateDirectory  :=../build-$(ConfigurationName)/Humpus_Wumpus
 OutDir                 :=../build-$(ConfigurationName)/Humpus_Wumpus
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=alexa
-Date                   :=01/04/2020
-User                   :=Stolk
 Date                   :=02/04/2020
 CodeLitePath           :="C:/Program Files/CodeLite"
 LinkerName             :="C:/Program Files/TDM-GCC/bin/g++.exe"
@@ -99,7 +95,6 @@ PreBuild:
 ##
 ../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(ObjectSuffix): main.cpp ../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/alexa/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Humpus_Wumpus/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Stolk/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Humpus_Wumpus/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
 ../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(DependSuffix): main.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(DependSuffix) -MM main.cpp
 
