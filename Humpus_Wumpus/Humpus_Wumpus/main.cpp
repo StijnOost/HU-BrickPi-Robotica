@@ -147,7 +147,7 @@ int wumpus_lopen(int coords_wumpus)
 			}
 		}
 		infile.close();
-		
+
 		int move_rand_wump = (rand()%3)+1;
 		cords[move_rand_wump];
 		return move_rand_wump;
@@ -269,22 +269,22 @@ int main()
     }
     vector<int> cords = directions(Begin_waarde_Speler());
 	int wumpus_coords = start_waarde_wumpus();
-	
+
 	// Er wordt gekeken of er is geschoten en of ie raak is dan wumpus locatie veranderen
-	
+
     // Begin van het spel en de functies uitvoeren
 	if(schot_kamer == -1){
 		schot_lopen_wumpus(wumpus_coords, schot_kamer)
 	}
-	
-	
+
+
 	int side = move(cords);
     int finalDest = checkside(side, cords);
-	
-	
+
+
     // Loop: doorheen gaan van het spel.
     while(true){
-		
+
         cords = directions(finalDest);
         side = move(cords);
         finalDest = checkside(side, cords);
