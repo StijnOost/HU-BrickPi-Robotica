@@ -27,15 +27,15 @@ void Instructies_uitlezen()
     }
 }
 
-void Klaar_Om_Te_Spelen()
+char Klaar_Om_Te_Spelen()
 {
-    string Y_tostart;
-    while(Y_tostart != "Y" || Y_tostart != "y"){
+    char Y_tostart;
+    while(Y_tostart != 'Y' || Y_tostart != 'y'){
         cout << "\nAre you ready to start (Y)? ";
         cin >> Y_tostart;
 
-        if(Y_tostart == "Y" || Y_tostart == "y"){
-            break;
+        if(Y_tostart == 'Y' || Y_tostart == 'y'){
+            return Y_tostart;
         }
     }
 }
@@ -105,14 +105,26 @@ int Begin_waarde_Speler()
     }
 }
 
-int move(vector<int> cords){
-
-    int side;
+char Show_Position_And_Options(vector<int> cords)
+{
     cout << "---------------------------------------\n";
     cout << "You are in room: " << cords[0] << endl;
 	cout << "Tunnels lead to room: " << cords[1] << ", " << cords[2] << " and " << cords[3] <<endl ;
     cout << "---------------------------------------\n";
-    cout << "To which room do you want to go?" << endl;
+    char SorM_Instr;
+    while(true){
+        cout << "Do you wanne shoot or move (S/M)? ";
+        cin >> SorM_Instr;
+        if(SorM_Instr == 'S' || SorM_Instr == 's' || SorM_Instr == 'M' || SorM_Instr == 'm'){
+            return SorM_Instr;
+        }
+    }
+}
+
+int move(vector<int> cords)
+{
+    int side;
+    cout << "Which direction do you move to? " << endl;
     cin >> side;
     return side;
 }
@@ -121,7 +133,6 @@ int checkside(int side, vector<int> cords)
 {
     while(true){
         if (side == cords[1] || side == cords[2] || side == cords[3]){
-        //fucntie
         return side;
         }
         else{
@@ -168,30 +179,41 @@ int main()
 {
     // Start functie die vraagt of mensen instructies wilt hebben.
     Instructies_uitlezen();
-    
-    string Continue_playing;
-    cout << "Do you want to continue with the last level? (Y/N)";
-    cin >> Continue_playing;
 
     // Begint funcite om te vragen om mensen klaar zijn om te spelen.
-    Klaar_Om_Te_Spelen();
+    char Klaar_Om_to_Spelen_Uitkomst = Klaar_Om_Te_Spelen();
 
     // Random waardes geven voor spawn points voor Wumpus en de spelers ( Moet nog bats en pit zijn. )
     srand((unsigned)time(0));
-    if(Continue_playing != "Y" || Continue_playing != "y"){
+    if(Klaar_Om_to_Spelen_Uitkomst != 'Y' || Klaar_Om_to_Spelen_Uitkomst != 'y'){
         random_waardes_toewijzen();
     }
     vector<int> cords = directions(Begin_waarde_Speler());
     
-
     // Begin van het spel en de functies uitvoeren
-	int side = move(cords);
-    int finalDest = checkside(side, cords);
-
+    int side;
+    int finalDest;
+    char Uitkomst_SPAO = Show_Position_And_Options(cords);
+    if(Uitkomst_SPAO == 'M' || Uitkomst_SPAO == 'm'){
+        side = move(cords);
+        finalDest = checkside(+side, cords);
+    }
+    else{
+        // HIER MOET CODE VOOR SCHIETEN
+        cout << "CUMPUS" << endl;
+    }
+    
     // Loop: doorheen gaan van het spel.
     while(true){
-        cords = directions(finalDest);
-        side = move(cords);
-        finalDest = checkside(side, cords);
+        Uitkomst_SPAO = Show_Position_And_Options(cords);
+        if(Uitkomst_SPAO == 'M' || Uitkomst_SPAO == 'm'){
+            side = move(cords);
+            finalDest = checkside(side, cords);
+            cords = directions(finalDest);
+        }
+        else{
+            // HIER MOET CODE VOOR SCHIETEN
+            cout << "CUMPUS" << endl;
+        }
     }
 }
