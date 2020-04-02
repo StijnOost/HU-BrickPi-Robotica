@@ -27,73 +27,6 @@ void Instructies_uitlezen()
     }
 }
 
-bool collision_death(vector<int> kamer){
-    ifstream infile;
-    string line;
-    string filename = "Waardes.txt";
-    infile.open(filename.c_str());
-    if(infile.is_open()){
-        while ( getline (infile, line) ){
-            stringstream find;
-            find << line;
-            string temp;
-            int found;
-            while(!find.eof()) {
-                find >> temp;
-                if(stringstream(temp) >> found){
-                    if (line[0] == 'W' || line[0] == 'G'){
-                        if (found == kamer[0]){
-                            infile.close();
-                            return true;
-                        }
-                    }
-                }
-                temp = "";
-            }
-        }
-    }
-    else{
-        cout << "ERROR: File unreachable \n";
-        infile.close();
-        
-    }
-    return false;
-    
-}
-
-bool collision_bats(vector<int> kamer){
-    ifstream infile;
-    string line;
-    string filename = "Waardes.txt";
-    infile.open(filename.c_str());
-    if(infile.is_open()){
-        while ( getline (infile, line) ){
-            stringstream find;
-            find << line;
-            string temp;
-            int found;
-            while(!find.eof()) {
-                find >> temp;
-                if(stringstream(temp) >> found){
-                    if (line[0] == 'B'){
-                        if (found == kamer[0]){
-                            infile.close();
-                            return true;
-                        }
-                    }
-                }
-                temp = "";
-            }
-        }
-    }
-    else{
-        cout << "ERROR: File unreachable \n";
-        infile.close();
-        
-    }
-    return false;
-}
-
 void Klaar_Om_Te_Spelen()
 {
     string Y_tostart;
@@ -131,13 +64,98 @@ void random_waardes_toewijzen(){
         while(xypit == xyplayer || xypit == xywump || xypit == xybats){
             xypit = (rand()%19)+0;
         }
-        waardes_infile << "G " << xypit << endl;
+        waardes_infile << "PI " << xypit << endl;
     }
     else{
         cout << "ERROR: File unreachable \n";
     }
     waardes_infile.close();
     
+}
+int start_waarde_wumpus(){
+    ifstream Start_waarde;
+    string line;
+    string filename = "Waardes.txt";
+    Start_waarde.open(filename.c_str());
+    if(Start_waarde.is_open()){
+        while (true){
+            getline(Start_waarde, line);
+            if(line[0] == 'W'){
+                stringstream find;
+				find << line;
+				string temp;
+				int found;
+				while(!find.eof()) {
+					find >> temp;
+					if(stringstream(temp) >> found){
+                        Start_waarde.close();
+						return found;
+					}
+					temp = "";
+				}
+            }
+        }
+    }
+    else{
+        cout << "ERROR: File unreachable \n";
+        Start_waarde.close();
+        return 0;
+    }
+}
+
+bool schot_lopen_wumpus(int wumpus_coords, int schot_kamer){
+	if(raak_wumpus(wumpus_coords,schot_kamer)){
+		return true;
+	}
+	else{
+		wumpus_coords = wumpus_lopen(wumpus_coords);
+		return false;
+	}
+}
+
+bool raak_wumpus(int coords_wumpus,int schot_kamer)
+{
+	if (coords_wumpus == schot_kamer){
+		return true;
+	}
+	return false;
+}
+
+int wumpus_lopen(int coords_wumpus)
+{
+	ifstream infile;
+	string filename = "map.txt";
+	string line;
+	vector<int> cords;
+	cords.push_back(coords_wumpus);
+	infile.open(filename.c_str());
+	if(infile.is_open()){
+		for(int i=0;i<coords_wumpus+1;i++){
+			getline(infile, line);
+			if(i==coords_wumpus){
+				stringstream find;
+				find << line;
+				string temp;
+				int found;
+				while(!find.eof()) {
+					find >> temp;
+					if(stringstream(temp) >> found){
+						cords.push_back(found);
+					}
+					temp = "";
+				}
+			}
+		}
+		infile.close();
+
+		int move_rand_wump = (rand()%3)+1;
+		cords[move_rand_wump];
+		return move_rand_wump;
+	}
+	else{
+		infile.close();
+		cout << "ERROR: File unreachable \n";
+	}
 }
 
 int Begin_waarde_Speler()
@@ -227,6 +245,7 @@ vector<int> directions(int local)
 		return(cords);
 	}
 	else{
+		infile.close();
 		cout << "ERROR: File unreachable \n";
 	}
 }
@@ -235,6 +254,7 @@ int main()
 {
     // Start functie die vraagt of mensen instructies wilt hebben.
     Instructies_uitlezen();
+
     // Begint funcite om te vragen om mensen klaar zijn om te spelen.
     Klaar_Om_Te_Spelen();
 
@@ -244,25 +264,29 @@ int main()
         random_waardes_toewijzen();
     }
     vector<int> cords = directions(Begin_waarde_Speler());
+
     
 
+	int wumpus_coords = start_waarde_wumpus();
+
+	// Er wordt gekeken of er is geschoten en of ie raak is dan wumpus locatie veranderen
+
+
     // Begin van het spel en de functies uitvoeren
+	if(schot_kamer == -1){
+		schot_lopen_wumpus(wumpus_coords, schot_kamer)
+	}
+
+
 	int side = move(cords);
     int finalDest = checkside(side, cords);
 
+
     // Loop: doorheen gaan van het spel.
     while(true){
+
         cords = directions(finalDest);
-        if (collision_death(cords)){
-            cout << "You are dead" << endl;
-            break;
-        }
-        if (collision_bats(cords)){
-            cout << "The bats carry you away" << endl;
-            cords = directions((rand()%19)+0); 
-        }
         side = move(cords);
         finalDest = checkside(side, cords);
-        
     }
 }
