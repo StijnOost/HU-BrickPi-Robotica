@@ -27,6 +27,73 @@ void Instructies_uitlezen()
     }
 }
 
+bool collision_death(vector<int> kamer){
+    ifstream infile;
+    string line;
+    string filename = "Waardes.txt";
+    infile.open(filename.c_str());
+    if(infile.is_open()){
+        while ( getline (infile, line) ){
+            stringstream find;
+            find << line;
+            string temp;
+            int found;
+            while(!find.eof()) {
+                find >> temp;
+                if(stringstream(temp) >> found){
+                    if (line[0] == 'W' || line[0] == 'G'){
+                        if (found == kamer[0]){
+                            infile.close();
+                            return true;
+                        }
+                    }
+                }
+                temp = "";
+            }
+        }
+    }
+    else{
+        cout << "ERROR: File unreachable \n";
+        infile.close();
+        
+    }
+    return false;
+    
+}
+
+bool collision_bats(vector<int> kamer){
+    ifstream infile;
+    string line;
+    string filename = "Waardes.txt";
+    infile.open(filename.c_str());
+    if(infile.is_open()){
+        while ( getline (infile, line) ){
+            stringstream find;
+            find << line;
+            string temp;
+            int found;
+            while(!find.eof()) {
+                find >> temp;
+                if(stringstream(temp) >> found){
+                    if (line[0] == 'B'){
+                        if (found == kamer[0]){
+                            infile.close();
+                            return true;
+                        }
+                    }
+                }
+                temp = "";
+            }
+        }
+    }
+    else{
+        cout << "ERROR: File unreachable \n";
+        infile.close();
+        
+    }
+    return false;
+}
+
 void Klaar_Om_Te_Spelen()
 {
     string Y_tostart;
@@ -64,7 +131,7 @@ void random_waardes_toewijzen(){
         while(xypit == xyplayer || xypit == xywump || xypit == xybats){
             xypit = (rand()%19)+0;
         }
-        waardes_infile << "PI " << xypit << endl;
+        waardes_infile << "G " << xypit << endl;
     }
     else{
         cout << "ERROR: File unreachable \n";
@@ -168,11 +235,6 @@ int main()
 {
     // Start functie die vraagt of mensen instructies wilt hebben.
     Instructies_uitlezen();
-    
-    string Continue_playing;
-    cout << "Do you want to continue with the last level? (Y/N)";
-    cin >> Continue_playing;
-
     // Begint funcite om te vragen om mensen klaar zijn om te spelen.
     Klaar_Om_Te_Spelen();
 
@@ -191,7 +253,16 @@ int main()
     // Loop: doorheen gaan van het spel.
     while(true){
         cords = directions(finalDest);
+        if (collision_death(cords)){
+            cout << "You are dead" << endl;
+            break;
+        }
+        if (collision_bats(cords)){
+            cout << "The bats carry you away" << endl;
+            cords = directions((rand()%19)+0); 
+        }
         side = move(cords);
         finalDest = checkside(side, cords);
+        
     }
 }
