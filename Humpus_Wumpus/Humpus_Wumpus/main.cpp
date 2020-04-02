@@ -40,7 +40,8 @@ char Klaar_Om_Te_Spelen()
     }
 }
 
-void random_waardes_toewijzen(){
+void random_waardes_toewijzen()
+{
     ofstream waardes_infile;
 	string filename = "Waardes.txt";
     waardes_infile.open(filename.c_str());
@@ -124,7 +125,7 @@ char Show_Position_And_Options(vector<int> cords)
 int move(vector<int> cords)
 {
     int side;
-    cout << "Which direction do you move to? " << endl;
+    cout << "Which direction do you move to? ";
     cin >> side;
     return side;
 }
