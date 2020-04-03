@@ -4,9 +4,11 @@
   <wxString Value="C:\Users\Stolk\OneDrive\Documents\GitHub\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus.workspace" Name="m_workspaceName"/>
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
+
       <wxString Value="C:\Users\Stolk\OneDrive\Documents\GitHub\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus\main.cpp" Name="FileName"/>
       <int Value="228" Name="FirstVisibleLine"/>
       <int Value="34" Name="CurrentLine"/>
+
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
