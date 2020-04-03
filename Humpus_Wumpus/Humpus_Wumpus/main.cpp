@@ -286,7 +286,6 @@ int wumpus_lopen(int coords_wumpus)
 		infile.close();
 
 		int move_rand_wump = (rand()%3)+1;
-		cords[move_rand_wump];
 		return cords[move_rand_wump];
 	}
 	else{
@@ -354,11 +353,13 @@ string Show_Position_And_Options(vector<int> cords)
 	cout << "Tunnels lead to room: " << cords[1] << ", " << cords[2] << " and " << cords[3] <<endl ;
     cout << "---------------------------------------\n";
 	sense(cords);
-    
-    cout << "Do you wanne shoot or move (S/M)? ";
     while(true){
+		cout << "Do you wanne shoot or move (S/M)? ";
         string SorM_Instr = "";
+		cin.ignore( 1000, '\n' );
         cin >> SorM_Instr;
+		cout << SorM_Instr << endl;
+		cout << SorM_Instr[0] << endl;
             if(SorM_Instr[0] == 'S' || SorM_Instr[0] == 's' || SorM_Instr[0] == 'M' || SorM_Instr[0] == 'm'){
                 return SorM_Instr;
             }
@@ -535,7 +536,7 @@ int main()
 				else{
 					cout << endl << "You dont have any arrows left, you cant shoot." << endl;
 					}
-				}
+				
 			}
 
 		}
