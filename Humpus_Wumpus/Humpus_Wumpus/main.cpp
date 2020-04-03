@@ -346,7 +346,7 @@ int Begin_waarde_Speler()
         return 0;
     }
 }
-char Show_Position_And_Options(vector<int> cords)
+string Show_Position_And_Options(vector<int> cords)
 {
     int side;
     cout << "---------------------------------------\n";
@@ -354,15 +354,19 @@ char Show_Position_And_Options(vector<int> cords)
 	cout << "Tunnels lead to room: " << cords[1] << ", " << cords[2] << " and " << cords[3] <<endl ;
     cout << "---------------------------------------\n";
 	sense(cords);
-    char SorM_Instr;
+    
+    cout << "Do you wanne shoot or move (S/M)? ";
     while(true){
-        cout << "Do you wanne shoot or move (S/M)? ";
+        string SorM_Instr = "";
         cin >> SorM_Instr;
-        if(SorM_Instr == 'S' || SorM_Instr == 's' || SorM_Instr == 'M' || SorM_Instr == 'm'){
-            return SorM_Instr;
-        }
+            if(SorM_Instr[0] == 'S' || SorM_Instr[0] == 's' || SorM_Instr[0] == 'M' || SorM_Instr[0] == 'm'){
+                return SorM_Instr;
+            }
     }
+        
+        
 }
+
 
 int move(vector<int> cords)
 {
@@ -456,8 +460,8 @@ int main()
     // Begin van het spel en de functies uitvoeren
     int side;
     int finalDest;
-    char Uitkomst_SPAO = Show_Position_And_Options(cords);
-    if(Uitkomst_SPAO == 'M' || Uitkomst_SPAO == 'm'){
+    string Uitkomst_SPAO = Show_Position_And_Options(cords);
+    if(Uitkomst_SPAO[0] == 'M' || Uitkomst_SPAO[0] == 'm'){
         side = move(cords);
         finalDest = checkside(+side, cords);
 		cords = directions(finalDest);
@@ -494,7 +498,7 @@ int main()
 	if(finish == true){    // Loop: doorheen gaan van het spel.
 		while(true){
 			Uitkomst_SPAO = Show_Position_And_Options(cords);
-			if(Uitkomst_SPAO == 'M' || Uitkomst_SPAO == 'm'){
+			if(Uitkomst_SPAO[0] == 'M' || Uitkomst_SPAO[0] == 'm'){
 				side = move(cords);
 				finalDest = checkside(side, cords);
 				cords = directions(finalDest);// Loop: doorheen gaan van het spel
