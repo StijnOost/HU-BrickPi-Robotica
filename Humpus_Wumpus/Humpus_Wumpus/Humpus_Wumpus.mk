@@ -6,8 +6,10 @@
 ProjectName            :=Humpus_Wumpus
 ConfigurationName      :=Debug
 WorkspaceConfiguration := $(ConfigurationName)
+
 WorkspacePath          :=C:/Users/Stolk/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus
 ProjectPath            :=C:/Users/Stolk/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Humpus_Wumpus
+
 IntermediateDirectory  :=../build-$(ConfigurationName)/Humpus_Wumpus
 OutDir                 :=../build-$(ConfigurationName)/Humpus_Wumpus
 CurrentFileName        :=
@@ -16,8 +18,8 @@ CurrentFileFullPath    :=
 User                   :=Stolk
 Date                   :=03/04/2020
 CodeLitePath           :="C:/Program Files/CodeLite"
-LinkerName             :=C:/TDM-GCC-32/bin/g++.exe
-SharedObjectLinkerName :=C:/TDM-GCC-32/bin/g++.exe -shared -fPIC
+LinkerName             :=C:/Users/Stolk/OneDrive/Documents/c++/bin/g++.exe
+SharedObjectLinkerName :=C:/Users/Stolk/OneDrive/Documents/c++/bin/g++.exe -shared -fPIC
 ObjectSuffix           :=.o
 DependSuffix           :=.o.d
 PreprocessSuffix       :=.i
@@ -36,7 +38,7 @@ PreprocessOnlySwitch   :=-E
 ObjectsFileList        :=$(IntermediateDirectory)/ObjectsList.txt
 PCHCompileFlags        :=
 RcCmpOptions           := 
-RcCompilerName         :=C:/TDM-GCC-32/bin/windres.exe
+RcCompilerName         :=C:/Users/Stolk/OneDrive/Documents/c++/bin/windres.exe
 LinkOptions            :=  
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). 
 IncludePCH             := 
@@ -49,13 +51,13 @@ LibPath                := $(LibraryPathSwitch).
 ## Common variables
 ## AR, CXX, CC, AS, CXXFLAGS and CFLAGS can be overriden using an environment variables
 ##
-AR       := C:/TDM-GCC-32/bin/ar.exe rcu
-CXX      := C:/TDM-GCC-32/bin/g++.exe
-CC       := C:/TDM-GCC-32/bin/gcc.exe
+AR       := C:/Users/Stolk/OneDrive/Documents/c++/bin/ar.exe rcu
+CXX      := C:/Users/Stolk/OneDrive/Documents/c++/bin/g++.exe
+CC       := C:/Users/Stolk/OneDrive/Documents/c++/bin/gcc.exe
 CXXFLAGS :=  -g -O0 -std=c++14 -Wall $(Preprocessors)
 CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
 ASFLAGS  := 
-AS       := C:/TDM-GCC-32/bin/as.exe
+AS       := C:/Users/Stolk/OneDrive/Documents/c++/bin/as.exe
 
 
 ##
@@ -95,6 +97,7 @@ PreBuild:
 ##
 ../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(ObjectSuffix): main.cpp ../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Stolk/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Humpus_Wumpus/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
+
 ../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(DependSuffix): main.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(DependSuffix) -MM main.cpp
 
