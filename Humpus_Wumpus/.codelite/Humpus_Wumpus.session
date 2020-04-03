@@ -1,19 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Session Name="C:\Users\stijn\OneDrive\Documenten\Documenten\Github\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus.workspace">
+<Session Name="C:\Users\Jari\Documents\GitHub\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus.workspace">
   <int Value="0" Name="m_selectedTab"/>
-  <wxString Value="C:\Users\stijn\OneDrive\Documenten\Documenten\Github\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus.workspace" Name="m_workspaceName"/>
+  <wxString Value="C:\Users\Jari\Documents\GitHub\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus.workspace" Name="m_workspaceName"/>
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
-      <wxString Value="C:\Users\stijn\OneDrive\Documenten\Documenten\Github\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus\main.cpp" Name="FileName"/>
-      <int Value="358" Name="FirstVisibleLine"/>
-      <int Value="355" Name="CurrentLine"/>
+      <wxString Value="C:\Users\Jari\Documents\GitHub\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus\main.cpp" Name="FileName"/>
+      <int Value="0" Name="FirstVisibleLine"/>
+      <int Value="104" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
+      <IntVector Name="CollapsedFolds">
+        <IntVectorItem Value="11"/>
+        <IntVectorItem Value="29"/>
+        <IntVectorItem Value="44"/>
+        <IntVectorItem Value="68"/>
+        <IntVectorItem Value="82"/>
+        <IntVectorItem Value="104"/>
+        <IntVectorItem Value="117"/>
+        <IntVectorItem Value="151"/>
+        <IntVectorItem Value="185"/>
+        <IntVectorItem Value="198"/>
+        <IntVectorItem Value="230"/>
+        <IntVectorItem Value="236"/>
+        <IntVectorItem Value="262"/>
+        <IntVectorItem Value="299"/>
+        <IntVectorItem Value="306"/>
+        <IntVectorItem Value="319"/>
+        <IntVectorItem Value="324"/>
+        <IntVectorItem Value="350"/>
+        <IntVectorItem Value="368"/>
+        <IntVectorItem Value="380"/>
+        <IntVectorItem Value="393"/>
+        <IntVectorItem Value="426"/>
+      </IntVector>
     </TabInfo>
     <TabInfo>
-      <wxString Value="C:\Users\stijn\OneDrive\Documenten\Documenten\Github\HU-BrickPi-Robotica\Humpus_Wumpus\Cumpus_Humpus\main.cpp" Name="FileName"/>
+      <wxString Value="C:\Users\Jari\Documents\GitHub\HU-BrickPi-Robotica\Humpus_Wumpus\Jari_Project\main.cpp" Name="FileName"/>
       <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="13" Name="CurrentLine"/>
+      <int Value="0" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
