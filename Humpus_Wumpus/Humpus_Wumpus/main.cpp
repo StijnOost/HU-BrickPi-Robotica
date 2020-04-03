@@ -258,42 +258,6 @@ int start_waarde_wumpus(){
     }
 }
 
-int wumpus_lopen(int coords_wumpus)
-{
-	ifstream infile;
-	string filename = "map.txt";
-	string line;
-	vector<int> cords;
-	cords.push_back(coords_wumpus);
-	infile.open(filename.c_str());
-	if(infile.is_open()){
-		for(int i=0;i<coords_wumpus+1;i++){
-			getline(infile, line);
-			if(i==coords_wumpus){
-				stringstream find;
-				find << line;
-				string temp;
-				int found;
-				while(!find.eof()) {
-					find >> temp;
-					if(stringstream(temp) >> found){
-						cords.push_back(found);
-					}
-					temp = "";
-				}
-			}
-		}
-		infile.close();
-
-		int move_rand_wump = (rand()%3)+1;
-		return cords[move_rand_wump];
-	}
-	else{
-		infile.close();
-		cout << "ERROR: File unreachable \n";
-	}
-}
-
 bool raak_wumpus(int coords_wumpus,int schot_kamer)
 {
 	if (coords_wumpus == schot_kamer){
@@ -307,7 +271,6 @@ bool schot_lopen_wumpus(int wumpus_coords, int schot_kamer){
 		return true;
 	}
 	else{
-		wumpus_coords = wumpus_lopen(wumpus_coords);
 		return false;
 	}
 }
@@ -345,7 +308,7 @@ int Begin_waarde_Speler()
         return 0;
     }
 }
-string Show_Position_And_Options(vector<int> cords)
+char Show_Position_And_Options(vector<int> cords)
 {
     int side;
     cout << "---------------------------------------\n";
@@ -353,21 +316,15 @@ string Show_Position_And_Options(vector<int> cords)
 	cout << "Tunnels lead to room: " << cords[1] << ", " << cords[2] << " and " << cords[3] <<endl ;
     cout << "---------------------------------------\n";
 	sense(cords);
+    char SorM_Instr;
     while(true){
-		cout << "Do you wanne shoot or move (S/M)? ";
-        string SorM_Instr = "";
-		cin.ignore( 1000, '\n' );
+        cout << "Do you wanne shoot or move (S/M)? ";
         cin >> SorM_Instr;
-		cout << SorM_Instr << endl;
-		cout << SorM_Instr[0] << endl;
-            if(SorM_Instr[0] == 'S' || SorM_Instr[0] == 's' || SorM_Instr[0] == 'M' || SorM_Instr[0] == 'm'){
-                return SorM_Instr;
-            }
+        if(SorM_Instr == 'S' || SorM_Instr == 's' || SorM_Instr == 'M' || SorM_Instr == 'm'){
+            return SorM_Instr;
+        }
     }
-        
-        
 }
-
 
 int move(vector<int> cords)
 {
@@ -385,8 +342,6 @@ int checkside(int side, vector<int> cords)
         }
         else{
             cout << "No such room nearby, try again:" << endl;
-			cin.clear();
-            cin.ignore(INT_MAX, '\n');
             cin >> side;
         }
     }
@@ -426,6 +381,42 @@ vector<int> directions(int local)
 	}
 }
 
+int wumpus_lopen(int coords_wumpus)
+{
+	ifstream infile;
+	ofstream outfile;
+	string filenameIn = "Waardes.txt";
+	string filenameOut = "tmp.txt";
+	string line;
+    infile.open(filenameIn.c_str());
+	outfile.open(filenameOut.c_str());
+	
+	vector<int> cords = directions(coords_wumpus);
+	int move_rand_wump = (rand()%3)+1;
+	
+	while(getline(infile, line)){
+		if(line[0]=='W'){
+			outfile << "W " << cords[move_rand_wump] << endl;
+		}
+		else{
+			outfile << line << endl;
+		}
+	}
+	
+	infile.close();
+	outfile.close();
+	filenameIn = "tmp.txt";
+	filenameOut = "Waardes.txt";
+	infile.open(filenameIn.c_str());
+	outfile.open(filenameOut.c_str());
+	
+	while(getline(infile, line)){
+		outfile << line << endl;
+	}
+	
+	return cords[move_rand_wump];
+}
+
 int schieten(vector<int>cords){
     int shoot;
     cout << "To which room do you want to shoot?: ";
@@ -463,8 +454,8 @@ int main()
     // Begin van het spel en de functies uitvoeren
     int side;
     int finalDest;
-    string Uitkomst_SPAO = Show_Position_And_Options(cords);
-    if(Uitkomst_SPAO[0] == 'M' || Uitkomst_SPAO[0] == 'm'){
+    char Uitkomst_SPAO = Show_Position_And_Options(cords);
+    if(Uitkomst_SPAO == 'M' || Uitkomst_SPAO == 'm'){
         side = move(cords);
         finalDest = checkside(+side, cords);
 		cords = directions(finalDest);
@@ -490,6 +481,7 @@ int main()
 					cout << "You win! You have killed the wumpus. You are MLG." << endl;
 					finish = false;
 				}else{
+					wumpus_coords = wumpus_lopen(wumpus_coords);
 					cout << endl <<"You missed the shot you have " << arrows_amount << " left." << endl;
 				}
 			}
@@ -500,8 +492,9 @@ int main()
 	}
 	if(finish == true){    // Loop: doorheen gaan van het spel.
 		while(true){
+			cout << wumpus_coords << endl;
 			Uitkomst_SPAO = Show_Position_And_Options(cords);
-			if(Uitkomst_SPAO[0] == 'M' || Uitkomst_SPAO[0] == 'm'){
+			if(Uitkomst_SPAO == 'M' || Uitkomst_SPAO == 'm'){
 				side = move(cords);
 				finalDest = checkside(side, cords);
 				cords = directions(finalDest);// Loop: doorheen gaan van het spel
@@ -528,18 +521,15 @@ int main()
 							break;
 						}
 						else{
+							wumpus_coords = wumpus_lopen(wumpus_coords);
 							cout << endl << "You missed the shot you have "  <<arrows_amount<< " left." << endl;
 						}
 					}
-					
-				}
-				else{
+				}else{
 					cout << endl << "You dont have any arrows left, you cant shoot." << endl;
-					}
-				
+				}
 			}
-
 		}
+		
 	}
 }
-
