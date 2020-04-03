@@ -202,19 +202,19 @@ void random_waardes_toewijzen(){
     if(waardes_infile.is_open()){
         int xyplayer = (rand()%19)+0;
         waardes_infile << "P " << xyplayer << endl;
-        
+
         int xywump = (rand()%19)+0;
         while(xyplayer == xywump){
             xywump = (rand()%19)+0;
         }
         waardes_infile << "W " << xywump << endl;
-        
+
         int xybats = (rand()%19)+0;
         while(xybats == xywump || xybats == xyplayer){
             xybats = (rand()%19)+0;
         }
         waardes_infile << "B " << xybats << endl;
-        
+
         int xypit = (rand()%19)+0;
         while(xypit == xyplayer || xypit == xywump || xypit == xybats){
             xypit = (rand()%19)+0;
@@ -225,7 +225,7 @@ void random_waardes_toewijzen(){
         cout << "ERROR: File unreachable \n";
     }
     waardes_infile.close();
-    
+
 }
 int start_waarde_wumpus(){
     ifstream Start_waarde;
@@ -346,7 +346,7 @@ int Begin_waarde_Speler()
         return 0;
     }
 }
-char Show_Position_And_Options(vector<int> cords)
+string Show_Position_And_Options(vector<int> cords)
 {
     int side;
     cout << "---------------------------------------\n";
@@ -354,15 +354,19 @@ char Show_Position_And_Options(vector<int> cords)
 	cout << "Tunnels lead to room: " << cords[1] << ", " << cords[2] << " and " << cords[3] <<endl ;
     cout << "---------------------------------------\n";
 	sense(cords);
-    char SorM_Instr;
+    
+    cout << "Do you wanne shoot or move (S/M)? ";
     while(true){
-        cout << "Do you wanne shoot or move (S/M)? ";
+        string SorM_Instr = "";
         cin >> SorM_Instr;
-        if(SorM_Instr == 'S' || SorM_Instr == 's' || SorM_Instr == 'M' || SorM_Instr == 'm'){
-            return SorM_Instr;
-        }
+            if(SorM_Instr[0] == 'S' || SorM_Instr[0] == 's' || SorM_Instr[0] == 'M' || SorM_Instr[0] == 'm'){
+                return SorM_Instr;
+            }
     }
+        
+        
 }
+
 
 int move(vector<int> cords)
 {
@@ -419,63 +423,12 @@ vector<int> directions(int local)
 	}
 }
 
-
-int death()
-{
-    string getFileContents (ifstream&); 
-    ifstream Reader ("death.txt");             //Open file
-
-    string Art = getFileContents (Reader);       //Get file
-    
-    cout << Art << endl;               //Print it to the screen
-
-    Reader.close ();                           //Close file
-
-    return 0;
-}
-
-string getFileContents (ifstream& File)
-{
-    string Lines = "";        //All lines
-    
-    if (File)                      //Check if everything is good
-    {
-	while (File.good ())
-	{
-	    string TempLine;                  //Temp line
-	    getline (File , TempLine);        //Get temp line
-	    TempLine += "\n";                      //Add newline character
-	    
-	    Lines += TempLine;                     //Add newline
-	}
-	return Lines;
-    }
-    else                           //Return error
-    {
-	return "ERROR File does not exist.";
-    }
-}
-
-int win()
-{
-    string getFileContents (ifstream&); 
-    ifstream Reader ("winner.txt");             //Open file
-
-    string Art = getFileContents (Reader);       //Get file
-    
-    cout << Art << endl;               //Print it to the screen
-
-    Reader.close ();                           //Close file
-
-    return 0;
-
 int schieten(vector<int>cords){
     int shoot;
     cout << "To which room do you want to shoot?: ";
     cin >> shoot;
     int finalDest = checkside(shoot, cords);
     return finalDest;
-
 }
 
 int main()
@@ -493,10 +446,7 @@ int main()
 	 }
     // Random waardes geven voor spawn points voor Wumpus en de spelers ( Moet nog bats en pit zijn. )
 
-
-
 	vector<int> cords = directions(Begin_waarde_Speler());
-
 	int wumpus_coords = start_waarde_wumpus();
 
 	// Er wordt gekeken of er is geschoten en of ie raak is dan wumpus locatie veranderen
@@ -505,15 +455,13 @@ int main()
 	int arrows_amount = 5;
     // Begint funcite om te vragen om mensen klaar zijn om te spelen.
 
-
     // Random waardes geven voor spawn points voor Wumpus en de spelers ( Moet nog bats en pit zijn. )
 
     // Begin van het spel en de functies uitvoeren
     int side;
     int finalDest;
-    char Uitkomst_SPAO = Show_Position_And_Options(cords);
-    if(Uitkomst_SPAO == 'M' || Uitkomst_SPAO == 'm'){
-
+    string Uitkomst_SPAO = Show_Position_And_Options(cords);
+    if(Uitkomst_SPAO[0] == 'M' || Uitkomst_SPAO[0] == 'm'){
         side = move(cords);
         finalDest = checkside(+side, cords);
 		cords = directions(finalDest);
@@ -550,7 +498,7 @@ int main()
 	if(finish == true){    // Loop: doorheen gaan van het spel.
 		while(true){
 			Uitkomst_SPAO = Show_Position_And_Options(cords);
-			if(Uitkomst_SPAO == 'M' || Uitkomst_SPAO == 'm'){
+			if(Uitkomst_SPAO[0] == 'M' || Uitkomst_SPAO[0] == 'm'){
 				side = move(cords);
 				finalDest = checkside(side, cords);
 				cords = directions(finalDest);// Loop: doorheen gaan van het spel
