@@ -471,7 +471,7 @@ int win()
 
 int schieten(vector<int>cords){
     int shoot;
-    cout << "To which room do you want to shoot?" << endl;
+    cout << "To which room do you want to shoot?: ";
     cin >> shoot;
     int finalDest = checkside(shoot, cords);
     return finalDest;
@@ -502,6 +502,7 @@ int main()
 	// Er wordt gekeken of er is geschoten en of ie raak is dan wumpus locatie veranderen
 	bool finish = true;
 	int schot_kamer = -1;
+	int arrows_amount = 5;
     // Begint funcite om te vragen om mensen klaar zijn om te spelen.
 
 
@@ -528,18 +529,22 @@ int main()
 
     }
     else{
-		
-		schot_kamer = schieten(cords);
-		if(schot_kamer != -1){
-			bool raak = schot_lopen_wumpus(wumpus_coords, schot_kamer);
-			if(raak){
-				win();
-				cout << "You win! You have killed the wumpus. You are MLG." << endl;
-				finish = false;
-			}else{
-				cout << "You missed the shot you have " << "left." << endl;
+		if(arrows_amount>0){
+			arrows_amount -=1;
+			schot_kamer = schieten(cords);
+			if(schot_kamer != -1){
+				bool raak = schot_lopen_wumpus(wumpus_coords, schot_kamer);
+				if(raak){
+					win();
+					cout << "You win! You have killed the wumpus. You are MLG." << endl;
+					finish = false;
+				}else{
+					cout << endl <<"You missed the shot you have " << arrows_amount << " left." << endl;
+				}
 			}
-        cout << "CUMPUS" << endl;
+		}
+		else{
+			cout << endl <<"You dont have any arrows left, you cant shoot."<< endl;
 		}
 	}
 	if(finish == true){    // Loop: doorheen gaan van het spel.
@@ -561,20 +566,41 @@ int main()
 				
 			}
 			else{
-				// HIER MOET CODE VOOR SCHIETEN
-				schot_kamer = schieten(cords);
-				if(schot_kamer != -1){
-					bool raak = schot_lopen_wumpus(wumpus_coords, schot_kamer);
-					if(raak){
-						win();
-						cout << "You win! You have killed the wumpus. You are MLG." << endl;
-						break;
+				if(arrows_amount<0){// HIER MOET CODE VOOR SCHIETEN
+					arrows_amount -=1;
+					schot_kamer = schieten(cords);
+					if(schot_kamer != -1){
+						bool raak = schot_lopen_wumpus(wumpus_coords, schot_kamer);
+						if(raak){
+							win();
+							cout << "You win! You have killed the wumpus. You are MLG." << endl;
+							break;
+						}
+						else{
+							cout << endl << "You missed the shot you have "  <<arrows_amount<< " left." << endl;
+						}
 					}
-					else{
-						cout << "You missed the shot you have "  << "left." << endl;
-					}
+					
 				}
-				cout << "CUMPUS" << endl;
+				else{
+					if(arrows_amount>0){
+			arrows_amount -=1;
+			schot_kamer = schieten(cords);
+			if(schot_kamer != -1){
+				bool raak = schot_lopen_wumpus(wumpus_coords, schot_kamer);
+				if(raak){
+					win();
+					cout << "You win! You have killed the wumpus. You are MLG." << endl;
+					finish = false;
+				}else{
+					cout << endl <<"You missed the shot you have " << arrows_amount << " left." << endl;
+				}
+			}
+		}
+		else{
+			cout << endl << "You dont have any arrows left, you cant shoot." << endl;
+		}
+				}
 			}
 
 		}
