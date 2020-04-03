@@ -287,7 +287,7 @@ int wumpus_lopen(int coords_wumpus)
 
 		int move_rand_wump = (rand()%3)+1;
 		cords[move_rand_wump];
-		return move_rand_wump;
+		return cords[move_rand_wump];
 	}
 	else{
 		infile.close();
@@ -384,6 +384,8 @@ int checkside(int side, vector<int> cords)
         }
         else{
             cout << "No such room nearby, try again:" << endl;
+			cin.clear();
+            cin.ignore(INT_MAX, '\n');
             cin >> side;
         }
     }
@@ -514,7 +516,7 @@ int main()
 				
 			}
 			else{
-				if(arrows_amount<0){// HIER MOET CODE VOOR SCHIETEN
+				if(arrows_amount>0){// HIER MOET CODE VOOR SCHIETEN
 					arrows_amount -=1;
 					schot_kamer = schieten(cords);
 					if(schot_kamer != -1){
@@ -531,23 +533,8 @@ int main()
 					
 				}
 				else{
-					if(arrows_amount>0){
-			arrows_amount -=1;
-			schot_kamer = schieten(cords);
-			if(schot_kamer != -1){
-				bool raak = schot_lopen_wumpus(wumpus_coords, schot_kamer);
-				if(raak){
-					win();
-					cout << "You win! You have killed the wumpus. You are MLG." << endl;
-					finish = false;
-				}else{
-					cout << endl <<"You missed the shot you have " << arrows_amount << " left." << endl;
-				}
-			}
-		}
-		else{
-			cout << endl << "You dont have any arrows left, you cant shoot." << endl;
-		}
+					cout << endl << "You dont have any arrows left, you cant shoot." << endl;
+					}
 				}
 			}
 
