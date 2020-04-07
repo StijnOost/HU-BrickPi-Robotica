@@ -195,38 +195,7 @@ char Klaar_Om_Te_Spelen()
     }
 }
 
-void random_waardes_toewijzen(){
-    ofstream waardes_infile;
-	string filename = "Waardes.txt";
-    waardes_infile.open(filename.c_str());
-    if(waardes_infile.is_open()){
-        int xyplayer = (rand()%19)+0;
-        waardes_infile << "P " << xyplayer << endl;
 
-        int xywump = (rand()%19)+0;
-        while(xyplayer == xywump){
-            xywump = (rand()%19)+0;
-        }
-        waardes_infile << "W " << xywump << endl;
-
-        int xybats = (rand()%19)+0;
-        while(xybats == xywump || xybats == xyplayer){
-            xybats = (rand()%19)+0;
-        }
-        waardes_infile << "B " << xybats << endl;
-
-        int xypit = (rand()%19)+0;
-        while(xypit == xyplayer || xypit == xywump || xypit == xybats){
-            xypit = (rand()%19)+0;
-        }
-        waardes_infile << "G " << xypit << endl;
-    }
-    else{
-        cout << "ERROR: File unreachable \n";
-    }
-    waardes_infile.close();
-
-}
 int start_waarde_wumpus(){
     ifstream Start_waarde;
     string line;
