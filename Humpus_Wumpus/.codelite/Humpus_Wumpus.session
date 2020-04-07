@@ -6,14 +6,14 @@
     <TabInfo>
       <wxString Value="C:\Users\stijn\OneDrive\Documenten\Documenten\Github\HU-BrickPi-Robotica\Humpus_Wumpus\Stijn_Project\main.cpp" Name="FileName"/>
       <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="6" Name="CurrentLine"/>
+      <int Value="0" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
       <wxString Value="C:\Users\stijn\OneDrive\Documenten\Documenten\Github\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus\main.cpp" Name="FileName"/>
-      <int Value="402" Name="FirstVisibleLine"/>
-      <int Value="407" Name="CurrentLine"/>
+      <int Value="451" Name="FirstVisibleLine"/>
+      <int Value="443" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
