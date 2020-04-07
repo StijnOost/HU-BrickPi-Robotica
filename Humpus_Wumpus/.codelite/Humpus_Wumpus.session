@@ -4,16 +4,16 @@
   <wxString Value="C:\Users\stijn\OneDrive\Documenten\Documenten\Github\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus.workspace" Name="m_workspaceName"/>
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
-      <wxString Value="C:\Users\stijn\OneDrive\Documenten\Documenten\Github\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus\main.cpp" Name="FileName"/>
-      <int Value="386" Name="FirstVisibleLine"/>
-      <int Value="357" Name="CurrentLine"/>
+      <wxString Value="C:\Users\stijn\OneDrive\Documenten\Documenten\Github\HU-BrickPi-Robotica\Humpus_Wumpus\Stijn_Project\main.cpp" Name="FileName"/>
+      <int Value="0" Name="FirstVisibleLine"/>
+      <int Value="7" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
-      <wxString Value="C:\Users\stijn\OneDrive\Documenten\Documenten\Github\HU-BrickPi-Robotica\Humpus_Wumpus\Stijn_Project\main.cpp" Name="FileName"/>
-      <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="0" Name="CurrentLine"/>
+      <wxString Value="C:\Users\stijn\OneDrive\Documenten\Documenten\Github\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus\main.cpp" Name="FileName"/>
+      <int Value="505" Name="FirstVisibleLine"/>
+      <int Value="53" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>

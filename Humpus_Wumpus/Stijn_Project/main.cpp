@@ -41,6 +41,6 @@ void random_values_add(){
 }
 
 int main(){
-	 srand((unsigned)time(0));
-		random_values_add();
+	srand((unsigned)time(0));
+	random_values_add();
 }
