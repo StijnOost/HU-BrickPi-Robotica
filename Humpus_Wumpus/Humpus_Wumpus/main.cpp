@@ -316,10 +316,10 @@ string show_position_and_options(vector<int> cords){
                 }
 
             }
-        }
-        else{
-            cout << "Wrong input, Try again: (S/M): ";
-        }
+            else{
+                cout << "Do you want to shoot or move (S/M)? ";
+            }
+
     }
 }
 
@@ -437,7 +437,7 @@ int shoot(int arrows_amount, vector<int> cords, vector<vector<int>> way_to_go){
 			bool hit = wump_walk_shot(wumpus_cords, shot_room);
 			if(hit){
 				ascii_art("winner.txt");
-				cout << "You win! You have slain the wumpus. You are MLG." << endl;
+				cout << "You win! You have slain the wumpus!" << endl;
 				return 999;
 			}
 			else{
@@ -452,57 +452,81 @@ int shoot(int arrows_amount, vector<int> cords, vector<vector<int>> way_to_go){
 	return arrows_amount;
 }
 
+bool restart_game_question(bool restart_game)
+{
+    string Restart_Char;
+    cout << "Would you like to restart the same game? (Y/N) ";
+    while(true){
+        getline(cin, Restart_Char);
+        if (Restart_Char.size() < 2){
+            if(Restart_Char[0] == 'Y' || Restart_Char[0] == 'y'){
+                return true;
+            }
+            else if(Restart_Char[0] == 'N' || Restart_Char[0] == 'n'){
+                return false;
+            }
+        }
+        else{
+            cout << "Would you like to restart the same game? (Y/N) ";
+        }
+    }
+}
+
 
 int main(){
-	leaderboard();
-	ready_go();  // Begint funcite om te vragen om mensen klaar zijn om te spelen.
-	read_instructions(); // Start functie die vraagt of mensen instructies wilt hebben.
-	vector<vector<int>> way_to_go = directions();
+  bool restart_game = true;
+  while(restart_game){
+  	leaderboard();
+  	ready_go();  // Begint funcite om te vragen om mensen klaar zijn om te spelen.
+  	read_instructions(); // Start functie die vraagt of mensen instructies wilt hebben.
+  	vector<vector<int>> way_to_go = directions();
 
-	srand((unsigned)time(0));
-	string username;
-	while(true){
-		cout << "Give a username: ";
-		cin >> username;
-		if(username.length()>3){
-			cout << "Username exceeded the 3 character limit, try again." << endl;
-		}
-		else{
-			cout << "Welcome, " << username << ". \n";
-			break;
-		}
-	}
+  	srand((unsigned)time(0));
+  	string username;
+  	while(true){
+  		cout << "Give a username: ";
+  		cin >> username;
+  		if(username.length()>3){
+  			cout << "Username exceeded the 3 character limit, try again." << endl;
+  		}
+  		else{
+  			cout << "Welcome, " << username << ". \n";
+  			break;
+  		}
+  	}
 
-	vector<int> cords = way_to_go[player_start()];
-	int arrows_amount = 5;
-    int side;
-    int final_dest;
-    string outcome_SPAO;
-	int score = 0;
+  	vector<int> cords = way_to_go[player_start()];
+  	int arrows_amount = 5;
+      int side;
+      int final_dest;
+      string outcome_SPAO;
+  	int score = 0;
 
-	while(true){ // Loop: doorheen gaan van het spel.
-		score+=1;
-		outcome_SPAO = show_position_and_options(cords);
-		if(outcome_SPAO[0] == 'M' || outcome_SPAO[0] == 'm'){
-			side = move(cords);
-			final_dest = checkside(side, cords);
-			cords = way_to_go[final_dest];
-			if (collision_bats(cords)){
-				cout << "You've been carried away by bats!" << endl;
-				cords = way_to_go[(rand()%20)+0];
-			}
-			if (collision_death(cords)){
-				ascii_art("death.txt");
-				cout << "You are dead, oh no!" << endl;
-				break;
-			}
+  	while(true){ // Loop: doorheen gaan van het spel.
+  		score+=1;
+  		outcome_SPAO = show_position_and_options(cords);
+  		if(outcome_SPAO[0] == 'M' || outcome_SPAO[0] == 'm'){
+  			side = move(cords);
+  			final_dest = checkside(side, cords);
+  			cords = way_to_go[final_dest];
+  			if (collision_bats(cords)){
+  				cout << "You've been carried away by bats!" << endl;
+  				cords = way_to_go[(rand()%20)+0];
+  			}
+  			if (collision_death(cords)){
+  				ascii_art("death.txt");
+  				cout << "You are dead, oh no!" << endl;
+  				break;
+  			}
 
-		}
-		else{
-			arrows_amount = shoot(arrows_amount, cords, way_to_go);
-			if(arrows_amount==999){
-				break;
-			}
-		}
-	}
+  		}
+  		else{
+  			arrows_amount = shoot(arrows_amount, cords, way_to_go);
+  			if(arrows_amount==999){
+  				break;
+  			}
+  		}
+  	}
+    restart_game = restart_game_question(restart_game);
+}
 }
