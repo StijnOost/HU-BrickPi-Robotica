@@ -316,10 +316,10 @@ string show_position_and_options(vector<int> cords){
                 }
 
             }
-            else{
-                cout << "Do you want to shoot or move (S/M)? ";
-            }
-
+        }
+        else{
+            cout << "Wrong input, Try again: (S/M): ";
+        }
     }
 }
 
@@ -390,11 +390,11 @@ int wumpus_walky(int cords_wumpus, vector<vector<int>> way_to_go){
 	string line;
     infile.open(filename_in.c_str());
 	outfile.open(filename_out.c_str());
-    
+
 	vector<int> cords = way_to_go[cords_wumpus];
-    
+
 	int move_rand_wump = (rand()%3)+1;
-    
+
 	while(getline(infile, line)){
 		if(line[0]=='W'){
 			outfile << "W " << cords[move_rand_wump] << endl;
@@ -437,7 +437,7 @@ int shoot(int arrows_amount, vector<int> cords, vector<vector<int>> way_to_go){
 			bool hit = wump_walk_shot(wumpus_cords, shot_room);
 			if(hit){
 				ascii_art("winner.txt");
-				cout << "You win! You have slain the wumpus." << endl;
+				cout << "You win! You have slain the wumpus. You are MLG." << endl;
 				return 999;
 			}
 			else{
