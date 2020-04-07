@@ -8,9 +8,46 @@
 #include <sstream>
 using namespace std;
 
-void read_instructions(){
+
+string getFileContents(ifstream& File)
+{
+    string Lines = "";
+    if (File){
+		while (File.good ()){
+			string TempLine;
+			getline (File , TempLine);
+			TempLine += "\n";
+
+			Lines += TempLine;
+		}
+		return Lines;
+	}
+    else{
+		return "ERROR File does not exist.";
+    }
+}
+
+
+int ascii_art(string filename)
+{
+    string getFileContents(ifstream&);
+    ifstream infile(filename.c_str());
+    string Art = getFileContents (infile);
+    cout << Art << endl;
+    infile.close ();
+
+    return 0;
+}
+
+
+void leaderboard(){
+	ascii_art("logo.txt");
+}
+
+
+void Instructies_uitlezen()
+{
 	string YorN_instr;
-    cout << "Hunt the Wumpus" << endl;
     cout << "Do you need instructions: (Y/N)? ";
     getline(cin, YorN_instr);
 
@@ -63,35 +100,6 @@ void sense(vector<int> room){
         cout << "ERROR: File unreachable \n";
         infile.close();
     }
-}
-
-
-string getFileContents(ifstream& File){
-    string Lines = "";
-    if (File){
-		while (File.good ()){
-			string Templine;
-			getline (File , Templine);
-			Templine += "\n";
-
-			Lines += Templine;
-		}
-		return Lines;
-	}
-    else{
-		return "ERROR File does not exist.";
-    }
-}
-
-
-int ascii_art(string filename){
-    string getFileContents(ifstream&);
-    ifstream infile(filename.c_str());
-    string Art = getFileContents (infile);
-    cout << Art << endl;
-    infile.close ();
-
-    return 0;
 }
 
 
@@ -163,21 +171,20 @@ bool collision_bats(vector<int> room){
 }
 
 
-string ready_go(){
+void ready_go(){
     string Y_tostart;
     cout << "\nAre you ready to start (Y)? ";
     while(true){
         getline(cin, Y_tostart);
         if (Y_tostart.size() < 2){
             if(Y_tostart[0] == 'Y' || Y_tostart[0] == 'y'){
-                return Y_tostart;
+				break;
             }
         }
         else{
             cout << "\nAre you ready to start (Y)? ";
         }
     }
-	return 0;
 }
 
 
@@ -344,28 +351,29 @@ int checkside(int side, vector<int> cords){
 }
 
 
-vector<int> directions(int local){
+vector<vector<int>> directions()
+{
 	ifstream infile;
 	string filename = "map.txt";
 	string line;
-	vector<int> cords;
-	cords.push_back(local);
+	vector<vector<int>> cords;
+	vector<int> new_entry;
 	infile.open(filename.c_str());
 	if(infile.is_open()){
-		for(int i=0;i<local+1;i++){
+		for(int i=0;i<19;i++){
+			cords.push_back(new_entry);
+			cords[i].push_back(i);
 			getline(infile, line);
-			if(i==local){
-				stringstream find;
-				find << line;
-				string temp;
-				int found;
-				while(!find.eof()) {
-					find >> temp;
-					if(stringstream(temp) >> found){
-						cords.push_back(found);
-					}
-					temp = "";
+			stringstream find;
+			find << line;
+			string temp;
+			int found;
+			while(!find.eof()) {
+				find >> temp;
+				if(stringstream(temp) >> found){
+					cords[i].push_back(found);
 				}
+				temp = "";
 			}
 		}
 		infile.close();
@@ -379,16 +387,17 @@ vector<int> directions(int local){
 }
 
 
-int wumpus_walky(int cords_wumpus){
+int wumpus_walky(int coords_wumpus, vector<vector<int>> way_to_go)
+{
 	ifstream infile;
 	ofstream outfile;
-	string filename_in = "Waardes.txt";
-	string filename_out = "tmp.txt";
+	string filenameIn = "Waardes.txt";
+	string filenameOut = "tmp.txt";
 	string line;
-    infile.open(filename_in.c_str());
-	outfile.open(filename_out.c_str());
+    infile.open(filenameIn.c_str());
+	outfile.open(filenameOut.c_str());
 
-	vector<int> cords = directions(cords_wumpus);
+	vector<int> cords = way_to_go[coords_wumpus];
 	int move_rand_wump = (rand()%3)+1;
 
 	while(getline(infile, line)){
@@ -402,10 +411,10 @@ int wumpus_walky(int cords_wumpus){
 
 	infile.close();
 	outfile.close();
-	filename_in = "tmp.txt";
-	filename_out = "Waardes.txt";
-	infile.open(filename_in.c_str());
-	outfile.open(filename_out.c_str());
+	filenameIn = "tmp.txt";
+	filenameOut = "Waardes.txt";
+	infile.open(filenameIn.c_str());
+	outfile.open(filenameOut.c_str());
 
 	while(getline(infile, line)){
 		outfile << line << endl;
@@ -419,11 +428,11 @@ int aim(vector<int>cords){
     int shoot;
     cout << "To which room do you want to shoot?: ";
     cin >> shoot;
-    int final_dest = checkside(shoot, cords);
-    return final_dest;
+    int finalDest = checkside(shoot, cords);
+    return finalDest;
 }
 
-int shoot(int arrows_amount, vector<int> cords){
+int shoot(int arrows_amount, vector<int> cords, vector<vector<int>> way_to_go){
 	if(arrows_amount>0){
 		arrows_amount -=1;
 		int wumpus_cords = location_wumpus();
@@ -432,56 +441,70 @@ int shoot(int arrows_amount, vector<int> cords){
 			bool raak = wump_walk_shot(wumpus_cords, shot_room);
 			if(raak){
 				ascii_art("winner.txt");
-				cout << "You win! You have slain the wumpus!" << endl;
+				cout << "You win! You have slain the wumpus." << endl;
 				return 999;
 			}
 			else{
-				wumpus_cords = wumpus_walky(wumpus_cords);
+				wumpus_cords = wumpus_walky(wumpus_cords, way_to_go);
 				cout << endl << "You missed the shot and have lost the arrow, you have "  << arrows_amount << " left." << endl;
 			}
 		}
 	}
 	else{
-		cout << endl << "You don't have any arrows left" << endl;
+		cout << endl << "You dont have any arrows left." << endl;
 	}
 	return arrows_amount;
 }
 
 
-int main(){
-    read_instructions();
-	string ready_to_play_outcome = ready_go();
+int main()
+{
+	leaderboard();
+	ready_go();  // Begint funcite om te vragen om mensen klaar zijn om te spelen.
+	Instructies_uitlezen(); // Start functie die vraagt of mensen instructies wilt hebben.
+	vector<vector<int>> way_to_go = directions();
 
 	srand((unsigned)time(0));
-	if(ready_to_play_outcome[0] != 'Y' || ready_to_play_outcome[0] != 'y'){
-			assign_values();
+	string username;
+	while(true){
+		cout << "Give a username: ";
+		cin >> username;
+		if(username.length()>3){
+			cout << "Username exceeded the 3 character limit, try again." << endl;
+		}
+		else{
+			cout << "Welcome, " << username << ". \n";
+			break;
+		}
 	}
 
-	vector<int> cords = directions(player_start());
+	vector<int> cords = way_to_go[player_start()];
 	int arrows_amount = 5;
     int side;
-    int final_dest;
-    string outcome_SPAO;
+    int finalDest;
+    string Uitkomst_SPAO;
+	int score = 0;
 
 	while(true){ // Loop: doorheen gaan van het spel.
-		outcome_SPAO = Show_Position_And_Options(cords);
-		if(outcome_SPAO[0] == 'M' || outcome_SPAO[0] == 'm'){
+		score+=1;
+		Uitkomst_SPAO = Show_Position_And_Options(cords);
+		if(Uitkomst_SPAO[0] == 'M' || Uitkomst_SPAO[0] == 'm'){
 			side = move(cords);
-			final_dest = checkside(side, cords);
-			cords = directions(final_dest);
+			finalDest = checkside(side, cords);
+			cords = way_to_go[finalDest];
 			if (collision_bats(cords)){
 				cout << "You've been carried away by bats!" << endl;
-				cords = directions((rand()%20)+0);
+				cords = way_to_go[(rand()%19)+0];
 			}
 			if (collision_death(cords)){
 				ascii_art("death.txt");
-				cout << "You are dead, better luck next time!" << endl;
+				cout << "You are dead, oh no!" << endl;
 				break;
 			}
 
 		}
 		else{
-			arrows_amount = shoot(arrows_amount, cords);
+			arrows_amount = shoot(arrows_amount, cords, way_to_go);
 			if(arrows_amount==999){
 				break;
 			}
