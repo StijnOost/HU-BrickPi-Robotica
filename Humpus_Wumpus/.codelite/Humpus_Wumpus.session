@@ -5,8 +5,8 @@
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
       <wxString Value="C:\Users\alexa\OneDrive\Documents\GitHub\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus\main.cpp" Name="FileName"/>
-      <int Value="120" Name="FirstVisibleLine"/>
-      <int Value="319" Name="CurrentLine"/>
+      <int Value="384" Name="FirstVisibleLine"/>
+      <int Value="390" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>

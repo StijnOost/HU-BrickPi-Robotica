@@ -1,4 +1,9 @@
-P 8
-W 13
-B 2
-G 4
+alx 1 2
+pep 1 5
+uip 1 4
+alu 1 70
+kut 3 13
+kkk 3 100
+wat 5 120
+pop 5 19
+nig 10 432
