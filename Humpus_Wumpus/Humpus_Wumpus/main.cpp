@@ -47,7 +47,7 @@ void leaderboard(){
 
 void Instructies_uitlezen()
 {
-	string YorN_Instr;
+	string YorN_instr;
     cout << "Do you need instructions: (Y/N)? ";
     getline(cin, YorN_instr);
 
@@ -100,35 +100,6 @@ void sense(vector<int> room){
         cout << "ERROR: File unreachable \n";
         infile.close();
     }
-}
-
-
-string getFileContents(ifstream& File){
-    string Lines = "";
-    if (File){
-		while (File.good ()){
-			string Templine;
-			getline (File , Templine);
-			Templine += "\n";
-
-			Lines += Templine;
-		}
-		return Lines;
-	}
-    else{
-		return "ERROR File does not exist.";
-    }
-}
-
-
-int ascii_art(string filename){
-    string getFileContents(ifstream&);
-    ifstream infile(filename.c_str());
-    string Art = getFileContents (infile);
-    cout << Art << endl;
-    infile.close ();
-
-    return 0;
 }
 
 
@@ -207,14 +178,13 @@ void ready_go(){
         getline(cin, Y_tostart);
         if (Y_tostart.size() < 2){
             if(Y_tostart[0] == 'Y' || Y_tostart[0] == 'y'){
-                return Y_tostart;
+				break;
             }
         }
         else{
             cout << "\nAre you ready to start (Y)? ";
         }
     }
-	return 0;
 }
 
 
@@ -465,17 +435,17 @@ int aim(vector<int>cords){
 int shoot(int arrows_amount, vector<int> cords, vector<vector<int>> way_to_go){
 	if(arrows_amount>0){
 		arrows_amount -=1;
-		int wumpus_coords = location_wumpus();
-		int schot_kamer = aim(cords);
-		if(schot_kamer != -1){
+		int wumpus_cords = location_wumpus();
+		int shot_room = aim(cords);
+		if(shot_room != -1){
 			bool raak = wump_walk_shot(wumpus_cords, shot_room);
 			if(raak){
 				ascii_art("winner.txt");
-				cout << "You win! You have slain the wumpus. You are MLG." << endl;
+				cout << "You win! You have slain the wumpus." << endl;
 				return 999;
 			}
 			else{
-				wumpus_coords = wumpus_walky(wumpus_coords, way_to_go);
+				wumpus_cords = wumpus_walky(wumpus_cords, way_to_go);
 				cout << endl << "You missed the shot and have lost the arrow, you have "  << arrows_amount << " left." << endl;
 			}
 		}
