@@ -48,10 +48,10 @@ void sense(vector<int> room){
                             }
                             if(line[0]=='B'){
                                 cout << "You hear flapping nearby" << endl;
-                            }    
+                            }
                             if(line[0]=='G'){
                                 cout << "You feel a cold breeze" << endl;
-                            }        
+                            }
                         }
                     }
                 }
@@ -71,10 +71,10 @@ string getFileContents(ifstream& File){
     if (File){
 		while (File.good ()){
 			string Templine;
-			getline (File , Templine); 
-			Templine += "\n";  
-			
-			Lines += Templine; 
+			getline (File , Templine);
+			Templine += "\n";
+
+			Lines += Templine;
 		}
 		return Lines;
 	}
@@ -85,7 +85,7 @@ string getFileContents(ifstream& File){
 
 
 int ascii_art(string filename){
-    string getFileContents(ifstream&); 
+    string getFileContents(ifstream&);
     ifstream infile(filename.c_str());
     string Art = getFileContents (infile);
     cout << Art << endl;
@@ -311,12 +311,12 @@ string Show_Position_And_Options(vector<int> cords){
                 if(SorM_instr[0] == 'S' || SorM_instr[0] == 's' || SorM_instr[0] == 'M' || SorM_instr[0] == 'm'){
                     return SorM_instr;
                 }
-    
+
             }
             else{
                 cout << "Do you want to shoot or move (S/M)? ";
             }
-        
+
     }
 }
 
@@ -387,10 +387,10 @@ int wumpus_walky(int cords_wumpus){
 	string line;
     infile.open(filename_in.c_str());
 	outfile.open(filename_out.c_str());
-	
+
 	vector<int> cords = directions(cords_wumpus);
 	int move_rand_wump = (rand()%3)+1;
-	
+
 	while(getline(infile, line)){
 		if(line[0]=='W'){
 			outfile << "W " << cords[move_rand_wump] << endl;
@@ -399,18 +399,18 @@ int wumpus_walky(int cords_wumpus){
 			outfile << line << endl;
 		}
 	}
-	
+
 	infile.close();
 	outfile.close();
 	filename_in = "tmp.txt";
 	filename_out = "Waardes.txt";
 	infile.open(filename_in.c_str());
 	outfile.open(filename_out.c_str());
-	
+
 	while(getline(infile, line)){
 		outfile << line << endl;
 	}
-	
+
 	return cords[move_rand_wump];
 }
 
@@ -449,20 +449,20 @@ int shoot(int arrows_amount, vector<int> cords){
 
 
 int main(){
-    read_instructions(); 
-	string ready_to_play_outcome = ready_go(); 
-	
+    read_instructions();
+	string ready_to_play_outcome = ready_go();
+
 	srand((unsigned)time(0));
 	if(ready_to_play_outcome[0] != 'Y' || ready_to_play_outcome[0] != 'y'){
-			assign_values(); 
+			assign_values();
 	}
 
 	vector<int> cords = directions(player_start());
 	int arrows_amount = 5;
     int side;
     int final_dest;
-    string outcome_SPAO;   
-	
+    string outcome_SPAO;
+
 	while(true){ // Loop: doorheen gaan van het spel.
 		outcome_SPAO = Show_Position_And_Options(cords);
 		if(outcome_SPAO[0] == 'M' || outcome_SPAO[0] == 'm'){
@@ -478,7 +478,7 @@ int main(){
 				cout << "You are dead, better luck next time!" << endl;
 				break;
 			}
-			
+
 		}
 		else{
 			arrows_amount = shoot(arrows_amount, cords);
