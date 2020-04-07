@@ -1,9 +1,9 @@
--IC:\Users\Stolk\OneDrive\Documents\c++\lib\gcc\mingw32\5.1.0\include\c++
--IC:\Users\Stolk\OneDrive\Documents\c++\lib\gcc\mingw32\5.1.0\include\c++\mingw32
--IC:\Users\Stolk\OneDrive\Documents\c++\lib\gcc\mingw32\5.1.0\include\c++\backward
--IC:\Users\Stolk\OneDrive\Documents\c++\lib\gcc\mingw32\5.1.0\include
--IC:\Users\Stolk\OneDrive\Documents\c++\include
--IC:\Users\Stolk\OneDrive\Documents\c++\lib\gcc\mingw32\5.1.0\include-fixed
--IC:\Users\Stolk\OneDrive\Documents\GitHub\HU-Hunt-the-wumpus\Humpus_Wumpus\Humpus_Wumpus
+-IC:\TDM-GCC-32\lib\gcc\mingw32\5.1.0\include\c++
+-IC:\TDM-GCC-32\lib\gcc\mingw32\5.1.0\include\c++\mingw32
+-IC:\TDM-GCC-32\lib\gcc\mingw32\5.1.0\include\c++\backward
+-IC:\TDM-GCC-32\lib\gcc\mingw32\5.1.0\include
+-IC:\TDM-GCC-32\include
+-IC:\TDM-GCC-32\lib\gcc\mingw32\5.1.0\include-fixed
+-IC:\Users\Stolk\OneDrive\Documents\GitHub\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus
 -target
 x86_64-pc-windows-gnu
