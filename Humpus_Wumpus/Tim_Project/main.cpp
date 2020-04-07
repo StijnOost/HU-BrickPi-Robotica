@@ -1,62 +1,33 @@
 #include <iostream>
+#include <string>
+#include <vector>
 #include <fstream>
 using namespace std;
 
-#include <string>
 
-           //Gets file contents
 
-int death()
-{
-    string getFileContents (ifstream&); 
-    ifstream Reader ("death.txt");             //Open file
-
-    string Art = getFileContents (Reader);       //Get file
-    
-    cout << Art << endl;               //Print it to the screen
-
-    Reader.close ();                           //Close file
-
-    return 0;
-}
-
-string getFileContents (ifstream& File)
-{
-    string Lines = "";        //All lines
-    
-    if (File)                      //Check if everything is good
-    {
-	while (File.good ())
-	{
-	    string TempLine;                  //Temp line
-	    getline (File , TempLine);        //Get temp line
-	    TempLine += "\n";                      //Add newline character
-	    
-	    Lines += TempLine;                     //Add newline
-	}
-	return Lines;
+void custom_numbers(){
+    int Play;
+    int Wump;
+    int Bats;
+    int Pit;
+    cout << "In which room should the player start?" << endl;
+    while(true){
+        cin.clear();
+        cin>>Play;
+        if(Play < 20 && Play > -1){
+            ofstream custom_room;
+            string filename = "Waardes.txt";
+            custom_room.open(filename.c_str());
+            if(custom_room.is_open()){
+                custom_room << "P " << Play << endl;
+            }
+        }
+        cout << "This is not a valid room, try again:" << endl;
     }
-    else                           //Return error
-    {
-	return "ERROR File does not exist.";
-    }
-}
-
-int text2()
-{
-    string getFileContents (ifstream&); 
-    ifstream Reader ("winner.txt");             //Open file
-
-    string Art = getFileContents (Reader);       //Get file
     
-    cout << Art << endl;               //Print it to the screen
-
-    Reader.close ();                           //Close file
-
-    return 0;
 }
 
 int main(){
-    text();
-    text2();
+    custom_numbers();
 }
