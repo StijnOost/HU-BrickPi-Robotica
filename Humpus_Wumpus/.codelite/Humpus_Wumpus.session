@@ -5,15 +5,15 @@
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
       <wxString Value="C:\Users\stijn\OneDrive\Documenten\Documenten\Github\HU-BrickPi-Robotica\Humpus_Wumpus\Stijn_Project\main.cpp" Name="FileName"/>
-      <int Value="27" Name="FirstVisibleLine"/>
-      <int Value="0" Name="CurrentLine"/>
+      <int Value="627" Name="FirstVisibleLine"/>
+      <int Value="634" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
       <wxString Value="C:\Users\stijn\OneDrive\Documenten\Documenten\Github\HU-BrickPi-Robotica\Humpus_Wumpus\Humpus_Wumpus\main.cpp" Name="FileName"/>
-      <int Value="241" Name="FirstVisibleLine"/>
-      <int Value="242" Name="CurrentLine"/>
+      <int Value="358" Name="FirstVisibleLine"/>
+      <int Value="365" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>

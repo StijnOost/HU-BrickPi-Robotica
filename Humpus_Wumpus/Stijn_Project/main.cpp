@@ -6,6 +6,7 @@
 #include <ctime>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 #include <Windows.h>
 using namespace std;
 
@@ -358,7 +359,7 @@ vector<vector<int> > directions(){
 	vector<int> new_entry;
 	infile.open(filename.c_str());
 	if(infile.is_open()){
-		for(int i=0;i<19;i++){
+		for(int i=0;i<20;i++){
 			cords.push_back(new_entry);
 			cords[i].push_back(i);
 			getline(infile, line);
@@ -508,14 +509,16 @@ vector<char> AI_sense(vector<int> room){
                         }
 			
                     }
-				if (dangers.size()==0){
-					dangers.push_back('n'); //no dangers
 				}
-				return dangers;
-                }
-                temp = "";
-            }
+			temp = "";
+			}
+		
         }
+		if (dangers.size()==0){
+			dangers.push_back('n'); //no dangers
+		}
+		return dangers;
+		
     }
     else{
         cout << "ERROR: File unreachable \n";
@@ -525,50 +528,58 @@ vector<char> AI_sense(vector<int> room){
 vector<int> ai_avoid(vector<int>pit_rooms,vector<int>wump_rooms,vector<int>cords){
 	vector<int> temp;
 	bool room_hazard = false;
-	for(int i=1;i<3;i++){
-		room_hazard = false;
-		for(int j=0;j<wump_rooms.size();j++){
-			if(cords[i]==wump_rooms[j]){
+	int count;
+	for(unsigned int i=1;i<4;i++){
+	count = 0;
+		for(unsigned int j=0;j<wump_rooms.size();j++){
+			room_hazard == false;
+			if(cords[i]==wump_rooms[j]&& count==0){
+				count += 1;
 				room_hazard = true;
+				cout<<cords[i]<<"same dus HAZARD"<<wump_rooms[j]<<endl;
+				Sleep(100);
 			}
 		}
-		for(int j=0;j<pit_rooms.size();j++){
-			if(cords[i]==wump_rooms[j]){
-				room_hazard = true;
-			}
-		}
+		cout << cords[i]<< room_hazard<<"False safe"<<endl;
 		if(room_hazard == false){
 			temp.push_back(cords[i]);
 		}
 	}
 	cout<<temp.size()<< "temp"<<endl;
+	Sleep(500);
 	return temp;
 }
 
 
-vector<string> algorithm_way_to_go(vector<int>cords)
+vector<string> algorithm_way_to_go(vector<int>cords,vector<int> & visited,vector<int> & wump_rooms,vector<int> & pit_rooms)
 {
-	
-	vector<int> pit_rooms;
-	vector<int> wump_rooms;
-	vector<int> visited;
 	vector<string> S_M_and_room;
+	vector<int>wump_rooms_safe;
 	vector<int> directions;
 	char str[2];
+	int count;
 	
-	visited.insert(visited.end(),cords[0]); //Kamer waar die staat toewijzen dat ie daar is geweest
+	visited.push_back(cords[0]); //Kamer waar die staat toewijzen dat ie daar is geweest
+	cout<<visited.size()<<"size visited"<<endl;
 	vector<char> danger = AI_sense(cords); //als er iets in de buurt is
-	cout<<"yeet";
-	for (int i=1; i<4; i++){
+	for (int i=0; i<3; i++){
+	count = 0;
 		if (danger[0] == 'w'){ 					//voeg alle kamers eromheen toe aan de gevaarlijke vector
-		cout << cords[i]<<endl;
+		cout << cords[0]<<"i am here and scared"<<endl;
 			for(int j=0; j<visited.size(); j++){		//verwijder de kamers waar je al bent geweest of nog nergens geweest random
-				cout<<visited[j] << " " << cords[i]<<endl;
-				if (visited[j] != cords[i]){
-					wump_rooms.push_back(cords[i]);
-					cout << visited[0];
-					cout << cords[i+1];
-					Sleep(500);
+				cout<<visited[j] << " " << cords[i+1]<<endl;
+				cout<<count<<"count"<<endl;
+				Sleep(100);
+				if (visited[j] == cords[i+1]&&count==0){
+					count=+1;
+					wump_rooms_safe.push_back(cords[i+1]);
+					cout << visited[j] << "vistited" << endl; 
+					cout << cords[i+1] << "cords" << endl; 
+					Sleep(300);
+				}
+				else if(count==0){
+					count=+1;
+					wump_rooms.push_back(cords[i+1]);
 				}
 				cout<<endl;
 			}
@@ -581,18 +592,27 @@ vector<string> algorithm_way_to_go(vector<int>cords)
 				}
 			}
 		}
-		Sleep(500);
+		Sleep(300);
 	}
-	cout<<"yeet";
-	directions = ai_avoid(pit_rooms,wump_rooms,cords);
-
+	cout<<wump_rooms_safe.size()<<"safe rooms"<<endl;
+	if (wump_rooms_safe.size()==0){
+		directions = ai_avoid(pit_rooms,wump_rooms,cords);
+	}
+	else{
+		cout<<directions[0]<<"safe"<<endl;
+		directions = wump_rooms_safe;
+	}
+	
+	cout<<wump_rooms.size() << "Wump rooms"<< endl;
+	for(int i=0; i<wump_rooms.size(); i++){
+		cout<<wump_rooms[i]<<" wump_rooms"<<endl;
+	}
 	if (wump_rooms.size() == 1){
 		cout<<"paniek"<<endl;
-		cout<< "yeet" << endl;
 		S_M_and_room.push_back("s");
 		sprintf(str, "%d", wump_rooms[0]);
 		S_M_and_room.push_back(str);
-		
+		Sleep(100);
 		return S_M_and_room;
 	}
 	else{
@@ -602,7 +622,7 @@ vector<string> algorithm_way_to_go(vector<int>cords)
 		int start_value_ran = directions.size();
 		cout<< start_value_ran <<"start"<<endl;
 		while(same){
-			direction_to_go = (rand()%start_value_ran)+1;
+			direction_to_go = (rand()%start_value_ran)+0;
 			for(int i; i<visited.size(); i++){
 				cout<< visited[i]<<" been there" <<endl;
 				if(visited[i]!=cords[direction_to_go]){
@@ -613,9 +633,11 @@ vector<string> algorithm_way_to_go(vector<int>cords)
 			}
 			same = false;
 		}
+		cout<< "after random val"<<endl;
 		sprintf(str, "%d", cords[direction_to_go]);
 		S_M_and_room.push_back(str);
-	
+		cout<< cords[direction_to_go] << "moving too"<<endl;
+		Sleep(100);
 		return S_M_and_room;
 	}
 	
@@ -654,21 +676,29 @@ int main(){
   	int score = 0;
 	int aiside = 0;
 	string ai_SPAO; 
+	vector<int> visited;
+	vector<int> wump_rooms;
+	vector<int> pit_rooms;
 	
 	
 	while(true){ // Loop: doorheen gaan van het spel.
 		score+=1;
-		ai_outcome_SPAO = algorithm_way_to_go(cords);
+		ai_outcome_SPAO = algorithm_way_to_go(cords,visited,wump_rooms,pit_rooms);
 		
 		ai_SPAO	= ai_outcome_SPAO[0];
 		
-		cout<< ai_outcome_SPAO[1] << " room" << endl;
+		cout<< endl<< ai_outcome_SPAO[1] << " room" << endl;
   		//outcome_SPAO = show_position_and_options(cords);
   		if(ai_SPAO[0] == 'M' || ai_SPAO[0] == 'm'){
+			cout<<"after move"<<endl;
 			istringstream(ai_outcome_SPAO[1]) >> side;
 			
   			final_dest = checkside(side, cords);
+			cout<<"after checkside"<<endl;
+			cout<< final_dest<<"final dest"<<endl;
+			cout<<way_to_go.size()<<"go size"<<endl;
   			cords = way_to_go[final_dest];
+			cout<<"after way to go"<<endl;
   			if (collision_bats(cords)){
   				cout << "You've been carried away by bats!" << endl;
   				cords = way_to_go[(rand()%20)+0];
