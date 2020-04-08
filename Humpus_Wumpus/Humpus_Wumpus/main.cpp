@@ -280,18 +280,13 @@ void ready_go(){
         getline(cin, Y_tostart);
         if (Y_tostart.size() < 2){
             if(Y_tostart[0] == 'Y' || Y_tostart[0] == 'y'){
-				break;
+                break;
             }
         }
         else{
             cout << "\nAre you ready to start (Y)? ";
         }
-        values_infile << "G " << xypit << endl;
     }
-    else{
-        cout << "ERROR: File unreachable \n";
-    }
-    values_infile.close();
 }
 
 
