@@ -474,7 +474,7 @@ bool restart_game_question(bool restart_game)
     }
 }
 
-char AI_sense(vector<int> room){
+vector<char> AI_sense(vector<int> room){
     ifstream infile;
     string line;
 	vector<char> dangers;
@@ -515,12 +515,127 @@ char AI_sense(vector<int> room){
         infile.close();
     }
 }
-vector<int> ai_avoid(pit_rooms,wump_rooms,cords){
+vector<int> ai_avoid(vector<int>pit_rooms,vector<int>wump_rooms,vector<int>cords){
 	if (pit_rooms.size()>wump_rooms.size())
-		for(i=0; i>pit_rooms.size();i++;){
-			for
+		for(int i=0; i>pit_rooms.size();i++){
+			//for
 			if(pit_rooms[i] == cords[i+1] || wump_rooms[i] == cords[i+1]){
 				
 			}
 		}
+}
+
+
+vector<string> algorithm_way_to_go(vector<int>cords)
+{
+	vector<int> pit_rooms;
+	vector<int> wump_rooms;
+	vector<int> visited;
+	vector<string> S_M_and_room;
+	vector<int> directions;
+	char str[2];
+	
+	visited.insert(visited.end(),cords[0]); //Kamer waar die staat toewijzen dat ie daar is geweest
+	vector<char> danger = AI_sense(cords); //als er iets in de buurt is
+	for (int i = 1; i > cords.size(); i++){
+		if (danger[0] == 'w'){ 					//voeg alle kamers eromheen toe aan de gevaarlijke vector
+			for(int j=0; j>visited.size(); j++){		//verwijder de kamers waar je al bent geweest of nog nergens geweest random
+				if (visited[j] != cords[i]){
+					wump_rooms.insert(visited.end(),cords[i]);
+				}
+			}
+		}
+		if(danger[0] == 'p'||danger[1] == 'p'){
+			for(int j=0; j>visited.size(); j++){		//verwijder de kamers waar je al bent geweest of nog nergens geweest random
+				if (visited[j] != cords[i]){
+					pit_rooms.insert(visited.end(),cords[i]);
+				}
+				
+			}
+		}
+		directions = ai_avoid(pit_rooms,wump_rooms,cords);
+	}
+	if (wump_rooms.size() == 1){
+		S_M_and_room.insert(S_M_and_room.end(),"s");
+		sprintf(str, "%d", wump_rooms[0]);
+		S_M_and_room.insert(S_M_and_room.end(),str);
+		return S_M_and_room;
+	}
+	else{
+		S_M_and_room.insert(S_M_and_room.end(),"m");
+		int start_value_ran = directions.size();
+		int direction_to_go = (rand()%start_value_ran)+0;
+		sprintf(str, "%d", direction_to_go);
+		S_M_and_room.insert(S_M_and_room.end(),str);
+		return S_M_and_room;
+	}
+	
+		
+}
+
+int main(){
+  bool restart_game = true;
+  while(restart_game){
+  	leaderboard();
+  	ready_go();  // Begint funcite om te vragen om mensen klaar zijn om te spelen.
+  	read_instructions(); // Start functie die vraagt of mensen instructies wilt hebben.
+  	vector<vector<int> > way_to_go = directions();
+
+  	srand((unsigned)time(0));
+  	string username;
+  	while(true){
+  		cout << "Give a username: ";
+  		cin >> username;
+  		if(username.length()>3){
+  			cout << "Username exceeded the 3 character limit, try again." << endl;
+  		}
+  		else{
+  			cout << "Welcome, " << username << ". \n";
+  			break;
+  		}
+  	}
+
+  	vector<int> cords = way_to_go[player_start()];
+  	int arrows_amount = 5;
+      int side;
+      int final_dest;
+      string outcome_SPAO;
+	  vector<string> ai_outcome_SPAO;
+  	int score = 0;
+	
+	int aiside = 0;
+	ai_outcome_SPAO = algorithm_way_to_go(cords);
+	string ai_SPAO = ai_outcome_SPAO[0];
+	char Final_ai_SPAO = ai_SPAO[0];
+	char a = '4';
+	int ia = a - '0';
+	//int ai_side = ai_move();
+	
+  	while(true){ // Loop: doorheen gaan van het spel.
+  		score+=1;
+  		//outcome_SPAO = show_position_and_options(cords);
+  		if(ai_SPAO[0] == 'M' || ai_SPAO[0] == 'm'){
+  			side = move(cords);
+  			final_dest = checkside(side, cords);
+  			cords = way_to_go[final_dest];
+  			if (collision_bats(cords)){
+  				cout << "You've been carried away by bats!" << endl;
+  				cords = way_to_go[(rand()%20)+0];
+  			}
+  			if (collision_death(cords)){
+  				ascii_art("death.txt");
+  				cout << "You are dead, oh no!" << endl;
+  				break;
+  			}
+
+  		}
+  		else{
+  			arrows_amount = shoot(arrows_amount, cords, way_to_go);
+  			if(arrows_amount==999){
+  				break;
+  			}
+  		}
+  	}
+    restart_game = restart_game_question(restart_game);
+}
 }
