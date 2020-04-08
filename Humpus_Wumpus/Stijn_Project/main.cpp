@@ -587,21 +587,33 @@ vector<string> algorithm_way_to_go(vector<int>cords)
 	directions = ai_avoid(pit_rooms,wump_rooms,cords);
 
 	if (wump_rooms.size() == 1){
+		cout<<"paniek"<<endl;
 		cout<< "yeet" << endl;
 		S_M_and_room.push_back("s");
-		
 		sprintf(str, "%d", wump_rooms[0]);
 		S_M_and_room.push_back(str);
 		
 		return S_M_and_room;
 	}
 	else{
-	
+		int direction_to_go;
+		bool same = true;
 		S_M_and_room.push_back("m");
 		int start_value_ran = directions.size();
-		cout<< start_value_ran;
-		int direction_to_go = (rand()%start_value_ran)+0;
-		sprintf(str, "%d", direction_to_go);
+		cout<< start_value_ran <<"start"<<endl;
+		while(same){
+			direction_to_go = (rand()%start_value_ran)+1;
+			for(int i; i<visited.size(); i++){
+				cout<< visited[i]<<" been there" <<endl;
+				if(visited[i]!=cords[direction_to_go]){
+					same = false; 
+					continue;
+				}
+				
+			}
+			same = false;
+		}
+		sprintf(str, "%d", cords[direction_to_go]);
 		S_M_and_room.push_back(str);
 	
 		return S_M_and_room;
@@ -633,24 +645,24 @@ int main(){
   	}
 
   	vector<int> cords = way_to_go[player_start()];
+	cout<< cords[0]<<cords[1]<<cords[2]<<cords[3];
   	int arrows_amount = 5;
-      int side;
-      int final_dest;
-      string outcome_SPAO;
-	  vector<string> ai_outcome_SPAO;
+	int side;
+	int final_dest;
+	string outcome_SPAO;
+	vector<string> ai_outcome_SPAO;
   	int score = 0;
 	int aiside = 0;
 	string ai_SPAO; 
 	
-	//int ai_side = ai_move();
 	
-  	while(true){ // Loop: doorheen gaan van het spel.
-  		score+=1;
+	while(true){ // Loop: doorheen gaan van het spel.
+		score+=1;
 		ai_outcome_SPAO = algorithm_way_to_go(cords);
 		
 		ai_SPAO	= ai_outcome_SPAO[0];
 		
-		cout<< ai_outcome_SPAO[1] << endl;
+		cout<< ai_outcome_SPAO[1] << " room" << endl;
   		//outcome_SPAO = show_position_and_options(cords);
   		if(ai_SPAO[0] == 'M' || ai_SPAO[0] == 'm'){
 			istringstream(ai_outcome_SPAO[1]) >> side;
