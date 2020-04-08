@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -40,8 +41,105 @@ int ascii_art(string filename){
 
 void leaderboard(){
 	ascii_art("logo.txt");
+	ifstream infile;
+	string filename_in = "score.txt";
+	string line;
+	infile.open(filename_in.c_str());
+	int place = 0;
+
+	cout << "Place | Name | Score | Time" << endl;
+	cout << "---------------------------" << endl;
+	while(getline(infile, line)){
+		place+=1;
+		if(place==1){
+			cout << "1st: " << line << endl;
+		}
+		else if(place==2){
+			cout << "2nd: " << line << endl;
+		}
+		else if(place==3){
+			cout << "3rd: " << line << endl;
+		}
+		else{
+			cout << place <<"th: " << line << endl;
+		}
+
+	}
+	cout << "---------------------------" << endl;
 }
 
+
+void register_score(string username, time_t start_time, int score){
+	double diffrence = difftime( time(0), start_time);
+	cout << "You won with a score of " << score << " whithin " << diffrence << " seconds." << endl;
+
+	ifstream infile;
+	ofstream outfile;
+	string filename_in = "score.txt";
+	string filename_out = "tmp.txt";
+	string line;
+	bool wrote = false;
+    infile.open(filename_in.c_str());
+	outfile.open(filename_out.c_str());
+
+	while(getline(infile, line)){
+		outfile << line << endl;
+	}
+
+	infile.close();
+	outfile.close();
+	filename_in = "tmp.txt";
+	filename_out = "score.txt";
+	infile.open(filename_in.c_str());
+	outfile.open(filename_out.c_str());
+
+	int amount_lines = 0;
+	while(getline(infile, line)){
+		if(amount_lines==9){
+			break;
+		}
+		stringstream find;
+		find << line;
+		int found;
+		while(!find.eof()) {
+			string temp;
+			find >> temp;
+			if(stringstream(temp) >> found){
+				if(wrote==false && score < found){
+					outfile << username << " " << score << " " << diffrence << endl;
+					amount_lines+=1;
+					wrote=true;
+				}
+				else if(wrote==false && score == found){
+					while(!find.eof()) {
+						string temp;
+						find >> temp;
+						if(stringstream(temp) >> found){
+							if(diffrence < found){
+								outfile << username << " " << score << " " << diffrence << endl;
+								amount_lines+=1;
+								wrote=true;
+							}
+						}
+					}
+				}
+				outfile << line << endl;
+				if(amount_lines==9){
+					break;
+				}
+				amount_lines+=1;
+				break;
+			}
+			temp = "";
+		}
+
+	}
+	if(amount_lines==0 || (amount_lines<9 && wrote == false)){
+		outfile << username << " " << score << " " << diffrence << endl;
+	}
+	infile.close();
+	outfile.close();
+}
 
 void read_instructions(){
 	string YorN_instr;
@@ -49,14 +147,15 @@ void read_instructions(){
     getline(cin, YorN_instr);
 
     if(YorN_instr[0] == 'Y' || YorN_instr[0] == 'y'){
-        cout << "1. There are 3 hazards: \n";
+		cout << "1. Your goal is to kill The Wumpus \n";
+        cout << "2. There are 3 hazards, you will sense them if you get too close: \n";
             cout << "\t1.1 A bottomless pit (you will feel a breeze nearby).\n";
             cout << "\t1.2 A colony of bats that will pick you up and drop you in a random space (you will hear flapping nearby).\n";
             cout << "\t1.3 A fearsome, hungry, and unbathed wumpus (you will smell it nearby).\n";
-        cout << "2. The wumpus is heavy; bats cannot lift him.\n";
-        cout << "3. The wumpus is covered in suckers; he won't fall down the bottomless pit.\n";
-        cout << "4. Firing an arrow that misses the wumpus may cause it to move.\n";
-        cout << "5. You have 5 wumpus-piercing arrows.\n";
+        cout << "3. The wumpus is heavy; bats cannot lift him.\n";
+        cout << "4. The wumpus is covered in suction cups; he won't fall down the bottomless pit.\n";
+        cout << "5. Firing an arrow that misses the wumpus may cause it to move.\n";
+        cout << "6. You have 5 wumpus-piercing arrows, if you run out you better start running.\n";
     }
 }
 
@@ -100,7 +199,7 @@ void sense(vector<int> room){
 }
 
 
-bool collision_death(vector<int> room){
+int collision_death(vector<int> room){
     ifstream infile;
     string line;
     string filename = "values.txt";
@@ -114,10 +213,16 @@ bool collision_death(vector<int> room){
             while(!find.eof()) {
                 find >> temp;
                 if(stringstream(temp) >> found){
-                    if (line[0] == 'W' || line[0] == 'G'){
+                    if (line[0] == 'W'){
                         if (found == room[0]){
                             infile.close();
-                            return true;
+                            return 2;
+                        }
+                    }
+					else if (line[0] == 'G'){
+                        if (found == room[0]){
+                            infile.close();
+                            return 1;
                         }
                     }
                 }
@@ -175,45 +280,13 @@ void ready_go(){
         getline(cin, Y_tostart);
         if (Y_tostart.size() < 2){
             if(Y_tostart[0] == 'Y' || Y_tostart[0] == 'y'){
-				break;
+                break;
             }
         }
         else{
             cout << "\nAre you ready to start (Y)? ";
         }
     }
-}
-
-
-void assign_values(){
-    ofstream values_infile;
-	string filename = "values.txt";
-    values_infile.open(filename.c_str());
-    if(values_infile.is_open()){
-        int xyplayer = (rand()%20)+0;
-        values_infile << "P " << xyplayer << endl;
-        int xywump = (rand()%20)+0;
-        while(xyplayer == xywump){
-            xywump = (rand()%20)+0;
-        }
-        values_infile << "W " << xywump << endl;
-
-        int xybats = (rand()%20)+0;
-        while(xybats == xywump || xybats == xyplayer){
-            xybats = (rand()%20)+0;
-        }
-        values_infile << "B " << xybats << endl;
-
-        int xypit = (rand()%20)+0;
-        while(xypit == xyplayer || xypit == xywump || xypit == xybats){
-            xypit = (rand()%20)+0;
-        }
-        values_infile << "G " << xypit << endl;
-    }
-    else{
-        cout << "ERROR: File unreachable \n";
-    }
-    values_infile.close();
 }
 
 
@@ -390,11 +463,11 @@ int wumpus_walky(int cords_wumpus, vector<vector<int>> way_to_go){
 	string line;
     infile.open(filename_in.c_str());
 	outfile.open(filename_out.c_str());
-    
+
 	vector<int> cords = way_to_go[cords_wumpus];
-    
+
 	int move_rand_wump = (rand()%3)+1;
-    
+
 	while(getline(infile, line)){
 		if(line[0]=='W'){
 			outfile << "W " << cords[move_rand_wump] << endl;
@@ -415,7 +488,8 @@ int wumpus_walky(int cords_wumpus, vector<vector<int>> way_to_go){
 		outfile << line << endl;
 	}
 
-
+	infile.close();
+	outfile.close();
 	return cords[move_rand_wump];
 }
 
@@ -428,28 +502,34 @@ int aim(vector<int>cords){
     return final_dest;
 }
 
-int shoot(int arrows_amount, vector<int> cords, vector<vector<int>> way_to_go){
+vector<int> shoot(int arrows_amount, vector<int> cords, vector<vector<int>> way_to_go){
+	vector<int> shoot_info;
 	if(arrows_amount>0){
-		arrows_amount -=1;
+		shoot_info.push_back(arrows_amount-1);
 		int wumpus_cords = location_wumpus();
 		int shot_room = aim(cords);
 		if(shot_room != -1){
 			bool hit = wump_walk_shot(wumpus_cords, shot_room);
 			if(hit){
 				ascii_art("winner.txt");
-				cout << "You win! You have slain the wumpus." << endl;
-				return 999;
+				cout << "You win! You have slain the wumpus. You are a MLG gamer!" << endl;
+				shoot_info.push_back(1);
+				return shoot_info;
+			}
+			else if(shoot_info[0]==0){
+				ascii_art("death wump.txt");
+				cout << "You have shot your last shot, The Wumpus noticed this and charged you down." << endl;
+				shoot_info.push_back(2);
+				return shoot_info;
 			}
 			else{
 				wumpus_cords = wumpus_walky(wumpus_cords, way_to_go);
-				cout << endl << "You missed the shot and have lost the arrow, you have "  << arrows_amount << " left." << endl;
+				cout << endl << "You missed the shot and have lost the arrow, you have "  << shoot_info[0] << " left." << endl;
 			}
 		}
 	}
-	else{
-		cout << endl << "You don't have any arrows left." << endl;
-	}
-	return arrows_amount;
+	shoot_info.push_back(0);
+	return shoot_info;
 }
 
 
@@ -464,8 +544,8 @@ int main(){
 	while(true){
 		cout << "Give a username: ";
 		cin >> username;
-		if(username.length()>3){
-			cout << "Username exceeded the 3 character limit, try again." << endl;
+		if(username.length()!=3){
+			cout << "Your username should be 3 characters, try again." << endl;
 		}
 		else{
 			cout << "Welcome, " << username << ". \n";
@@ -478,7 +558,9 @@ int main(){
     int side;
     int final_dest;
     string outcome_SPAO;
+	vector<int> shoot_info;
 	int score = 0;
+	time_t start_time = time(0);
 
 	while(true){ // Loop: doorheen gaan van het spel.
 		score+=1;
@@ -491,16 +573,26 @@ int main(){
 				cout << "You've been carried away by bats!" << endl;
 				cords = way_to_go[(rand()%20)+0];
 			}
-			if (collision_death(cords)){
-				ascii_art("death.txt");
-				cout << "You are dead, oh no!" << endl;
+			if(collision_death(cords)==1){
+				ascii_art("death cliff.txt");
+				cout << "You have fallen down a botemless pit!" << endl;
+				break;
+			}
+			if(collision_death(cords)==2){
+				ascii_art("death wump.txt");
+				cout << "You have been killed by the wumpus!" << endl;
 				break;
 			}
 
 		}
 		else{
-			arrows_amount = shoot(arrows_amount, cords, way_to_go);
-			if(arrows_amount==999){
+			shoot_info = shoot(arrows_amount, cords, way_to_go);
+			arrows_amount = shoot_info[0];
+			if(shoot_info[1]==1){
+				register_score(username, start_time, score);
+				break;
+			}
+			if(shoot_info[1]==2){
 				break;
 			}
 		}

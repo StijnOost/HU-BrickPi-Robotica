@@ -1,6 +1,6 @@
 ##
 ## Auto Generated makefile by CodeLite IDE
-## any manual changes will be erased      
+## any manual changes will be erased
 ##
 ## Debug
 ProjectName            :=Tim_Project
@@ -21,29 +21,29 @@ SharedObjectLinkerName :=C:/TDM-GCC-32/bin/g++.exe -shared -fPIC
 ObjectSuffix           :=.o
 DependSuffix           :=.o.d
 PreprocessSuffix       :=.i
-DebugSwitch            :=-g 
+DebugSwitch            :=-g
 IncludeSwitch          :=-I
 LibrarySwitch          :=-l
-OutputSwitch           :=-o 
+OutputSwitch           :=-o
 LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
-SourceSwitch           :=-c 
+SourceSwitch           :=-c
 OutputFile             :=..\build-$(ConfigurationName)\bin\$(ProjectName)
 Preprocessors          :=
-ObjectSwitch           :=-o 
-ArchiveOutputSwitch    := 
+ObjectSwitch           :=-o
+ArchiveOutputSwitch    :=
 PreprocessOnlySwitch   :=-E
 ObjectsFileList        :=$(IntermediateDirectory)/ObjectsList.txt
 PCHCompileFlags        :=
-RcCmpOptions           := 
+RcCmpOptions           :=
 RcCompilerName         :=C:/TDM-GCC-32/bin/windres.exe
-LinkOptions            :=  
-IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). 
-IncludePCH             := 
-RcIncludePath          := 
-Libs                   := 
-ArLibs                 :=  
-LibPath                := $(LibraryPathSwitch). 
+LinkOptions            :=
+IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch).
+IncludePCH             :=
+RcIncludePath          :=
+Libs                   :=
+ArLibs                 :=
+LibPath                := $(LibraryPathSwitch).
 
 ##
 ## Common variables
@@ -54,7 +54,7 @@ CXX      := C:/TDM-GCC-32/bin/g++.exe
 CC       := C:/TDM-GCC-32/bin/gcc.exe
 CXXFLAGS :=  -g -O0 -std=c++14 -Wall $(Preprocessors)
 CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
-ASFLAGS  := 
+ASFLAGS  :=
 AS       := C:/TDM-GCC-32/bin/as.exe
 
 
@@ -62,19 +62,19 @@ AS       := C:/TDM-GCC-32/bin/as.exe
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
-Objects0=../build-$(ConfigurationName)/Tim_Project/main.cpp$(ObjectSuffix) 
+Objects0=../build-$(ConfigurationName)/Tim_Project/main.cpp$(ObjectSuffix)
 
 
 
-Objects=$(Objects0) 
+Objects=$(Objects0)
 
 ##
-## Main Build Targets 
+## Main Build Targets
 ##
 .PHONY: all clean PreBuild PrePreBuild PostBuild MakeIntermediateDirs
 all: MakeIntermediateDirs $(OutputFile)
 
-$(OutputFile): ../build-$(ConfigurationName)/Tim_Project/.d $(Objects) 
+$(OutputFile): ../build-$(ConfigurationName)/Tim_Project/.d $(Objects)
 	@if not exist "..\build-$(ConfigurationName)\Tim_Project" mkdir "..\build-$(ConfigurationName)\Tim_Project"
 	@echo "" > $(IntermediateDirectory)/.d
 	@echo $(Objects0)  > $(ObjectsFileList)
@@ -108,5 +108,3 @@ PreBuild:
 ##
 clean:
 	$(RM) -r $(IntermediateDirectory)
-
-
