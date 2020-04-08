@@ -15,9 +15,7 @@ void clear_tmp_file()
 
 bool check_numbers(int number, vector<int> & list_int_objects)
 {
-    cout << list_int_objects.size() << endl;
     for(int i=0; i<list_int_objects.size(); i++){
-        cout << "HANS: " << list_int_objects[i] << endl;
         if(number == list_int_objects[i]){
             return true;
         }
@@ -68,7 +66,6 @@ void New_value_in_tmp(int int_objects, string objects_chars, vector<string> tmp_
 
 void ask_for_custom_number(string objects_chars, vector<int> & list_int_objects)
 {
-    cout << list_int_objects.size() << endl;
     ifstream infile;
     string filename_in = "values.txt";
     string line;
@@ -103,9 +100,8 @@ void ask_for_custom_number(string objects_chars, vector<int> & list_int_objects)
     else if(YorN_change[0] == 'R' || YorN_change[0] == 'r'){
         while(true){
             int_objects = (rand()%20)+0;
-            list_int_objects.push_back(int_objects);
-            if(check_numbers(int_objects, list_int_objects) == true){
-                cout << "LUL" << endl;
+            if(check_numbers(int_objects, list_int_objects) == false){
+                list_int_objects.push_back(int_objects);
                 New_value_in_tmp(int_objects, objects_chars, tmp_values);
                 break;
             }
@@ -118,13 +114,41 @@ void ask_for_custom_number(string objects_chars, vector<int> & list_int_objects)
     infile.close();
 }
 
+bool reset_values_ask(bool reset_values){
+    string Restart_Char;
+    cout << "Do you want to keep these values? (Y/N) ";
+    while(true){
+        getline(cin, Restart_Char);
+        if (Restart_Char.size() < 2){
+            if(Restart_Char[0] == 'Y' || Restart_Char[0] == 'y'){
+                return false;
+            }
+            else if(Restart_Char[0] == 'N' || Restart_Char[0] == 'n'){
+                return true;
+            }
+        }
+        else{
+            cout << "Do you want to keep these values? (Y/N) ";
+        }
+    }
+}
+
 int main()
 {
-    clear_tmp_file();
-    srand((unsigned)time(0));
-    vector<int> list_int_objects;
-    vector<string> objects_chars = {"Hole", "Wombat", "Bat", "Player"};
-    for(int i=0; i<4; i++){
-        ask_for_custom_number(objects_chars[i], list_int_objects);
-    }    
+    bool reset_values = true;
+    while(reset_values){
+        cout << "Standard values of the objects are: " << endl;
+        cout << "Hole is: \t16 " << endl;
+        cout << "Wombat is: \t9 " << endl;
+        cout << "Bat is: \t14 " << endl;
+        cout << "Player is: \t6 " << endl;
+        clear_tmp_file();
+        srand((unsigned)time(0));
+        vector<int> list_int_objects;
+        vector<string> objects_chars = {"Hole", "Wombat", "Bat", "Player"};
+        for(int i=0; i<4; i++){
+            ask_for_custom_number(objects_chars[i], list_int_objects);
+        }
+        reset_values = reset_values_ask(reset_values);
+    }
 }
