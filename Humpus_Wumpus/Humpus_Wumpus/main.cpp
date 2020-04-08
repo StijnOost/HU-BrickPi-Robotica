@@ -171,15 +171,14 @@ bool collision_bats(vector<int> room){
 void ready_go(){
     string Y_tostart;
     cout << "\nAre you ready to start (Y)? ";
+    getline(cin, Y_tostart);
     while(true){
-        getline(cin, Y_tostart);
-        if (Y_tostart.size() < 2){
-            if(Y_tostart[0] == 'Y' || Y_tostart[0] == 'y'){
-				break;
-            }
+        if((Y_tostart[0] == 'Y' || Y_tostart[0] == 'y') && Y_tostart.size() < 2){
+            break;
         }
         else{
             cout << "\nAre you ready to start (Y)? ";
+            getline(cin, Y_tostart);
         }
     }
 }

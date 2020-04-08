@@ -71,24 +71,24 @@ void ask_for_custom_number(string objects_chars, vector<int> & list_int_objects)
     string line;
     infile.open(filename_in.c_str());
     int int_objects = -2;
-    char YorN_change[2];
+    string YorN_change;
     vector<string> tmp_values;
  
     while(getline(infile, line)){
         tmp_values.push_back(line);
     }
     cout << "Do you want to change the " << objects_chars << " start location? (y/n/r) ";
-    cin>>YorN_change;
-    if(YorN_change[0] == 'Y' || YorN_change[0] == 'y'){
+    getline(cin,YorN_change);
+    if((YorN_change[0] == 'Y' || YorN_change[0] == 'y') && YorN_change.size() < 2){
         while(true){
             cout << "In which room should the " << objects_chars << " start? ";
             cin.clear();
-            cin>>int_objects;
+            cin >> int_objects;
             while(!cin>>int_objects || int_objects > 19 || int_objects < 0 || check_numbers(int_objects, list_int_objects)){
                 cout << "This is not a valid room, try again: ";
                 cin.clear();
                 cin.ignore(INT_MAX, '\n');
-                cin>>int_objects;
+                cin >> int_objects;
 
             }
             list_int_objects.push_back(int_objects);
@@ -97,7 +97,7 @@ void ask_for_custom_number(string objects_chars, vector<int> & list_int_objects)
             break;
         }
     }
-    else if(YorN_change[0] == 'R' || YorN_change[0] == 'r'){
+    else if((YorN_change[0] == 'R' || YorN_change[0] == 'r') && YorN_change.size() < 2){
         while(true){
             int_objects = (rand()%20)+0;
             if(check_numbers(int_objects, list_int_objects) == false){
@@ -117,18 +117,17 @@ void ask_for_custom_number(string objects_chars, vector<int> & list_int_objects)
 bool reset_values_ask(bool reset_values){
     string Restart_Char;
     cout << "Do you want to keep these values? (Y/N) ";
+    getline(cin, Restart_Char);
     while(true){
-        getline(cin, Restart_Char);
-        if (Restart_Char.size() < 2){
-            if(Restart_Char[0] == 'Y' || Restart_Char[0] == 'y'){
-                return false;
-            }
-            else if(Restart_Char[0] == 'N' || Restart_Char[0] == 'n'){
-                return true;
-            }
+        if(Restart_Char[0] == 'Y' || Restart_Char[0] == 'y'){
+            return false;
+        }
+        else if(Restart_Char[0] == 'N' || Restart_Char[0] == 'n'){
+            return true;
         }
         else{
             cout << "Do you want to keep these values? (Y/N) ";
+            getline(cin, Restart_Char);
         }
     }
 }
