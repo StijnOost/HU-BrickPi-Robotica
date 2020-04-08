@@ -17,10 +17,10 @@ void New_value_in_tmp(int int_objects, string objects_chars, vector<string> tmp_
     ofstream outfile;
     string filename_out = "tmp.txt";
     outfile.open(filename_out.c_str(), ios_base::app);
-    cout << objects_chars << endl;
     if(int_objects != -1 && int_objects != -2){
         for(int i=0; i<tmp_values.size(); i++){
             for(int j=0; j<tmp_values.size(); j++){
+                cout << tmp_values[i][j] << ".";
                 if(tmp_values[i][j]==objects_chars[0]){
                     outfile << objects_chars[0] << " " << int_objects << endl;
                     break;
@@ -31,9 +31,10 @@ void New_value_in_tmp(int int_objects, string objects_chars, vector<string> tmp_
     else if(int_objects == -1){
         for(int i=0; i<tmp_values.size(); i++){
             for(int j=0; j<tmp_values.size(); j++){
-                if(tmp_values[i][j]==objects_chars[0]){
-                    outfile << objects_chars[0] << " " << (rand()%20)+0 << endl;
-                    break;
+                    if(tmp_values[i][j]==objects_chars[0]){
+                        outfile << objects_chars[0] << " " << (rand()%20)+0 << endl;
+                        break;
+                    }
                 }
             }
         }
@@ -100,7 +101,6 @@ int main()
     srand((unsigned)time(0));
     vector<string> objects_chars = {"Hole", "Wombat", "Bat", "Player"};
     for(int i=0; i<4; i++){
-        cout << objects_chars[i][0] << endl;
         ask_for_custom_number(objects_chars[i]);
     }    
 }
