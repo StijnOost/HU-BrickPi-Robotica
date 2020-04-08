@@ -6,18 +6,18 @@
 ProjectName            :=Alex_Project
 ConfigurationName      :=Debug
 WorkspaceConfiguration := $(ConfigurationName)
-WorkspacePath          :=C:/Users/alexa/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus
-ProjectPath            :=C:/Users/alexa/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Alex_Project
+WorkspacePath          :=C:/Users/Jari/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus
+ProjectPath            :=C:/Users/Jari/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Alex_Project
 IntermediateDirectory  :=../build-$(ConfigurationName)/Alex_Project
 OutDir                 :=../build-$(ConfigurationName)/Alex_Project
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
-User                   :=alexa
-Date                   :=25/03/2020
+User                   :=Jari
+Date                   :=08/04/2020
 CodeLitePath           :="C:/Program Files/CodeLite"
-LinkerName             :="C:/Program Files/TDM-GCC/bin/g++.exe"
-SharedObjectLinkerName :="C:/Program Files/TDM-GCC/bin/g++.exe" -shared -fPIC
+LinkerName             :=C:/TDM-GCC-32/bin/g++.exe
+SharedObjectLinkerName :=C:/TDM-GCC-32/bin/g++.exe -shared -fPIC
 ObjectSuffix           :=.o
 DependSuffix           :=.o.d
 PreprocessSuffix       :=.i
@@ -36,7 +36,7 @@ PreprocessOnlySwitch   :=-E
 ObjectsFileList        :=$(IntermediateDirectory)/ObjectsList.txt
 PCHCompileFlags        :=
 RcCmpOptions           := 
-RcCompilerName         :="C:/Program Files/TDM-GCC/bin/windres.exe"
+RcCompilerName         :=C:/TDM-GCC-32/bin/windres.exe
 LinkOptions            :=  
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). 
 IncludePCH             := 
@@ -49,13 +49,13 @@ LibPath                := $(LibraryPathSwitch).
 ## Common variables
 ## AR, CXX, CC, AS, CXXFLAGS and CFLAGS can be overriden using an environment variables
 ##
-AR       := "C:/Program Files/TDM-GCC/bin/ar.exe" rcu
-CXX      := "C:/Program Files/TDM-GCC/bin/g++.exe"
-CC       := "C:/Program Files/TDM-GCC/bin/gcc.exe"
+AR       := C:/TDM-GCC-32/bin/ar.exe rcu
+CXX      := C:/TDM-GCC-32/bin/g++.exe
+CC       := C:/TDM-GCC-32/bin/gcc.exe
 CXXFLAGS :=  -g -O0 -Wall $(Preprocessors)
 CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
 ASFLAGS  := 
-AS       := "C:/Program Files/TDM-GCC/bin/as.exe"
+AS       := C:/TDM-GCC-32/bin/as.exe
 
 
 ##
@@ -94,7 +94,7 @@ PreBuild:
 ## Objects
 ##
 ../build-$(ConfigurationName)/Alex_Project/main.cpp$(ObjectSuffix): main.cpp ../build-$(ConfigurationName)/Alex_Project/main.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/alexa/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Alex_Project/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Jari/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Alex_Project/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
 ../build-$(ConfigurationName)/Alex_Project/main.cpp$(DependSuffix): main.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/Alex_Project/main.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/Alex_Project/main.cpp$(DependSuffix) -MM main.cpp
 
