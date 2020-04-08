@@ -10,10 +10,10 @@
 using namespace std;
 
 
-string get_file_contents(ifstream& File){
+string get_file_contents(ifstream& File){ //Opent de ascii file en returned 1 lange string aan tekens
     string Lines = "";
     if (File){
-		while (File.good ()){
+		while (File.good()){
 			string Templine;
 			getline (File , Templine);
 			Templine += "\n";
@@ -28,7 +28,7 @@ string get_file_contents(ifstream& File){
 }
 
 
-int ascii_art(string filename){
+int ascii_art(const string filename){ //Openen van een text file met een ascii plaatje. parameter is de text file naam.
     string get_file_contents(ifstream&);
     ifstream infile(filename.c_str());
     string Art = get_file_contents (infile);
@@ -39,40 +39,40 @@ int ascii_art(string filename){
 }
 
 
-void leaderboard(){
+void leaderboard(){ //Laat het leaderboard zien met de beste 9 tijden voor het verslaan van Wumpus
 	ascii_art("logo.txt");
 	ifstream infile;
 	string filename_in = "score.txt";
 	string line;
 	infile.open(filename_in.c_str());
 	int place = 0;
-
+	
 	cout << "Place | Name | Score | Time" << endl;
 	cout << "---------------------------" << endl;
 	while(getline(infile, line)){
 		place+=1;
 		if(place==1){
-			cout << "1st: " << line << endl;
+			cout << "1st:    " << line << endl;
 		}
 		else if(place==2){
-			cout << "2nd: " << line << endl;
+			cout << "2nd:    " << line << endl;
 		}
 		else if(place==3){
-			cout << "3rd: " << line << endl;
+			cout << "3rd:    " << line << endl;
 		}
 		else{
-			cout << place <<"th: " << line << endl;
+			cout << place <<"th:    " << line << endl;
 		}
-
+		
 	}
 	cout << "---------------------------" << endl;
 }
 
 
-void register_score(string username, time_t start_time, int score){
+void register_score(const string username, const time_t start_time, const int score){ //Registreert je score in een file als je hebt gewonnen met de naam score en tijd
 	double diffrence = difftime( time(0), start_time);
 	cout << "You won with a score of " << score << " whithin " << diffrence << " seconds." << endl;
-
+	
 	ifstream infile;
 	ofstream outfile;
 	string filename_in = "score.txt";
@@ -81,7 +81,7 @@ void register_score(string username, time_t start_time, int score){
 	bool wrote = false;
     infile.open(filename_in.c_str());
 	outfile.open(filename_out.c_str());
-
+    
 	while(getline(infile, line)){
 		outfile << line << endl;
 	}
@@ -92,7 +92,7 @@ void register_score(string username, time_t start_time, int score){
 	filename_out = "score.txt";
 	infile.open(filename_in.c_str());
 	outfile.open(filename_out.c_str());
-
+	
 	int amount_lines = 0;
 	while(getline(infile, line)){
 		if(amount_lines==9){
@@ -106,7 +106,12 @@ void register_score(string username, time_t start_time, int score){
 			find >> temp;
 			if(stringstream(temp) >> found){
 				if(wrote==false && score < found){
-					outfile << username << " " << score << " " << diffrence << endl;
+					if(score>9){
+                        outfile << username << "      " << score << "     " << diffrence << endl;
+                    }
+                    else{
+                        outfile << username << "      " << score << "      " << diffrence << endl;
+                    }
 					amount_lines+=1;
 					wrote=true;
 				}
@@ -116,7 +121,12 @@ void register_score(string username, time_t start_time, int score){
 						find >> temp;
 						if(stringstream(temp) >> found){
 							if(diffrence < found){
-								outfile << username << " " << score << " " << diffrence << endl;
+                                if(score>9){
+                                    outfile << username << "      " << score << "     " << diffrence << endl;
+                                }
+								else{
+                                    outfile << username << "      " << score << "      " << diffrence << endl;
+                                }
 								amount_lines+=1;
 								wrote=true;
 							}
@@ -132,16 +142,21 @@ void register_score(string username, time_t start_time, int score){
 			}
 			temp = "";
 		}
-
+		
 	}
 	if(amount_lines==0 || (amount_lines<9 && wrote == false)){
-		outfile << username << " " << score << " " << diffrence << endl;
+        if(score>9){
+            outfile << username << "      " << score << "     " << diffrence << endl;
+        }
+        else{
+            outfile << username << "      " << score << "      " << diffrence << endl;
+        }
 	}
 	infile.close();
 	outfile.close();
 }
 
-void read_instructions(){
+void read_instructions(){ //Vraagt om instructies van het spel
 	string YorN_instr;
     cout << "Do you need instructions: (Y/N)? ";
     getline(cin, YorN_instr);
@@ -160,7 +175,7 @@ void read_instructions(){
 }
 
 
-void sense(vector<int> room){
+void sense(const vector<int> room){ //Laat de messages zien als je dichtbij een Wumpus, Bats of Pit bent
     ifstream infile;
     string line;
     string filename = "values.txt";
@@ -182,7 +197,7 @@ void sense(vector<int> room){
                             if(line[0]=='B'){
                                 cout << "You hear flapping nearby" << endl;
                             }
-                            if(line[0]=='G'){
+                            if(line[0]=='H'){
                                 cout << "You feel a cold breeze" << endl;
                             }
                         }
@@ -199,7 +214,7 @@ void sense(vector<int> room){
 }
 
 
-int collision_death(vector<int> room){
+int collision_death(const vector<int> room){ //Checkt of je op de Wumpus loopt
     ifstream infile;
     string line;
     string filename = "values.txt";
@@ -219,7 +234,7 @@ int collision_death(vector<int> room){
                             return 2;
                         }
                     }
-					else if (line[0] == 'G'){
+					else if (line[0] == 'H'){
                         if (found == room[0]){
                             infile.close();
                             return 1;
@@ -235,11 +250,11 @@ int collision_death(vector<int> room){
         infile.close();
 
     }
-    return false;
+    return 0;
 }
 
 
-bool collision_bats(vector<int> room){
+bool collision_bats(const vector<int> room){ //Checkt of je op de Bats loopt
     ifstream infile;
     string line;
     string filename = "values.txt";
@@ -273,14 +288,14 @@ bool collision_bats(vector<int> room){
 }
 
 
-void ready_go(){
+void ready_go(){ //Vraagt of je het spel wilt spelen
     string Y_tostart;
     cout << "\nAre you ready to start (Y)? ";
     while(true){
         getline(cin, Y_tostart);
         if (Y_tostart.size() < 2){
             if(Y_tostart[0] == 'Y' || Y_tostart[0] == 'y'){
-                break;
+				break;
             }
         }
         else{
@@ -290,7 +305,7 @@ void ready_go(){
 }
 
 
-int location_wumpus(){
+int location_wumpus(){ //Zoekt de locatie van de Wumpus
     ifstream start_value;
     string line;
     string filename = "values.txt";
@@ -322,7 +337,7 @@ int location_wumpus(){
 }
 
 
-bool wump_hit(int cords_wumpus,int shot_room){
+bool wump_hit(const int cords_wumpus, const int shot_room){ //Check of de pijl de Wumpus raakt
 	if (cords_wumpus == shot_room){
 		return true;
 	}
@@ -330,7 +345,7 @@ bool wump_hit(int cords_wumpus,int shot_room){
 }
 
 
-bool wump_walk_shot(int wumpus_cords, int shot_room){
+bool wump_walk_shot(const int wumpus_cords, const int shot_room){ //Check of de Wumpus moet lopen (true is gewonnen, false is lopen)
 	if(wump_hit(wumpus_cords,shot_room)){
 		return true;
 	}
@@ -340,8 +355,7 @@ bool wump_walk_shot(int wumpus_cords, int shot_room){
 }
 
 
-
-int player_start(){
+int player_start(){ //Startwaarde van de speler
     ifstream start_value;
     string line;
     string filename = "values.txt";
@@ -373,7 +387,7 @@ int player_start(){
 }
 
 
-string show_position_and_options(vector<int> cords){
+string show_position_and_options(const vector<int> cords){ //Laat de speler zien in welke kamer hij/zij is en vraagt om te schieten of lopen
     cout << "---------------------------------------\n";
     cout << "You are in room: " << cords[0] << endl;
 	cout << "There are tunnels that lead to room: " << cords[1] << ", " << cords[2] << " and " << cords[3] <<endl ;
@@ -397,7 +411,7 @@ string show_position_and_options(vector<int> cords){
 }
 
 
-int move(vector<int> cords){
+int move(const vector<int> cords){ //Vragen naar welke kamer de speler wilt lopen
     int side;
     cout << "To which room do you want to move to?: ";
     cin >> side;
@@ -405,7 +419,7 @@ int move(vector<int> cords){
 }
 
 
-int checkside(int side, vector<int> cords){
+int checkside(int side, const vector<int> cords){ //Check of de opgegeven kamer van move() aanliggend is aan de kamer waar de speler is
     while(true){
         if (side == cords[1] || side == cords[2] || side == cords[3]){
         return side;
@@ -420,7 +434,7 @@ int checkside(int side, vector<int> cords){
 }
 
 
-vector<vector<int>> directions(){
+vector<vector<int>> directions(){ //Maakt een vector met de kamer en de aanliggende 3 kamers
 	ifstream infile;
 	string filename = "map.txt";
 	string line;
@@ -428,7 +442,7 @@ vector<vector<int>> directions(){
 	vector<int> new_entry;
 	infile.open(filename.c_str());
 	if(infile.is_open()){
-		for(int i=0;i<19;i++){
+		for(int i=0;i<20;i++){
 			cords.push_back(new_entry);
 			cords[i].push_back(i);
 			getline(infile, line);
@@ -455,7 +469,7 @@ vector<vector<int>> directions(){
 }
 
 
-int wumpus_walky(int cords_wumpus, vector<vector<int>> way_to_go){
+int wumpus_walky(const int cords_wumpus, const vector<vector<int>> way_to_go){ //Laat de wumpus naar een random kamer om zich heen lopen
 	ifstream infile;
 	ofstream outfile;
 	string filename_in = "values.txt";
@@ -463,11 +477,11 @@ int wumpus_walky(int cords_wumpus, vector<vector<int>> way_to_go){
 	string line;
     infile.open(filename_in.c_str());
 	outfile.open(filename_out.c_str());
-
+    
 	vector<int> cords = way_to_go[cords_wumpus];
-
+    
 	int move_rand_wump = (rand()%3)+1;
-
+    
 	while(getline(infile, line)){
 		if(line[0]=='W'){
 			outfile << "W " << cords[move_rand_wump] << endl;
@@ -494,7 +508,7 @@ int wumpus_walky(int cords_wumpus, vector<vector<int>> way_to_go){
 }
 
 
-int aim(vector<int>cords){
+int aim(const vector<int> cords){
     int shoot;
     cout << "To which room do you want to shoot?: ";
     cin >> shoot;
@@ -502,7 +516,8 @@ int aim(vector<int>cords){
     return final_dest;
 }
 
-vector<int> shoot(int arrows_amount, vector<int> cords, vector<vector<int>> way_to_go){
+
+vector<int> shoot(int arrows_amount, const vector<int> cords, const vector<vector<int>> way_to_go){ //Check of de speler nog pijlen heeft, zo ja: laat de speler weten of hij/zij de wumpus heeft geraakt
 	vector<int> shoot_info;
 	if(arrows_amount>0){
 		shoot_info.push_back(arrows_amount-1);
@@ -512,7 +527,7 @@ vector<int> shoot(int arrows_amount, vector<int> cords, vector<vector<int>> way_
 			bool hit = wump_walk_shot(wumpus_cords, shot_room);
 			if(hit){
 				ascii_art("winner.txt");
-				cout << "You win! You have slain the wumpus. You are a MLG gamer!" << endl;
+				cout << "You win! You have slain the wumpus!" << endl;
 				shoot_info.push_back(1);
 				return shoot_info;
 			}
@@ -533,68 +548,128 @@ vector<int> shoot(int arrows_amount, vector<int> cords, vector<vector<int>> way_
 }
 
 
-int main(){
-	leaderboard();
-	ready_go();  // Begint funcite om te vragen om mensen klaar zijn om te spelen.
-	read_instructions(); // Start functie die vraagt of mensen instructies wilt hebben.
-	vector<vector<int>> way_to_go = directions();
+bool restart_game_question(){ //Vraagt de speler om het spel opnieuw te spelen
+    string Restart_Char;
+    cout << "Would you like to restart the same game? (Y/N) ";
+    while(true){
+        getline(cin, Restart_Char);
+        if (Restart_Char.size() < 2){
+            if(Restart_Char[0] == 'Y' || Restart_Char[0] == 'y'){
+                return true;
+            }
+            else if(Restart_Char[0] == 'N' || Restart_Char[0] == 'n'){
+                return false;
+            }
+        }
+        else{
+            cout << "Would you like to restart the same game? (Y/N) ";
+        }
+    }
+}
 
-	srand((unsigned)time(0));
-	string username;
-	while(true){
-		cout << "Give a username: ";
-		cin >> username;
-		if(username.length()!=3){
-			cout << "Your username should be 3 characters, try again." << endl;
-		}
-		else{
-			cout << "Welcome, " << username << ". \n";
-			break;
-		}
+
+void save_loadout(){ //Slaat de waarde van de speler, Wumpus, Bats en Pit op in een text file
+	ifstream infile;
+	ofstream outfile;
+	string filename_in = "values.txt";
+	string filename_out = "values begin.txt";
+	string line;
+    infile.open(filename_in.c_str());
+	outfile.open(filename_out.c_str());
+    
+	while(getline(infile, line)){
+		outfile << line << endl;
 	}
+	infile.close();
+	outfile.close();
+}
 
-	vector<int> cords = way_to_go[player_start()];
-	int arrows_amount = 5;
-    int side;
-    int final_dest;
-    string outcome_SPAO;
-	vector<int> shoot_info;
-	int score = 0;
-	time_t start_time = time(0);
 
-	while(true){ // Loop: doorheen gaan van het spel.
-		score+=1;
-		outcome_SPAO = show_position_and_options(cords);
-		if(outcome_SPAO[0] == 'M' || outcome_SPAO[0] == 'm'){
-			side = move(cords);
-			final_dest = checkside(side, cords);
-			cords = way_to_go[final_dest];
-			if (collision_bats(cords)){
-				cout << "You've been carried away by bats!" << endl;
-				cords = way_to_go[(rand()%20)+0];
+void paste_loadout(){ //Zet waarde in de value text file
+	ifstream infile;
+	ofstream outfile;
+	string filename_in = "values begin.txt";
+	string filename_out = "values.txt";
+	string line;
+    infile.open(filename_in.c_str());
+	outfile.open(filename_out.c_str());
+    
+	while(getline(infile, line)){
+		outfile << line << endl;
+	}
+	infile.close();
+	outfile.close();
+}
+
+
+int main(){
+    bool restart_game = true;
+	save_loadout();
+	while(restart_game){ //Als de speler kiest voor herstarten (of standaard bij eerste ronde)
+		paste_loadout();
+		leaderboard();
+		ready_go();  
+		read_instructions(); 
+		const vector<vector<int>> way_to_go = directions();
+
+		srand((unsigned)time(0));
+		string username;
+		while(true){ //Vraag om de naam van de speler totdat de speler een naam van 3 karakters geeft
+			cout << "Give a username: ";
+			cin >> username;
+			if(username.length()!=3){
+				cout << "Your username should be 3 characters, try again." << endl;
 			}
-			if(collision_death(cords)==1){
-				ascii_art("death cliff.txt");
-				cout << "You have fallen down a botemless pit!" << endl;
+			else{
+				cout << "Welcome, " << username << ". \n";
 				break;
 			}
-			if(collision_death(cords)==2){
-				ascii_art("death wump.txt");
-				cout << "You have been killed by the wumpus!" << endl;
-				break;
-			}
-
 		}
-		else{
-			shoot_info = shoot(arrows_amount, cords, way_to_go);
-			arrows_amount = shoot_info[0];
-			if(shoot_info[1]==1){
-				register_score(username, start_time, score);
-				break;
+
+		vector<int> cords = way_to_go[player_start()];
+		int arrows_amount = 5;
+		int side;
+		int final_dest;
+		string outcome_SPAO;
+		vector<int> shoot_info;
+		int score = 0;
+		time_t start_time = time(0);
+		
+		while(true){ // Loop: doorheen gaan van het spel.
+			score+=1;
+			outcome_SPAO = show_position_and_options(cords);
+			if(outcome_SPAO[0] == 'M' || outcome_SPAO[0] == 'm'){
+				side = move(cords);
+				final_dest = checkside(side, cords);
+				cords = way_to_go[final_dest];
+				if (collision_bats(cords)){
+					cout << "You've been carried away by bats!" << endl;
+					cords = way_to_go[(rand()%20)+0];
+				}
+				if(collision_death(cords)==1){
+					ascii_art("death cliff.txt");
+					cout << "You have fallen down a botemless pit!" << endl;
+					break;
+				}
+				if(collision_death(cords)==2){
+					ascii_art("death wump.txt");
+					cout << "You have been killed by the wumpus!" << endl;
+					break;
+				}
+
 			}
-			if(shoot_info[1]==2){
-				break;
+			else{
+				shoot_info = shoot(arrows_amount, cords, way_to_go);
+				arrows_amount = shoot_info[0];
+				if(shoot_info[1]==1){
+					register_score(username, start_time, score);
+					break;
+				}
+				if(shoot_info[1]==2){
+					break;
+				}
 			}
 		}
+		restart_game = restart_game_question();
 	}
 }
