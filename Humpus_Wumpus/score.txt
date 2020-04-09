@@ -1,6 +1,2 @@
-wam 1 1
-sle 1 1
-alx 1 3
-kwk 1 8
-tkt 1 14
-kkk 3 11
+alx      1      10
+alx      17     70
