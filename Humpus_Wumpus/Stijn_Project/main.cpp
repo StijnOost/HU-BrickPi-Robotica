@@ -558,24 +558,30 @@ vector<string> algorithm_way_to_go(vector<int>cords,vector<int> & visited,vector
 	vector<int> directions;
 	char str[2];
 	int count;
+	int count_safe;
 	
 	visited.push_back(cords[0]); //Kamer waar die staat toewijzen dat ie daar is geweest
 	cout<<visited.size()<<"size visited"<<endl;
 	vector<char> danger = AI_sense(cords); //als er iets in de buurt is
 	for (int i=0; i<3; i++){
+	count_safe =0;
 	count = 0;
 		if (danger[0] == 'w'){ 					//voeg alle kamers eromheen toe aan de gevaarlijke vector
 		cout << cords[0]<<"i am here and scared"<<endl;
 			for(int j=0; j<visited.size(); j++){		//verwijder de kamers waar je al bent geweest of nog nergens geweest random
 				cout<<visited[j] << " " << cords[i+1]<<endl;
 				cout<<count<<"count"<<endl;
+				cout<<count_safe<<"safe"<<endl;
 				Sleep(100);
-				if (visited[j] == cords[i+1]&&count==0){
-					count=+1;
-					wump_rooms_safe.push_back(cords[i+1]);
-					cout << visited[j] << "vistited" << endl; 
-					cout << cords[i+1] << "cords" << endl; 
-					Sleep(300);
+				if (visited[j] == cords[i+1]){
+					if(count_safe == 1){ 
+						count_safe +=1;
+						wump_rooms_safe.push_back(cords[i+1]);
+						cout << visited[j] << "vistited" << endl; 
+						cout << cords[i+1] << "cords" << endl; 
+						Sleep(300);
+						
+					}
 				}
 				else if(count==0){
 					count=+1;
@@ -622,7 +628,7 @@ vector<string> algorithm_way_to_go(vector<int>cords,vector<int> & visited,vector
 		int start_value_ran = directions.size();
 		cout<< start_value_ran <<"start"<<endl;
 		while(same){
-			direction_to_go = (rand()%start_value_ran)+0;
+			direction_to_go = (rand()%start_value_ran)+1;
 			for(int i; i<visited.size(); i++){
 				cout<< visited[i]<<" been there" <<endl;
 				if(visited[i]!=cords[direction_to_go]){
@@ -637,7 +643,7 @@ vector<string> algorithm_way_to_go(vector<int>cords,vector<int> & visited,vector
 		sprintf(str, "%d", cords[direction_to_go]);
 		S_M_and_room.push_back(str);
 		cout<< cords[direction_to_go] << "moving too"<<endl;
-		Sleep(100);
+		cout<< S_M_and_room[0] << S_M_and_room[0] << "move too room return"<<endl;
 		return S_M_and_room;
 	}
 	
