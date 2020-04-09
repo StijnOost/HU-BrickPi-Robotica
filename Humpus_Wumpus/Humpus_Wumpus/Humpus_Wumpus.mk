@@ -6,18 +6,18 @@
 ProjectName            :=Humpus_Wumpus
 ConfigurationName      :=Debug
 WorkspaceConfiguration := $(ConfigurationName)
-WorkspacePath          :=C:/Users/stijn/OneDrive/Documenten/Documenten/Github/HU-BrickPi-Robotica/Humpus_Wumpus
-ProjectPath            :=C:/Users/stijn/OneDrive/Documenten/Documenten/Github/HU-BrickPi-Robotica/Humpus_Wumpus/Humpus_Wumpus
+WorkspacePath          :=C:/Users/alexa/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus
+ProjectPath            :=C:/Users/alexa/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Humpus_Wumpus
 IntermediateDirectory  :=../build-$(ConfigurationName)/Humpus_Wumpus
 OutDir                 :=../build-$(ConfigurationName)/Humpus_Wumpus
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
-User                   :=stijn
-Date                   :=08/04/2020
+User                   :=alexa
+Date                   :=09/04/2020
 CodeLitePath           :="C:/Program Files/CodeLite"
-LinkerName             :=C:/TDM-GCC-32/bin/g++.exe
-SharedObjectLinkerName :=C:/TDM-GCC-32/bin/g++.exe -shared -fPIC
+LinkerName             :="C:/Program Files/TDM-GCC/bin/g++.exe"
+SharedObjectLinkerName :="C:/Program Files/TDM-GCC/bin/g++.exe" -shared -fPIC
 ObjectSuffix           :=.o
 DependSuffix           :=.o.d
 PreprocessSuffix       :=.i
@@ -36,7 +36,7 @@ PreprocessOnlySwitch   :=-E
 ObjectsFileList        :=$(IntermediateDirectory)/ObjectsList.txt
 PCHCompileFlags        :=
 RcCmpOptions           := 
-RcCompilerName         :=C:/TDM-GCC-32/bin/windres.exe
+RcCompilerName         :="C:/Program Files/TDM-GCC/bin/windres.exe"
 LinkOptions            :=  
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). 
 IncludePCH             := 
@@ -49,20 +49,20 @@ LibPath                := $(LibraryPathSwitch).
 ## Common variables
 ## AR, CXX, CC, AS, CXXFLAGS and CFLAGS can be overriden using an environment variables
 ##
-AR       := C:/TDM-GCC-32/bin/ar.exe rcu
-CXX      := C:/TDM-GCC-32/bin/g++.exe
-CC       := C:/TDM-GCC-32/bin/gcc.exe
+AR       := "C:/Program Files/TDM-GCC/bin/ar.exe" rcu
+CXX      := "C:/Program Files/TDM-GCC/bin/g++.exe"
+CC       := "C:/Program Files/TDM-GCC/bin/gcc.exe"
 CXXFLAGS :=  -g -O0 -std=c++14 -Wall $(Preprocessors)
 CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
 ASFLAGS  := 
-AS       := C:/TDM-GCC-32/bin/as.exe
+AS       := "C:/Program Files/TDM-GCC/bin/as.exe"
 
 
 ##
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
-Objects0=../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(ObjectSuffix) 
+Objects0=../build-$(ConfigurationName)/Humpus_Wumpus/wumpusAI.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/Humpus_Wumpus/customizeWumpus.cpp$(ObjectSuffix) 
 
 
 
@@ -93,13 +93,29 @@ PreBuild:
 ##
 ## Objects
 ##
+../build-$(ConfigurationName)/Humpus_Wumpus/wumpusAI.cpp$(ObjectSuffix): wumpusAI.cpp ../build-$(ConfigurationName)/Humpus_Wumpus/wumpusAI.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/alexa/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Humpus_Wumpus/wumpusAI.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/wumpusAI.cpp$(ObjectSuffix) $(IncludePath)
+../build-$(ConfigurationName)/Humpus_Wumpus/wumpusAI.cpp$(DependSuffix): wumpusAI.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/Humpus_Wumpus/wumpusAI.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/Humpus_Wumpus/wumpusAI.cpp$(DependSuffix) -MM wumpusAI.cpp
+
+../build-$(ConfigurationName)/Humpus_Wumpus/wumpusAI.cpp$(PreprocessSuffix): wumpusAI.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/Humpus_Wumpus/wumpusAI.cpp$(PreprocessSuffix) wumpusAI.cpp
+
 ../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(ObjectSuffix): main.cpp ../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/stijn/OneDrive/Documenten/Documenten/Github/HU-BrickPi-Robotica/Humpus_Wumpus/Humpus_Wumpus/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/alexa/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Humpus_Wumpus/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
 ../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(DependSuffix): main.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(DependSuffix) -MM main.cpp
 
 ../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(PreprocessSuffix): main.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/Humpus_Wumpus/main.cpp$(PreprocessSuffix) main.cpp
+
+../build-$(ConfigurationName)/Humpus_Wumpus/customizeWumpus.cpp$(ObjectSuffix): customizeWumpus.cpp ../build-$(ConfigurationName)/Humpus_Wumpus/customizeWumpus.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/alexa/OneDrive/Documents/GitHub/HU-BrickPi-Robotica/Humpus_Wumpus/Humpus_Wumpus/customizeWumpus.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/customizeWumpus.cpp$(ObjectSuffix) $(IncludePath)
+../build-$(ConfigurationName)/Humpus_Wumpus/customizeWumpus.cpp$(DependSuffix): customizeWumpus.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/Humpus_Wumpus/customizeWumpus.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/Humpus_Wumpus/customizeWumpus.cpp$(DependSuffix) -MM customizeWumpus.cpp
+
+../build-$(ConfigurationName)/Humpus_Wumpus/customizeWumpus.cpp$(PreprocessSuffix): customizeWumpus.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/Humpus_Wumpus/customizeWumpus.cpp$(PreprocessSuffix) customizeWumpus.cpp
 
 
 -include ../build-$(ConfigurationName)/Humpus_Wumpus//*$(DependSuffix)
