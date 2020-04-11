@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -30,13 +29,17 @@ vector<int> directions(int local){
 			}
 		}
 		infile.close();
-		return(cords);
 	}
 	else{
 		cout << "ERROR: File unreachable \n";
 	}
+	cout << cords[0] << endl;
+	cout << cords[1] << endl;
+	cout << cords[2] << endl;
+	cout << cords[3] << endl;
+	return(cords);
 }
 int main(){
-	int location = 6;
+	int location = 9;
 	directions(location);
 }

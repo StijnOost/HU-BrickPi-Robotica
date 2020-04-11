@@ -8,6 +8,9 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
+    <File Name="wumpusAI.cpp"/>
+    <File Name="customizeWumpus.cpp"/>
+    <File Name="wumpHead.hpp"/>
     <File Name="main.cpp"/>
   </VirtualDirectory>
   <Settings Type="Executable">

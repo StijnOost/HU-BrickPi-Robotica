@@ -1,9 +1,10 @@
--IC:\TDM-GCC-32\lib\gcc\mingw32\5.1.0\include\c++
--IC:\TDM-GCC-32\lib\gcc\mingw32\5.1.0\include\c++\mingw32
--IC:\TDM-GCC-32\lib\gcc\mingw32\5.1.0\include\c++\backward
--IC:\TDM-GCC-32\lib\gcc\mingw32\5.1.0\include
--IC:\TDM-GCC-32\include
--IC:\TDM-GCC-32\lib\gcc\mingw32\5.1.0\include-fixed
--IC:\Users\Stolk\OneDrive\Documents\GitHub\HU-BrickPi-Robotica\Humpus_Wumpus\Jari_Project
+-IC:\Program
+-IC:\Users\alexa\OneDrive\Documents\GitHub\HU-BrickPi-Robotica\Humpus_Wumpus\Jari_Project
+-I"C:\Program Files\TDM-GCC\lib\gcc\mingw32\5.1.0\include\c++"
+-I"C:\Program Files\TDM-GCC\lib\gcc\mingw32\5.1.0\include\c++\mingw32"
+-I"C:\Program Files\TDM-GCC\lib\gcc\mingw32\5.1.0\include\c++\backward"
+-I"C:\Program Files\TDM-GCC\lib\gcc\mingw32\5.1.0\include"
+-I"C:\Program Files\TDM-GCC\include"
+-I"C:\Program Files\TDM-GCC\lib\gcc\mingw32\5.1.0\include-fixed"
 -target
 x86_64-pc-windows-gnu
